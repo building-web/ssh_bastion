@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/DatabaseCleaner/database_cleaner.git
+  revision: f318781a77228f5999f5f2371c12f59089c141f3
+  ref: f318781a77228f5999f5f2371c12f59089c141f3
+  branch: master
+  specs:
+    database_cleaner (1.5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -65,6 +73,12 @@ GEM
       railties (>= 4.0, < 5.1)
     erubis (2.7.0)
     execjs (2.6.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.6.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
+    ffaker (2.2.0)
     ffi (1.9.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -194,7 +208,10 @@ DEPENDENCIES
   byebug (~> 8.2.2)
   capybara (~> 2.6.2)
   coffee-rails (~> 4.1.1)
+  database_cleaner!
   dotenv-rails (~> 2.1.0)
+  factory_girl_rails (~> 4.6.0)
+  ffaker (~> 2.2.0)
   jbuilder (~> 2.4.1)
   jquery-rails (~> 4.1.0)
   listen (~> 3.0.6)

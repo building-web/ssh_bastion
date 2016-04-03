@@ -1,0 +1,2 @@
+class BastionHost < ApplicationRecord
+end
