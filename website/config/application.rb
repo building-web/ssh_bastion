@@ -22,6 +22,10 @@ module SshBastion
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    Config::Integration::Rails::Railtie.preload
+
+    config.time_zone = Settings.time_zone
+
     config.generators do |g|
       g.assets false
       g.helper false

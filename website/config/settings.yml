@@ -1,0 +1,7 @@
+time_zone: Beijing
+
+default_bastion_host:
+  ip: 127.0.0.1
+  user: developer
+  desc: ''
+
