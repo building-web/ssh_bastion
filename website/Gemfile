@@ -27,7 +27,7 @@ group :development do
   gem 'spring', '~> 1.6.4'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'parallel_tests', '~> 2.5.0', require: false
+  gem 'parallel_tests', '~> 2.5.0'
 end
 
 group :test do

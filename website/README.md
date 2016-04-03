@@ -1,24 +1,31 @@
 ## README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
 * System dependencies
 
-* Configuration
+https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
 
-* Database creation
+* How to run
 
-* Database initialization
+$ cp .versions.conf.example .versions.conf
 
-* How to run the test suite
+$ cd .
 
-* Services (job queues, cache servers, search engines, etc.)
+$ cp .env.example .env
 
-* Deployment instructions
+$ cp config/database.yml.example config/database.yml
 
-* ...
+$ rake db:create && rake db:migrate && rake db:seed
+
+* How to run test
+
+$ rake parallel:create
+
+$ rake parallel:prepare
+
+$ rake parallel:setup
+
+$ rake parallel:spec
+
+
+
+

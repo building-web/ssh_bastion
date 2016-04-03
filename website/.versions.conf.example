@@ -1,0 +1,4 @@
+ruby=ruby-2.2.2
+ruby-gemset=ssh_bastion_development
+#ruby-gem-install=bundler rake
+#ruby-bundle-install=true
