@@ -19,6 +19,9 @@ gem 'dotenv-rails', '~> 2.1.0'
 
 gem 'config', '~> 1.1.0'
 
+gem 'nokogiri', '~> 1.6.8.rc3' #gpgme and nokogiri require conflict
+gem 'gpgme', '~> 2.0.12'
+
 group :development, :test do
   gem 'byebug', '~> 8.2.2'
 
