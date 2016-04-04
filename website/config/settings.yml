@@ -2,5 +2,4 @@ time_zone: Beijing
 
 Arch_mode: 1
 
-website_gnupg_uid: 'ssh_bastion@example.com'
-
+website_GPG_key_ID: 00000000
