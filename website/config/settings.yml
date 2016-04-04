@@ -1,8 +1,13 @@
 time_zone: Beijing
 
-Arch_mode: 1
+super_admin:
+  email: admin@example.com
 
 website_GPG_key_ID: 00000000
 
-super_admin:
-  email: admin@example.com
+#
+# 1 website and bastion_host in same host
+#
+Arch_mode: 1
+Arch_mode_one:
+  user: dev
