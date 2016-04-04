@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404020138) do
+ActiveRecord::Schema.define(version: 20160404154256) do
+
+  create_table "account_ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "account_id"
+    t.string   "key_type"
+    t.text     "public_key", limit: 65535
+    t.string   "comment"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "account_ssh_keys", ["account_id"], name: "index_account_ssh_keys_on_account_id", using: :btree
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                     default: "", null: false
@@ -40,6 +51,17 @@ ActiveRecord::Schema.define(version: 20160404020138) do
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
 
+  create_table "accounts_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "account_id"
+    t.integer  "bastion_host_id"
+    t.string   "host_user"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "accounts_hosts", ["account_id"], name: "index_accounts_hosts_on_account_id", using: :btree
+  add_index "accounts_hosts", ["bastion_host_id"], name: "index_accounts_hosts_on_bastion_host_id", using: :btree
+
   create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "arch_mode",  default: 1
     t.string   "ip"
@@ -49,4 +71,7 @@ ActiveRecord::Schema.define(version: 20160404020138) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "account_ssh_keys", "accounts"
+  add_foreign_key "accounts_hosts", "accounts"
+  add_foreign_key "accounts_hosts", "bastion_hosts"
 end
