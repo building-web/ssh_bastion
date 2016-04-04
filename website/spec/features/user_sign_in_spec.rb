@@ -8,7 +8,7 @@ RSpec.feature "UserSignIn", type: :feature do
 
   scenario 'user enter right account' do
     sign_in_user_with @user.email, 'password'
-    user_sees_flash_notice 'Welcome, person@example.com'
+    user_sees_flash_notice 'Signed in successfully'
   end
 
   scenario 'user enter wrong account' do
