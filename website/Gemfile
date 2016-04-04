@@ -23,6 +23,9 @@ gem 'nokogiri', '~> 1.6.8.rc3' #gpgme and nokogiri require conflict
 gem 'gpgme', '~> 2.0.12'
 gem 'devise', '4.0.0.rc2'
 
+gem 'devise-two-factor', github: 'colorfulberry/devise-two-factor',
+                         branch: 'devise-4', ref: 'fc93fb4a7a171d4ae1bfc055b29fc95574a18106'
+
 group :development, :test do
   gem 'byebug', '~> 8.2.2'
 
