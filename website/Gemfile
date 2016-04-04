@@ -32,8 +32,6 @@ gem 'attr_encrypted', '~> 3.0.1'
 gem 'devise-two-factor', github: 'colorfulberry/devise-two-factor',
                          branch: 'devise-4', ref: 'fc93fb4a7a171d4ae1bfc055b29fc95574a18106'
 
-gem 'bootstrap', '~> 4.0.0.alpha3'
-
 gem 'switch_user', '~> 1.2.1'
 
 group :development, :test do

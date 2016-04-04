@@ -10,6 +10,8 @@
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
 
+  <%= render 'account/shared/static_plugins' %>
+
   <%= stylesheet_link_tag    'account', media: 'all', 'data-turbolinks-track' => 'reload' %>
   <%= javascript_include_tag 'account', 'data-turbolinks-track' => 'reload' %>
 </head>
@@ -25,11 +27,13 @@
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <%= render 'account/shared/flash' %>
         <%= yield %>
+
+        <%= switch_user_select %>
       </div>
     </div>
   </div>
 
-  <%= switch_user_select %>
+
 
 </body>
 </html>
