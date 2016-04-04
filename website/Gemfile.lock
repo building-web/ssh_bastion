@@ -63,7 +63,12 @@ GEM
     arel (7.0.0)
     attr_encrypted (3.0.1)
       encryptor (~> 3.0.0)
+    autoprefixer-rails (6.3.6)
+      execjs
     bcrypt (3.1.11)
+    bootstrap (4.0.0.alpha3)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.4.19)
     builder (3.2.2)
     byebug (8.2.2)
     capybara (2.6.2)
@@ -93,6 +98,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise-bootstrap-views (0.0.8)
     devise-i18n (1.0.1)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
@@ -255,12 +261,14 @@ PLATFORMS
 
 DEPENDENCIES
   attr_encrypted (~> 3.0.1)
+  bootstrap (~> 4.0.0.alpha3)
   byebug (~> 8.2.2)
   capybara (~> 2.6.2)
   coffee-rails (~> 4.1.1)
   config (~> 1.1.0)
   database_cleaner!
   devise (~> 4.0.0.rc2)
+  devise-bootstrap-views (~> 0.0.8)
   devise-i18n (~> 1.0.1)
   devise-two-factor!
   dotenv-rails (~> 2.1.0)

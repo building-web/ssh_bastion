@@ -9,5 +9,9 @@ FactoryGirl.define do
 
     factory :admin do
     end
+
+    after(:build) do |account|
+      account.skip_confirmation!
+    end
   end
 end
