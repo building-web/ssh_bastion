@@ -3,3 +3,6 @@ time_zone: Beijing
 Arch_mode: 1
 
 website_GPG_key_ID: 00000000
+
+super_admin:
+  email: admin@example.com

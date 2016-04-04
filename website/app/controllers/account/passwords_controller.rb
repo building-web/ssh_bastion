@@ -1,5 +1,5 @@
 class Account::PasswordsController < Devise::PasswordsController
 
-  layout 'account'
+  layout 'account_unsigned'
 
 end

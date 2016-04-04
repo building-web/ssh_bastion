@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SshBastion</title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+
+  <%= stylesheet_link_tag    'account', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'account', 'data-turbolinks-track' => 'reload' %>
+</head>
+
+<body>
+  <%= render 'account/shared/navbar' %>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="main">
+        <%= render 'account/shared/flash' %>
+        <%= yield %>
+      </div>
+
+    </div>
+  </div>
+
+  <%= switch_user_select %>
+
+</body>
+</html>

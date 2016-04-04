@@ -34,6 +34,8 @@ gem 'devise-two-factor', github: 'colorfulberry/devise-two-factor',
 
 gem 'bootstrap', '~> 4.0.0.alpha3'
 
+gem 'switch_user', '~> 1.2.1'
+
 group :development, :test do
   gem 'byebug', '~> 8.2.2'
 

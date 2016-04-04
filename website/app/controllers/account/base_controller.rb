@@ -1,6 +1,6 @@
 class Account::BaseController < ApplicationController
 
-  layout 'account'
+  layout 'account_signed'
 
   before_action :authenticate_account!
 
