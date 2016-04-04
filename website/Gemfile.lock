@@ -59,6 +59,13 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    activevalidators (3.0.0)
+      activemodel (>= 3.0.0)
+      countries (~> 0.9.3)
+      date_validator
+      mail
+      phony (>= 1.9.0)
+      rake (>= 0.8.7)
     addressable (2.4.0)
     arel (7.0.0)
     attr_encrypted (3.0.1)
@@ -85,6 +92,12 @@ GEM
     config (1.1.0)
       activesupport (>= 3.0)
       deep_merge (~> 1.0.1)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
+    currencies (0.4.2)
+    date_validator (0.9.0)
+      activemodel
+      activesupport
     debug_inspector (0.0.2)
     deep_merge (1.0.1)
     devise (4.0.0.rc2)
@@ -146,6 +159,7 @@ GEM
     parallel (1.8.0)
     parallel_tests (2.5.0)
       parallel
+    phony (2.15.20)
     pkg-config (1.1.7)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -256,6 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activevalidators (~> 3.0.0)
   attr_encrypted (~> 3.0.1)
   byebug (~> 8.2.2)
   capybara (~> 2.6.2)
