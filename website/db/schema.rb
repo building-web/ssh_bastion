@@ -13,17 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160404020138) do
 
-  create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "ip"
-    t.string   "user"
-    t.string   "desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "bastion_hosts", ["ip"], name: "index_bastion_hosts_on_ip", unique: true, using: :btree
-
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                     default: "", null: false
     t.string   "encrypted_password",        default: "", null: false
     t.string   "reset_password_token"
@@ -43,7 +33,16 @@ ActiveRecord::Schema.define(version: 20160404020138) do
     t.boolean  "otp_required_for_login"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
+  add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
+
+  create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "arch_mode",  default: 1
+    t.string   "ip"
+    t.string   "user"
+    t.string   "desc"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
 end

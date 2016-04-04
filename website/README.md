@@ -26,7 +26,9 @@ website_GPG_key_ID: 7E4A6A09
 
 * How to run test
 
-$ rake parallel:setup && rake parallel:spec
+$ rake parallel:setup
+
+$ rake parallel:spec
 
 
 
