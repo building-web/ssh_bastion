@@ -93,6 +93,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.0.1)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
@@ -176,6 +177,9 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-i18n (5.0.0.beta3)
+      i18n (~> 0.7)
+      railties (~> 5.0.0.beta1)
     railties (5.0.0.beta3)
       actionpack (= 5.0.0.beta3)
       activesupport (= 5.0.0.beta3)
@@ -250,12 +254,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_encrypted (~> 3.0.1)
   byebug (~> 8.2.2)
   capybara (~> 2.6.2)
   coffee-rails (~> 4.1.1)
   config (~> 1.1.0)
   database_cleaner!
-  devise (= 4.0.0.rc2)
+  devise (~> 4.0.0.rc2)
+  devise-i18n (~> 1.0.1)
   devise-two-factor!
   dotenv-rails (~> 2.1.0)
   factory_girl_rails (~> 4.6.0)
@@ -270,6 +276,7 @@ DEPENDENCIES
   pry-rails (~> 0.3.4)
   puma (~> 3.0.2)
   rails (= 5.0.0.beta3)
+  rails-i18n (~> 5.0.0.beta3)
   rspec-rails (~> 3.5.0.beta3)
   sass-rails (~> 6.0.0.beta1)
   spring (~> 1.6.4)

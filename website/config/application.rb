@@ -26,6 +26,8 @@ module SshBastion
 
     config.time_zone = Settings.time_zone
 
+    config.i18n.available_locales = [:en, 'zh-CN']
+
     config.generators do |g|
       g.assets false
       g.helper false
