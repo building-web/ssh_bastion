@@ -1,8 +1,6 @@
 time_zone: Beijing
 
-salt_api:
-  host: 'salt.example.com'
-  username: 'salt'
-  password: 'salt'
+Arch_mode: 1
 
-local_gnupg_uid: 'ssh_bastion@example.com'
+website_gnupg_uid: 'ssh_bastion@example.com'
+
