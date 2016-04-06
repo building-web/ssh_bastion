@@ -17,13 +17,13 @@ when 1
   bastion_host.save!
 end
 
-if Rails.env.development? or Rails.env.test?
+if Rails.env.development?
   require 'database_cleaner'
   require 'factory_girl_rails'
   require 'ffaker'
 
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
-  
-  require Rails.root.join("db/seeds_develop").to_s
+
+  require Rails.root.join("db/seeds_development").to_s
 end
