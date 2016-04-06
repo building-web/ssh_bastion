@@ -7,4 +7,6 @@ module Features
     click_button 'Sign in'
   end
 
+  alias_method :sign_in_admin_with, :sign_in_user_with
+
 end

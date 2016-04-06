@@ -30,6 +30,18 @@ $ rake parallel:setup
 
 $ rake parallel:spec
 
+or
+
+$ RAILS_ENV=test rake db:drop
+
+$ RAILS_ENV=test rake db:create
+
+$ RAILS_ENV=test rake db:schema:load
+
+$ rspec
+
+
+
 
 
 
