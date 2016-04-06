@@ -6,14 +6,14 @@
         <a href="<%= account_root_path %>" class="nav-link"><%= t('App.dashbord', defeault: 'Dashbord') %></a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link"><%= t('App.profile', defeault: 'Profile') %></a>
+        <a href="/account/profile" class="nav-link"><%= t('App.profile', defeault: 'Profile') %></a>
       </li>
     </ul>
 
     <ul class="nav navbar-nav pull-right">
       <li class="nav-item">
         <% if current_account.present? %>
-          <a class="nav-link" href="<%= destroy_account_session_path %>" data-method="delete"><%= t('App.logout', default: 'Logout')%></a>
+          <a class="nav-link" href="<%= destroy_account_session_path %>" data-method="delete"><%= t('App.logout', default: 'Sign out')%></a>
         <% else %>
           <a class="nav-link" href="<%= new_account_session_path %>"><%= t('App.login', default: 'Login')%></a>
         <% end %>
