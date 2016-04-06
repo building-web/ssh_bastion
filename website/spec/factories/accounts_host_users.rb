@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :accounts_host_user do
-    association :account, factory: :user, strategy: :build
-    association :bastion_host, strategy: :build
-    host_user { FFaker::Name.last_name }
+    association :account, factory: :user
+    association :host_user
+    host_id { |record| record.host_user.host_id }
   end
 end
