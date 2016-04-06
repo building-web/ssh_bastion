@@ -26,22 +26,12 @@ website_GPG_key_ID: 7E4A6A09
 
 * How to run test
 
-$ rake parallel:setup
+$ RAILS_ENV=test rake db:drop && RAILS_ENV=test rake db:create && RAILS_ENV=test rake db:schema:load
 
-$ rake parallel:spec
+$ rspec # or guard
 
 or
 
-$ RAILS_ENV=test rake db:drop
+$ rake parallel:setup
 
-$ RAILS_ENV=test rake db:create
-
-$ RAILS_ENV=test rake db:schema:load
-
-$ rspec
-
-
-
-
-
-
+$ rake parallel:spec
