@@ -18,22 +18,19 @@
 
 <body>
   <%= render 'account/shared/navbar' %>
+  <div id="wrapper">
+    <%= render 'account/shared/sidebar' %>
 
-  <div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-md-9 col-lg-10 main">
+          <%= render 'account/shared/flash' %>
+          <%= yield %>
 
-      <%= render 'account/shared/sidebar' %>
-
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <%= render 'account/shared/flash' %>
-        <%= yield %>
-
-        <%= switch_user_select %>
+          <%= switch_user_select %>
+        </div>
       </div>
     </div>
   </div>
-
-
-
 </body>
 </html>
