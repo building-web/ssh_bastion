@@ -21,10 +21,27 @@ RSpec.feature "AccountDashboard", type: :feature do
 
   scenario 'access by a new user' do
     sign_in_user_with @user1.email, 'password'
+
+    expect(page).to have_selector "a[href='/account']", text: :Dashboard
+    expect(page).to have_selector "a[href='/account/profile']", text: :Profile
+    expect(page).to have_selector "a[href='/accounts/sign_out']", text: :'Sign out'
+
+    expect(page).to have_selector "a[href='/account/ssh_keys']", text: 'Ssh Keys'
+    expect(page).to have_selector "a[href='/account/two_factor']", text: 'Two Factor'
+
+    expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
   end
 
-  scenario 'access by a user that was submitted a ssh_key'
+  scenario 'access by a user that was submitted a ssh_key' do
+    sign_in_user_with @user2.email, 'password'
 
-  scenario 'access by a user that was submitted a ssh_key and enabled two-factor'
+    expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
+  end
+
+  scenario 'access by a user that was submitted a ssh_key and enabled two-factor' do
+    sign_in_user_with @user3.email, 'password'
+
+    expect(page).to have_selector "a[href='/account/hosts']", text: :Hosts
+  end
 
 end
