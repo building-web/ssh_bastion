@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
-  include AccountExtRole
+
+  extend Enumerize
 
   attr_encrypted :otp_secret,
                   key:       ENV['TWO_STEP_ENCRYPTION_KEY'],
@@ -14,5 +15,18 @@ class Account < ApplicationRecord
          :validatable, :confirmable,
          :two_factor_authenticatable,
          otp_secret_encryption_key: ENV['TWO_STEP_ENCRYPTION_KEY']
+
+
+
+  ROLE_HASH = {
+    user: 1,
+    admin: 9,
+  }
+
+  enumerize :role, in: ROLE_HASH,
+                    default: :user,
+                    i18n_scope: "enums.account.role",
+                    scope: true,
+                    predicates: { prefix: true }
 
 end

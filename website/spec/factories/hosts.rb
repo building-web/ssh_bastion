@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :host do
     association :creator_account, factory: :admin
 
@@ -7,4 +8,5 @@ FactoryGirl.define do
     port { '22' }
     comment { FFaker::Lorem.sentence }
   end
+
 end

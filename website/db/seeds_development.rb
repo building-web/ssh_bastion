@@ -1,24 +1,36 @@
-puts 'create bastion_hosts'
-10.times do
-  FactoryGirl.create :bastion_host
+puts 'create admins'
+admins = []
+3.times do
+  admin = FactoryGirl.create :admin
+  admins << admin
 end
 
-puts 'create hosts'
+puts 'create users'
+users = []
 10.times do
-  FactoryGirl.create :host
+  user = FactoryGirl.create :user
+  users << user
 end
 
-puts 'create host_users'
-10.times do
-  FactoryGirl.create :host_user
+puts 'create ssh_keys'
+admins.each do |account|
+  FactoryGirl.create :ssh_key, account: account
+end
+users.each do |account|
+  FactoryGirl.create :ssh_key, account: account
 end
 
-puts 'create accounts_ssh_keys'
-10.times do
-  FactoryGirl.create :accounts_ssh_key
+puts 'create hosts and host_users'
+host_users = []
+admins.each do |account|
+  host = FactoryGirl.create :host, creator_account: account
+  host_user = FactoryGirl.create :host_user, host: host
+  host_users << host_user
 end
 
 puts 'create accounts_host_users'
-10.times do
-  FactoryGirl.create :accounts_host_user
+users.each do |account|
+  host_users.each do |host_user|
+    FactoryGirl.create :accounts_host_user, account: account, host: host_user.host, host_user: host_user
+  end
 end

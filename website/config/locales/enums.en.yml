@@ -1,0 +1,6 @@
+en:
+  enums:
+    account:
+      role:
+        user: User
+        admin: Admin

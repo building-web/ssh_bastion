@@ -8,16 +8,16 @@ FactoryGirl.define do
 
     email { generate :account_email }
     password { 'password' }
-    role { 1 }
+    role { :user }
 
     factory :user do
-      role { 1 }
+      role { :user }
       factory :user_with_enabled_two_factor do
       end
     end
 
     factory :admin do
-      role { 9 }
+      role { :admin }
 
       factory :admin_with_enabled_two_factor do
       end
