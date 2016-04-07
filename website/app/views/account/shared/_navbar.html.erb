@@ -1,21 +1,28 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-blue">
   <a class="navbar-brand" href="javascript:void(0);">Navbar</a>
   <div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
-    <ul class="nav navbar-nav">
-      <li class="nav-item active">
-        <a href="<%= account_root_path %>" class="nav-link"><%= t('App.dashbord', defeault: 'Dashbord') %></a>
-      </li>
-      <li class="nav-item">
-        <a href="/account/profile" class="nav-link"><%= t('App.profile', defeault: 'Profile') %></a>
-      </li>
-    </ul>
+    <% if current_account.present? %>
+      <ul class="nav navbar-nav">
+        <li class="nav-item active">
+          <a href="<%= account_root_path %>" class="nav-link"><%= t('view.dashboard', default: 'Dashboard') %></a>
+        </li>
+        <li class="nav-item">
+          <a href="/account/profile" class="nav-link"><%= t('view.profile', default: 'Profile') %></a>
+        </li>
+        <% if policy(:admin_module).manage_hosts? %>
+          <li class="nav-item">
+            <a href="/account/hosts" class="nav-link"><%= t('view.hosts', default: 'Hosts')%></a>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
 
     <ul class="nav navbar-nav pull-right">
       <li class="nav-item">
         <% if current_account.present? %>
-          <a class="nav-link" href="<%= destroy_account_session_path %>" data-method="delete"><%= t('App.logout', default: 'Sign out')%></a>
+          <a class="nav-link" href="<%= destroy_account_session_path %>" data-method="delete"><%= t('view.logout', default: 'Sign out')%></a>
         <% else %>
-          <a class="nav-link" href="<%= new_account_session_path %>"><%= t('App.login', default: 'Login')%></a>
+          <a class="nav-link" href="<%= new_account_session_path %>"><%= t('view.login', default: 'Login')%></a>
         <% end %>
       </li>
     </ul>

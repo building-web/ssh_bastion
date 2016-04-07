@@ -1,4 +1,5 @@
 class Account < ApplicationRecord
+  include AccountExtRole
 
   attr_encrypted :otp_secret,
                   key:       ENV['TWO_STEP_ENCRYPTION_KEY'],
