@@ -26,8 +26,8 @@ RSpec.feature "AccountDashboard", type: :feature do
     expect(page).to have_selector "a[href='/account/profile']", text: :Profile
     expect(page).to have_selector "a[href='/accounts/sign_out']", text: :'Sign out'
 
-    expect(page).to have_selector "a[href='/account/ssh_keys']", text: 'Ssh Keys'
-    expect(page).to have_selector "a[href='/account/two_factor']", text: 'Two Factor'
+    expect(page).to have_selector "a[href='/account/ssh_keys']", text: :'SSH keys'
+    expect(page).to have_selector "a[href='/account/two_factor_authentication']", text: :'Two-factor authentication'
 
     expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
   end
