@@ -9,23 +9,78 @@ RSpec.feature "AccountSshKeysIndex", type: :feature do
     @user2 = create :user, password: 'password'
     @user2_ssh_public_key = generate_ssh_public_key('RSA', 'user2@example.com')
     cat, content, comment = @user2_ssh_public_key.split(' ')
-    create :account_ssh_key, account: @user2, cat: cat, content: content, comment: comment
+    create :account_ssh_key, account: @user2, title: 'user2_first_ssh_key', cat: cat, content: content, comment: comment
   end
 
-  scenario 'visit by a new user' do
+  scenario 'user1 show ssh_key list' do
     sign_in_user_with @user1.email, 'password'
 
     visit '/account/ssh_keys'
 
+    expect(page).to have_content 'There are no SSH keys with access to your account.'
+  end
+
+  scenario 'user2 show ssh_key list' do
+    sign_in_user_with @user2.email, 'password'
+
+    visit '/account/ssh_keys'
+
+    expect(page).to have_content 'user2_first_ssh_key'
+    expect(page).to have_content ssh_public_key_fingerprint(@user2_ssh_public_key)
+  end
+
+  scenario 'user1 add a ssh_key' do
+    sign_in_user_with @user1.email, 'password'
+
+    visit '/account/ssh_keys'
+
+    expect(page).to have_selector "a#add_ssh_key"
+
     expect(page).to have_selector "form#new_ssh_key[action='/account/ssh_keys']"
+
+    expect(page.find_field('Title').visible?).to eq true
+    expect(page.find_field('Key').visible?).to eq true
+    expect(page.find_button('Add SSH key').visible?).to eq true
+
+    find('a#add_ssh_key').click
+
     expect(page.find_field('Title').visible?).to eq true
     expect(page.find_field('Key').visible?).to eq true
     expect(page.find_button('Add SSH key').visible?).to eq true
 
     within('form#new_ssh_key') do
-      fill_in 'Title', with: 'my_ssh_key'
+      fill_in 'Title', with: 'user1_first_ssh_key'
       fill_in 'Key', with: @user1_ssh_public_key
+      click_button 'Add SSH key'
     end
+
+    expect(page).to have_current_path('/account/ssh_keys')
+    user_sees_flash_notice 'SSH key was successfully created.'
+
+    expect(page).to have_content 'user1_first_ssh_key'
+    expect(page).to have_content ssh_public_key_fingerprint(@user1_ssh_public_key)
+  end
+
+  scenario 'user2 add a ssh_key' do
+    sign_in_user_with @user2.email, 'password'
+
+    visit '/account/ssh_keys'
+
+    expect(page).to have_selector "a#add_ssh_key"
+
+    expect(page).to have_selector "form#new_ssh_key[action='/account/ssh_keys']"
+
+    expect(page.find_field('Title').visible?).to eq false
+    expect(page.find_field('Key').visible?).to eq false
+    expect(page.find_button('Add SSH key').visible?).to eq false
+
+    find('a#add_ssh_key').click
+
+    expect(page.find_field('Title').visible?).to eq true
+    expect(page.find_field('Key').visible?).to eq true
+    expect(page.find_button('Add SSH key').visible?).to eq true
+
+
   end
 
 end

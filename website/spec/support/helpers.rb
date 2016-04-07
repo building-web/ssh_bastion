@@ -11,6 +11,10 @@ module Helpers
     k.ssh_public_key
   end
 
+  def ssh_public_key_fingerprint(ssh_public_key)
+    SSHKey.fingerprint ssh_public_key
+  end
+
 end
 
 RSpec.configure do |config|
