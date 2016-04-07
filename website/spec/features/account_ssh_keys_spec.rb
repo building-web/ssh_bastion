@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature "AccountSshKeysIndex", type: :feature do
 
   background do
-    user1 = create :user, password: 'password'
+    @user1 = create :user, password: 'password'
 
-    user2 = create :user, password: 'password'
-    create :ssh_key, account: user2
+    @user2 = create :user, password: 'password'
+    create :ssh_key, account: @user2
   end
 
   scenario 'visit by a new user' do
