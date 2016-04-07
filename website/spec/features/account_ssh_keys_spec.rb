@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.feature "AccountSshKeys", type: :feature do
 
   background do
+    # user1 is a new user
     @user1 = create :user, password: 'password'
     @user1_ssh_public_key = generate_ssh_public_key('RSA', 'user1@example.com')
 
+    # user2 is not a new user, he was created a ssh_key
     @user2 = create :user, password: 'password'
     @user2_ssh_public_key = generate_ssh_public_key('RSA', 'user2@example.com')
     cat, content, comment = @user2_ssh_public_key.split(' ')
