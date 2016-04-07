@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :ssh_key do
+  factory :account_ssh_key do
     association :account, factory: :user
     title { FFaker::Lorem.sentence }
     cat { 1 }

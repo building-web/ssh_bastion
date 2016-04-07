@@ -12,12 +12,12 @@ users = []
   users << user
 end
 
-puts 'create ssh_keys'
+puts 'create account_ssh_keys'
 admins.each do |account|
-  FactoryGirl.create :ssh_key, account: account
+  FactoryGirl.create :account_ssh_key, account: account
 end
 users.each do |account|
-  FactoryGirl.create :ssh_key, account: account
+  FactoryGirl.create :account_ssh_key, account: account
 end
 
 puts 'create hosts and host_users'

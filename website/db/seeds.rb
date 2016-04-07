@@ -1,24 +1,9 @@
+if Rails.env.production? or Rails.env.staging?
 
-puts 'create super_admin'
-Account.find_or_create_by!(email: Settings.super_admin.email) do |account|
-  account.password = SecureRandom.hex
-  account.role = :admin
-  account.skip_confirmation!
-end
+  require Rails.root.join("db/seeds_basic").to_s
 
-puts 'create bastion_hosts'
-case Settings.Arch_mode.to_i
-when 1
-  arch_mode = 1
-  ip = '127.0.0.1'
-  user = Settings.Arch_mode_one.user
+else
 
-  bastion_host = BastionHost.find_or_initialize_by(arch_mode: arch_mode, ip: ip)
-  bastion_host.user = user
-  bastion_host.save!
-end
-
-if Rails.env.development?
   require 'database_cleaner'
   require 'factory_girl_rails'
   require 'ffaker'
@@ -26,5 +11,7 @@ if Rails.env.development?
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean
 
+  require Rails.root.join("db/seeds_basic").to_s
   require Rails.root.join("db/seeds_development").to_s
+
 end

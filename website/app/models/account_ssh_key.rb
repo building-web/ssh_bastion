@@ -1,4 +1,4 @@
-class SshKey < ApplicationRecord
+class AccountSshKey < ApplicationRecord
 
   belongs_to :account
 

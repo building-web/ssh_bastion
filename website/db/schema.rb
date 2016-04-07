@@ -13,6 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20160406052780) do
 
+  create_table "account_ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "account_id"
+    t.string   "title"
+    t.integer  "cat"
+    t.text     "content",    limit: 65535
+    t.string   "comment"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "account_ssh_keys", ["account_id"], name: "index_account_ssh_keys_on_account_id", using: :btree
+
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                     default: "", null: false
     t.string   "encrypted_password",        default: "", null: false
@@ -83,21 +95,9 @@ ActiveRecord::Schema.define(version: 20160406052780) do
 
   add_index "hosts", ["creator_account_id"], name: "index_hosts_on_creator_account_id", unique: true, using: :btree
 
-  create_table "ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "account_id"
-    t.string   "title"
-    t.integer  "cat"
-    t.text     "content",    limit: 65535
-    t.string   "comment"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  add_index "ssh_keys", ["account_id"], name: "index_ssh_keys_on_account_id", using: :btree
-
+  add_foreign_key "account_ssh_keys", "accounts"
   add_foreign_key "accounts_host_users", "accounts"
   add_foreign_key "accounts_host_users", "host_users"
   add_foreign_key "accounts_host_users", "hosts"
   add_foreign_key "host_users", "hosts"
-  add_foreign_key "ssh_keys", "accounts"
 end

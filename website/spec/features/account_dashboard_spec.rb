@@ -6,18 +6,18 @@ RSpec.feature "AccountDashboard", type: :feature do
     @admin1 = create :admin, password: 'password'
 
     @admin2 = create :admin, password: 'password'
-    create :ssh_key, account: @admin2
+    create :account_ssh_key, account: @admin2
 
     @admin3 = create :admin_with_enabled_two_factor, password: 'password'
-    create :ssh_key, account: @admin3
+    create :account_ssh_key, account: @admin3
 
     @user1 = create :user, password: 'password'
 
     @user2 = create :user, password: 'password'
-    create :ssh_key, account: @user2
+    create :account_ssh_key, account: @user2
 
     @user3 = create :user_with_enabled_two_factor, password: 'password'
-    create :ssh_key, account: @user3
+    create :account_ssh_key, account: @user3
   end
 
   scenario 'visit by a new user' do
