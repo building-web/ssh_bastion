@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   namespace :account do
     root to: 'main#dashboard', as: :root
+    resources :ssh_keys
   end
 
 end
