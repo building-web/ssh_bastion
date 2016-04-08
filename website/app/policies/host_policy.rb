@@ -1,12 +1,14 @@
-class HostPolicy
+class HostPolicy < ApplicationPolicy
+
   attr_reader :account, :host
 
   def initialize(account, host)
     @account = account
-    @admin_module = host
+    @host = host
   end
 
   def index?
-    account.role_admin?
+    account.submitted_ssh_key? and account.enabled_two_factor_authentication?
   end
+
 end

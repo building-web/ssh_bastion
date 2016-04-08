@@ -1,0 +1,7 @@
+en:
+  view:
+    sidebar:
+      bastion_hosts: Bastion hosts
+      hosts: Hosts
+      ssh_keys: SSH keys
+      two_factor_authentication: Two-factor authentication

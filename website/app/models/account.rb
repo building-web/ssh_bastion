@@ -22,8 +22,8 @@ class Account < ApplicationRecord
                   encode_iv: true,
                   encode_salt: true
 
-has_many :hosts, class_name: 'Host', foreign_key: 'creator_account_id'
-has_many :ssh_keys, class_name: 'AccountSshKey'
+
+  has_many :ssh_keys, class_name: 'AccountSshKey'
 
 
   ROLE_HASH = {
@@ -36,5 +36,17 @@ has_many :ssh_keys, class_name: 'AccountSshKey'
                     i18n_scope: "enums.account.role",
                     scope: true,
                     predicates: { prefix: true }
+
+  def role?(_role)
+    send("role_#{_role}?")
+  end
+
+  def submitted_ssh_key?
+    ssh_keys.count > 0
+  end
+
+  def enabled_two_factor_authentication?
+    !otp_secret.nil? and !consumed_timestep.nil?
+  end
 
 end

@@ -9,11 +9,6 @@
         <li class="nav-item">
           <a href="/account/profile" class="nav-link"><%= t('view.navbar.profile', default: 'Profile') %></a>
         </li>
-        <% if policy(current_account.hosts.build).index? %>
-          <li class="nav-item">
-            <a href="/account/hosts" class="nav-link"><%= t('view.navbar.hosts', default: 'Hosts')%></a>
-          </li>
-        <% end %>
       </ul>
     <% end %>
 
