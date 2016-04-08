@@ -7,9 +7,8 @@ GIT
     database_cleaner (1.5.1)
 
 GIT
-  remote: git://github.com/colorfulberry/devise-two-factor.git
-  revision: fc93fb4a7a171d4ae1bfc055b29fc95574a18106
-  ref: fc93fb4a7a171d4ae1bfc055b29fc95574a18106
+  remote: git://github.com/tinfoil/devise-two-factor.git
+  revision: 93cae99a3765309ad3cc7f38075b0f3d81022153
   branch: devise-4
   specs:
     devise-two-factor (2.1.0)
