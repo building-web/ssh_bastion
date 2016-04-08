@@ -1,22 +1,10 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-    <li id="sidebar-control" class="bg-taggle">
-      <a href="#">
-         Toggle ☰
-      </a>
+    <li>
+      <a href="/account/ssh_keys"><%= t(' view.sidebar.ssh_keys', default: 'SSH keys')%></a>
     </li>
     <li>
-      <a href="/account/ssh_keys"><%= t('app.ssh_keys', default: 'SSH keys')%></a>
-    </li>
-    <li>
-      <a href="/account/two_factor_authentication"><%= t('app.two_factor', default: 'Two-factor authentication')%></a>
+      <a href="/account/two_factor_authentication"><%= t('view.sidebar.two_factor', default: 'Two-factor authentication')%></a>
     </li>
   </ul>
 </div>
-
-<script>
-  $("#sidebar-control").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-  });
-</script>

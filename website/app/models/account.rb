@@ -22,6 +22,8 @@ class Account < ApplicationRecord
                   encode_iv: true,
                   encode_salt: true
 
+has_many :hosts, class_name: 'Host', foreign_key: 'creator_account_id'
+
 
   ROLE_HASH = {
     user: 1,
