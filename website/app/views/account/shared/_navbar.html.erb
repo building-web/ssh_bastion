@@ -4,14 +4,14 @@
     <% if account_signed_in? %>
       <ul class="nav navbar-nav">
         <li class="nav-item active">
-          <a href="<%= account_root_path %>" class="nav-link"><%= t(' view.navbar.dashboard', default: 'Dashboard') %></a>
+          <a href="<%= account_root_path %>" class="nav-link"><%= t('view.navbar.dashboard', default: 'Dashboard') %></a>
         </li>
         <li class="nav-item">
-          <a href="/account/profile" class="nav-link"><%= t(' view.navbar.profile', default: 'Profile') %></a>
+          <a href="/account/profile" class="nav-link"><%= t('view.navbar.profile', default: 'Profile') %></a>
         </li>
         <% if policy(current_account.hosts.build).index? %>
           <li class="nav-item">
-            <a href="/account/hosts" class="nav-link"><%= t(' view.navbar.hosts', default: 'Hosts')%></a>
+            <a href="/account/hosts" class="nav-link"><%= t('view.navbar.hosts', default: 'Hosts')%></a>
           </li>
         <% end %>
       </ul>
@@ -20,9 +20,9 @@
     <ul class="nav navbar-nav pull-right">
       <li class="nav-item">
         <% if account_signed_in? %>
-          <a class="nav-link" href="<%= destroy_account_session_path %>" data-method="delete"><%= t(' view.navbar.logout', default: 'Sign out')%></a>
+          <a class="nav-link" href="<%= destroy_account_session_path %>" data-method="delete"><%= t('view.navbar.logout', default: 'Sign out')%></a>
         <% else %>
-          <a class="nav-link" href="<%= new_account_session_path %>"><%= t(' view.navbar.login', default: 'Login')%></a>
+          <a class="nav-link" href="<%= new_account_session_path %>"><%= t('view.navbar.login', default: 'Login')%></a>
         <% end %>
       </li>
     </ul>
