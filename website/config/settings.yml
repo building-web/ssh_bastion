@@ -3,7 +3,8 @@ time_zone: Beijing
 super_admin:
   email: admin@example.com
 
-website_GPG_key_ID: 00000000
+website_GPG_key_ID: '99999999'
+two_step_encryption_key: '99999999999999999999999999999999'
 
 #
 # 1 website and bastion_host in same host

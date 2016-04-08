@@ -14,7 +14,7 @@ $ cp .env.example .env
 
 $ cp config/database.yml.example config/database.yml
 
-$ rake db:drop:all && db:create && rake db:migrate && rake db:seed
+$ RAILS_ENV=development rake db:environment:set && rake db:drop:all && rake db:create && rake db:migrate && rake db:seed
 
 $ touch config/settings.local.yml
 

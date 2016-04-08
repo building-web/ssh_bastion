@@ -13,6 +13,9 @@ FactoryGirl.define do
     factory :user do
       role { :user }
       factory :user_with_enabled_two_factor do
+        otp_secret { '123456' }
+        consumed_timestep { 48669715 }
+        otp_required_for_login { false }
       end
     end
 
@@ -20,6 +23,9 @@ FactoryGirl.define do
       role { :admin }
 
       factory :admin_with_enabled_two_factor do
+        otp_secret { '123456' }
+        consumed_timestep { 48669715 }
+        otp_required_for_login { false }
       end
     end
 
