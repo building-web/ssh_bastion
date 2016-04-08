@@ -23,6 +23,7 @@ class Account < ApplicationRecord
                   encode_salt: true
 
 has_many :hosts, class_name: 'Host', foreign_key: 'creator_account_id'
+has_many :ssh_keys, class_name: 'AccountSshKey'
 
 
   ROLE_HASH = {

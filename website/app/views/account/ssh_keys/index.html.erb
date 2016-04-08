@@ -1,0 +1,44 @@
+<div class="boxed-group">
+  <button id="add_ssh_key" class="btn btn-sm btn-primary boxed-group-action">
+    New SSH key
+  </button>
+  <h3>SSH keys</h3>
+  <div class="boxed-group-inner">
+    <% if @ssh_keys.blank? %>
+      <p>There are no SSH keys with access to your account.</p>
+    <% end %>
+      <hr>
+    <ul class="boxed-group-list">
+      <li class="py-3 flex-table">
+        <span class="flex-table-item">
+          <span>
+            <svg aria-hidden="true" class="octicon octicon-key" height="32" version="1.1" viewBox="0 0 14 16" width="28"><path d="M12.83 2.17c-0.75-0.75-1.69-1.14-2.83-1.17-1.13 0.03-2.08 0.42-2.83 1.17s-1.13 1.69-1.16 2.83c0 0.3 0.03 0.59 0.09 0.89L0 12v1l1 1h2l1-1v-1h1v-1h1v-1h2l1.09-1.11c0.3 0.08 0.59 0.11 0.91 0.11 1.14-0.03 2.08-0.42 2.83-1.17s1.14-1.69 1.17-2.83c-0.03-1.14-0.42-2.08-1.17-2.83zM11 5.38c-0.77 0-1.38-0.61-1.38-1.38s0.61-1.38 1.38-1.38 1.38 0.61 1.38 1.38-0.61 1.38-1.38 1.38z"></path></svg>
+          </span>
+          <span class="user-key-badge">SSH</span>
+        </span>
+
+        <span class="user-key-details">
+          <strong class="d-block">ssh</strong>
+          <strong>Fingerprint:</strong> <code>61:f5:da:7c:93:e2:e5:bb:f1:aa:ca:0e:4d:81:75:80</code>
+          <br>
+          <span class="text-muted d-block">
+            Added on <time datetime="2016-04-08T09:20:57Z" day="numeric" is="local-time" month="short" year="numeric" title="Apr 8, 2016, 5:20 PM GMT+8">Apr 8, 2016</time> —
+              <span class="">Never used</span>
+          </span>
+        </span>
+
+        <span class="user-key-actions">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </span>
+      </li>
+    </ul>
+    <hr>
+    <div>
+      <%= simple_form_for [current_account.ssh_keys.new] do |f|%>
+        <%= f.input :title %>
+        <%= f.submit t('view.submi', default: 'Add SSH key'), class: 'btn btn-sm'%>
+      <% end %>
+    </div>
+  </div>
+
+</div>
