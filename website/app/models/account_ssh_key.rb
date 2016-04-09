@@ -1,6 +1,7 @@
 class AccountSshKey < ApplicationRecord
 
   extend Enumerize
+  attr_accessor :key
 
   CAT_ARRAY = [
     :'ssh-rsa',
@@ -13,4 +14,11 @@ class AccountSshKey < ApplicationRecord
 
   validates :content, uniqueness: { case_sensitive: true }
 
+  before_validation :scan_key, if: Proc.new { |a| a.key.present? }
+
+  private
+  def scan_key
+    # TODO
+    cat, content, comment = key.scan(/[\w'-]+/)
+  end
 end

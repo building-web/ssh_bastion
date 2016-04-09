@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   namespace :account do
     root to: 'main#dashboard', as: :root
-    resources :ssh_keys, only: [:index, :new, :delete]
+    resources :account_ssh_keys, path: 'ssh_keys', as: "ssh_keys", only: [:index, :create, :destroy]
   end
 
 end

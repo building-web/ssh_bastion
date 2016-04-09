@@ -80,7 +80,7 @@ RSpec.feature "AccountSshKeys", type: :feature do
     expect(page.find_field('Key').visible?).to eq false
     expect(page.find_button('Add SSH key').visible?).to eq false
 
-    find('a#add_ssh_key').click
+    find('button#add_ssh_key').click
 
     expect(page.find_field('Title').visible?).to eq true
     expect(page.find_field('Key').visible?).to eq true
@@ -104,7 +104,7 @@ RSpec.feature "AccountSshKeys", type: :feature do
 
     visit '/account/ssh_keys'
 
-    find('a#add_ssh_key').click
+    find('button#add_ssh_key').click
 
     within('form#new_ssh_key') do
       fill_in 'Title', with: 'user2_new_ssh_key'
@@ -121,7 +121,7 @@ RSpec.feature "AccountSshKeys", type: :feature do
 
     visit '/account/ssh_keys'
 
-    find('a#add_ssh_key').click
+    find('button#add_ssh_key').click
 
     within('form#new_ssh_key') do
       fill_in 'Title', with: 'user2_new_ssh_key'
@@ -138,7 +138,7 @@ RSpec.feature "AccountSshKeys", type: :feature do
 
     visit '/account/ssh_keys'
 
-    find('a#add_ssh_key').click
+    find('button#add_ssh_key').click
 
     within('form#new_ssh_key') do
       fill_in 'Title', with: 'user2_first_ssh_key'
