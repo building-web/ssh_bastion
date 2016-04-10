@@ -5,8 +5,9 @@ class AccountSshKey < ApplicationRecord
   belongs_to :account
 
   validates :title, presence: true, uniqueness: {scope: :account_id}
-  validates :key, presence: true, uniqueness: {}
-  validate :validate_key
+  validates :key, presence: true, uniqueness: {}, ssh_public_key: {}
+
+  before_validation :sub_key_comment
 
   def public_key
     _key = key
@@ -22,16 +23,15 @@ class AccountSshKey < ApplicationRecord
 
   private
 
-  def validate_key
-    unless SSHKey.valid_ssh_public_key?(key)
-      return errors.add(:key, :invalid)
+  def sub_key_comment
+    return if key.blank?
+
+    begin
+      ssh_type, encoded_key = SSHKey.send(:parse_ssh_public_key, key)
+    rescue SSHKey::PublicKeyError => err
+    else
+      self.key = "#{ssh_type} #{encoded_key}"
     end
-
-    _, _, self.comment = parse_key(key)
-  end
-
-  def parse_key(key_content)
-    key_content.split(' ')
   end
 
 end
