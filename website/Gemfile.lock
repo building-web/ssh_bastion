@@ -7,6 +7,16 @@ GIT
     database_cleaner (1.5.1)
 
 GIT
+  remote: git://github.com/amatsuda/kaminari.git
+  revision: 9d66373b4f3123c3ebc7fc79ad15dbdc8c82ac0c
+  ref: 9d66373b4f3123c3ebc7fc79ad15dbdc8c82ac0c
+  branch: master
+  specs:
+    kaminari (1.0.0.alpha)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/tinfoil/devise-two-factor.git
   revision: 93cae99a3765309ad3cc7f38075b0f3d81022153
   branch: devise-4
@@ -154,6 +164,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    kaminari-i18n (0.4.0)
+      kaminari
+      rails
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
@@ -330,6 +343,8 @@ DEPENDENCIES
   guard-rspec (~> 4.6.5)
   jbuilder (~> 2.4.1)
   jquery-rails (~> 4.1.0)
+  kaminari!
+  kaminari-i18n (~> 0.4.0)
   listen (~> 3.0.6)
   mysql2 (~> 0.4.3)
   nokogiri (~> 1.6.8.rc3)

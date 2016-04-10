@@ -1,6 +1,6 @@
 class Account::AccountSshKeysController < Account::BaseController
   def index
-    @account_ssh_keys = current_account.ssh_keys
+    @account_ssh_keys = current_account.ssh_keys.page(params[:page])
 
     @account_ssh_key = AccountSshKey.new
   end
@@ -10,6 +10,9 @@ class Account::AccountSshKeysController < Account::BaseController
     if @account_ssh_key.save
       redirect_to account_account_ssh_keys_path, notice: t('view.flash.create', default: 'SSH key was successfully created.')
     else
+
+      @account_ssh_keys = current_account.ssh_keys.page(params[:page])
+
       render :index
     end
   end
