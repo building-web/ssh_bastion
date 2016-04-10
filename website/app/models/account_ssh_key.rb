@@ -13,8 +13,8 @@ class AccountSshKey < ApplicationRecord
 
   belongs_to :account
 
-  validates :content, uniqueness: { case_sensitive: true }
-
+  validates :title, presence: true
+  validates :content, presence: true, uniqueness: { case_sensitive: true }
 
   def public_key
     key = "%s %s" % [cat, content]
