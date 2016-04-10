@@ -2,23 +2,23 @@
   <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
     ☰
   </button>
-  <a class="navbar-brand" href="#">SSH Bastion</a>
+  <a class="navbar-brand" href="<%= account_root_path %>">SSH Bastion</a>
   <div class="collapse navbar-toggleable-xs" id="collapsingNavbar">
     <ul class="nav navbar-nav pull-right">
       <% if account_signed_in? %>
 
       <li class="nav-item">
-        <a class="nav-link" href="<%= account_root_path %>"><%= t('view.navbar.dashboard', default: 'Dashboard') %></a>
+        <a href="<%= account_root_path %>" class="nav-link <%= 'active' if account_nav_is?(:dashboard) %>"><%= t('view.navbar.dashboard', default: 'Dashboard') %></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/account/profile"><%= t('view.navbar.profile', default: 'Profile') %></a>
+        <a href="/account/profile" class="nav-link"><%= t('view.navbar.profile', default: 'Profile') %></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<%= destroy_account_session_path %>" data-method="delete"><%= t('view.navbar.sign_out', default: 'Sign out')%></a>
+        <a href="<%= destroy_account_session_path %>" class="nav-link" data-method="delete"><%= t('view.navbar.sign_out', default: 'Sign out')%></a>
       </li>
       <% else %>
       <li class="nav-item">
-        <a class="nav-link" href="<%= new_account_session_path %>"><%= t('view.navbar.sign_in', default: 'Sign in')%></a>
+        <a href="<%= new_account_session_path %>" class="nav-link"><%= t('view.navbar.sign_in', default: 'Sign in')%></a>
       </li>
       <% end %>
     </ul>

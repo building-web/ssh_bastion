@@ -26,6 +26,14 @@ RSpec.feature "AccountDashboard", type: :feature do
     create :account_ssh_key, account: @admin3
   end
 
+  scenario "the 'Dashboard' navbar should active" do
+    sign_in_user_with @user1.email, 'password'
+
+    visit '/account'
+
+    expect(page).to have_selector "a.active[href='/account']"
+  end
+
   scenario 'user1 visit' do
     sign_in_user_with @user1.email, 'password'
 
