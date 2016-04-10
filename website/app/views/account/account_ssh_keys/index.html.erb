@@ -36,12 +36,20 @@
   </div>
 </div>
 
-<%= simple_form_for [:account, @account_ssh_key], html: {id: 'new_account_ssh_key', style: "display: #{@account_ssh_keys.blank? ? 'block' : 'none'}", data: {has_errors: @account_ssh_key.errors.present?}} do |f|%>
+<div class="row">
+<%= simple_form_for [:account, @account_ssh_key], wrapper: :horizontal_form, html: {id: 'new_account_ssh_key', style: "display: #{@account_ssh_keys.blank? ? 'block' : 'none'}", data: {has_errors: @account_ssh_key.errors.present?}} do |f|%>
   <%= f.input :title %>
-  <%= f.input :key, as: :text%>
-  <%= f.submit t('view.submit', default: 'Add SSH key'), class: 'btn btn-sm btn-primary'%>
-<% end %>
+  <%= f.input :key, as: :text %>
 
+  <div class="form-group">
+    <label class="col-sm-3"></label>
+    <div class="col-sm-9">
+      <%= f.submit t('view.submit', default: 'Add SSH key'), class: 'btn btn-sm btn-primary'%>
+    </div>
+  </div>
+
+<% end %>
+</div>
 
 <script>
 $(document).on('ready page:load', function() {
