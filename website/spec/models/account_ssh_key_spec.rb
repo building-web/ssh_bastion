@@ -14,7 +14,7 @@ RSpec.describe AccountSshKey, type: :model do
       it "when comment blank" do
         account_ssh_key = build :account_ssh_key, comment: ''
 
-        ssh_public_key = "%s %s" % [account_ssh_key.cat, account_ssh_key.content]
+        ssh_public_key = "%s" % account_ssh_key.key
 
         expect(account_ssh_key.public_key).to eq(ssh_public_key)
       end
@@ -22,7 +22,7 @@ RSpec.describe AccountSshKey, type: :model do
       it "when comment present" do
         account_ssh_key = build :account_ssh_key, comment: 'abc@example.com'
 
-        ssh_public_key = "%s %s abc@example.com" % [account_ssh_key.cat, account_ssh_key.content]
+        ssh_public_key = "%s abc@example.com" % account_ssh_key.key
 
         expect(account_ssh_key.public_key).to eq(ssh_public_key)
       end

@@ -2,45 +2,33 @@ class AccountSshKey < ApplicationRecord
 
   extend Enumerize
 
-  attr_accessor :key
-
-  CAT_ARRAY = [
-    :'ssh-rsa',
-    :'ssh-dsa',
-  ]
-
-  enumerize :cat, in: CAT_ARRAY
-
   belongs_to :account
 
-  validates :title, presence: true
-  validates :content, presence: true, uniqueness: { case_sensitive: true }
+  validates :title, presence: true, uniqueness: {scope: :account_id}
+  validates :key, presence: true, uniqueness: {}
+  validate :validate_key
 
   def public_key
-    key = "%s %s" % [cat, content]
+    _key = key
     if comment.present?
-      key << " #{comment}"
+      _key << " #{comment}"
     end
-    key
+    _key
   end
 
   def fingerprint
     SSHKey.fingerprint public_key
   end
 
-  def key=(key_content)
-    if key_content.blank?
-      return errors.add(:key, :blank)
-    end
+  private
 
-    unless SSHKey.valid_ssh_public_key?(key_content)
+  def validate_key
+    unless SSHKey.valid_ssh_public_key?(key)
       return errors.add(:key, :invalid)
     end
 
-    self.cat, self.content, self.comment = parse_key(key_content)
+    _, _, self.comment = parse_key(key)
   end
-
-  private
 
   def parse_key(key_content)
     key_content.split(' ')

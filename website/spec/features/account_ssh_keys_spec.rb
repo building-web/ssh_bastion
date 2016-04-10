@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AccountSshKeys", type: :feature do
+RSpec.feature "AccountSshKeys", type: :feature, js: true do
 
   background do
     # user1 is a new user
@@ -10,8 +10,8 @@ RSpec.feature "AccountSshKeys", type: :feature do
     # user2 is not a new user, he was created a ssh_key
     @user2 = create :user, password: 'password'
     @user2_ssh_public_key = generate_ssh_public_key('RSA', 'user2@example.com')
-    cat, content, comment = @user2_ssh_public_key.split(' ')
-    @user2_ssh_key = create :account_ssh_key, account: @user2, title: 'user2_first_ssh_key', cat: cat, content: content, comment: comment
+    _, _, comment = @user2_ssh_public_key.split(' ')
+    @user2_ssh_key = create :account_ssh_key, account: @user2, title: 'user2_first_ssh_key', key: @user2_ssh_public_key, comment: comment
 
     @user2_new_ssh_public_key = generate_ssh_public_key('RSA', 'user2_new@example.com')
   end
@@ -117,7 +117,7 @@ RSpec.feature "AccountSshKeys", type: :feature do
     end
 
     expect(page).to have_current_path('/account/ssh_keys')
-    expect(page).to have_content 'Key is already in use'
+    expect(page).to have_content 'has already been taken'
   end
 
   scenario 'user2 add a invalid ssh_key that Key is invalid' do
@@ -134,7 +134,7 @@ RSpec.feature "AccountSshKeys", type: :feature do
     end
 
     expect(page).to have_current_path('/account/ssh_keys')
-    expect(page).to have_content 'Key is invalid'
+    expect(page).to have_content 'is invalid'
   end
 
   scenario 'user2 add a invalid ssh_key that Title is exists' do
@@ -151,7 +151,7 @@ RSpec.feature "AccountSshKeys", type: :feature do
     end
 
     expect(page).to have_current_path('/account/ssh_keys')
-    expect(page).to have_content 'Title is already in use'
+    expect(page).to have_content 'has already been taken'
   end
 
 end
