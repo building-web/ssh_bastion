@@ -40,7 +40,8 @@ $ rspec # or guard
 or
 
 ```bash
-$ rake parallel:setup
+
+$ RAILS_ENV=test rake parallel:setup
 
 $ rake parallel:spec
 
