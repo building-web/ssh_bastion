@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>SshBastion</title>
+  <title>SSH Bastion</title>
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
 
@@ -18,19 +18,17 @@
 
 <body>
   <%= render 'account/shared/navbar' %>
-  <div id="wrapper">
-    <%= render 'account/shared/sidebar' %>
+  <div class="container-fluid" id="main">
+    <div class="row row-offcanvas row-offcanvas-left">
+      <%= render 'account/shared/sidebar' %>
 
-    <div id="page-content-wrapper">
-      <div class="container-fluid">
-        <div class="col-md-9 col-lg-11">
-          <%= render 'account/shared/flash' %>
-          <%= yield %>
-
-          <%= switch_user_select %>
-        </div>
+      <div class="col-md-9 col-lg-10 main">
+        <%= render 'account/shared/flash' %>
+        <%= yield %>
       </div>
     </div>
   </div>
+
+  <%= render 'account/shared/footer' %>
 </body>
 </html>

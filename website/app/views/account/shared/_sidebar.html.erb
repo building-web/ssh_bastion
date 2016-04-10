@@ -1,6 +1,5 @@
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
-
+<div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+  <ul class="nav nav-pills nav-stacked">
     <% if policy(BastionHost.new).index? %>
     <li class="nav-item">
       <a href="/account/bastion_hosts" class="nav-link"><%= t('view.sidebar.bastion_hosts', default: 'Bastion hosts')%></a>
@@ -13,13 +12,11 @@
     </li>
     <% end %>
 
-    <li>
-      <a href="/account/ssh_keys"><%= t('view.sidebar.ssh_keys', default: 'SSH keys')%></a>
+    <li class="nav-item">
+      <a href="/account/ssh_keys" class="nav-link"><%= t('view.sidebar.ssh_keys', default: 'SSH keys')%></a>
     </li>
-    <li>
-      <a href="/account/two_factor_authentication"><%= t('view.sidebar.two_factor_authentication', default: 'Two-factor authentication')%></a>
+    <li class="nav-item">
+      <a href="/account/two_factor_authentication" class="nav-link"><%= t('view.sidebar.two_factor_authentication', default: 'Two-factor authentication')%></a>
     </li>
-
-
   </ul>
 </div>

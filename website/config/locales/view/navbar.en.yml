@@ -3,3 +3,5 @@ en:
     navbar:
       dashboard: Dashboard
       profile: Profile
+      sign_out: Sign out
+      sign_in: Sign in
