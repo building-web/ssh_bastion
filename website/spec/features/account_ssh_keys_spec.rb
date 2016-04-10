@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AccountSshKeys", type: :feature, js: true do
+RSpec.feature "AccountSshKeys", type: :feature do
 
   background do
     # user1 is a new user
@@ -14,6 +14,14 @@ RSpec.feature "AccountSshKeys", type: :feature, js: true do
     @user2_ssh_key = create :account_ssh_key, account: @user2, title: 'user2_first_ssh_key', key: @user2_ssh_public_key, comment: comment
 
     @user2_new_ssh_public_key = generate_ssh_public_key('RSA', 'user2_new@example.com')
+  end
+
+  scenario "the 'SSH keys' sidebar should active" do
+    sign_in_user_with @user1.email, 'password'
+
+    visit '/account/ssh_keys'
+
+    expect(page).to have_selector "a.active[href='/account/ssh_keys']"
   end
 
   scenario 'user1 show ssh_key list' do
@@ -35,7 +43,7 @@ RSpec.feature "AccountSshKeys", type: :feature, js: true do
     expect(page).to have_selector "a[href='/account/ssh_keys/#{@user2_ssh_key.id}']", text: :Delete
   end
 
-  scenario 'user1 add a new ssh_key' do
+  scenario 'user1 add a new ssh_key', js: true do
     sign_in_user_with @user1.email, 'password'
 
     visit '/account/ssh_keys'
@@ -69,7 +77,7 @@ RSpec.feature "AccountSshKeys", type: :feature, js: true do
     expect(page).to have_content ssh_public_key_fingerprint(@user1_ssh_public_key)
   end
 
-  scenario 'user2 add a new ssh_key' do
+  scenario 'user2 add a new ssh_key', js: true do
     sign_in_user_with @user2.email, 'password'
 
     visit '/account/ssh_keys'
@@ -103,7 +111,7 @@ RSpec.feature "AccountSshKeys", type: :feature, js: true do
     expect(page).to have_content ssh_public_key_fingerprint(@user2_new_ssh_public_key)
   end
 
-  scenario 'user2 add a invalid ssh_key that Key is exists' do
+  scenario 'user2 add a invalid ssh_key that Key is exists', js: true do
     sign_in_user_with @user2.email, 'password'
 
     visit '/account/ssh_keys'
@@ -120,7 +128,7 @@ RSpec.feature "AccountSshKeys", type: :feature, js: true do
     expect(page).to have_content 'has already been taken'
   end
 
-  scenario 'user2 add a invalid ssh_key that Key is invalid' do
+  scenario 'user2 add a invalid ssh_key that Key is invalid', js: true do
     sign_in_user_with @user2.email, 'password'
 
     visit '/account/ssh_keys'
@@ -137,7 +145,7 @@ RSpec.feature "AccountSshKeys", type: :feature, js: true do
     expect(page).to have_content 'is invalid'
   end
 
-  scenario 'user2 add a invalid ssh_key that Title is exists' do
+  scenario 'user2 add a invalid ssh_key that Title is exists', js: true do
     sign_in_user_with @user2.email, 'password'
 
     visit '/account/ssh_keys'

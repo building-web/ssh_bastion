@@ -13,7 +13,7 @@
     <% end %>
 
     <li class="nav-item">
-      <a href="/account/ssh_keys" class="nav-link"><%= t('view.sidebar.ssh_keys', default: 'SSH keys')%></a>
+      <a href="/account/ssh_keys" class="nav-link <%= 'active' if account_nav_is?(:account_ssh_keys) %>"><%= t('view.sidebar.ssh_keys', default: 'SSH keys')%></a>
     </li>
     <li class="nav-item">
       <a href="/account/two_factor_authentication" class="nav-link"><%= t('view.sidebar.two_factor_authentication', default: 'Two-factor authentication')%></a>
