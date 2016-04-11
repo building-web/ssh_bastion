@@ -8,7 +8,7 @@ class Account::AccountSshKeysController < Account::BaseController
   def create
     @account_ssh_key = current_account.ssh_keys.new(ssh_key_params)
     if @account_ssh_key.save
-      redirect_to account_account_ssh_keys_path, notice: t('view.flash.create', default: 'SSH key was successfully created.')
+      redirect_to account_account_ssh_keys_path, notice: t('flash.actions.create.notice', resource_name: 'Ssh key')
     else
 
       @account_ssh_keys = current_account.ssh_keys.page(params[:page])
@@ -19,9 +19,13 @@ class Account::AccountSshKeysController < Account::BaseController
 
   def destroy
     @account_ssh_key = current_account.ssh_keys.find(params[:id])
-    @account_ssh_key.destroy
+    if @account_ssh_key.destroy
+      redirect_to account_account_ssh_keys_path, notice: t('flash.actions.destroy.notice', resource_name: 'Ssh key')
+    else
+      @account_ssh_keys = current_account.ssh_keys.page(params[:page])
 
-    redirect_to account_account_ssh_keys_path, notice: t('view.flash.destroy', default: 'SSH key was successfully destroyed.')
+      render :index
+    end
   end
 
   private
