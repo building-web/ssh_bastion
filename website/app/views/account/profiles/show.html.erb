@@ -1,0 +1,20 @@
+<div class="row sub-header">
+  <div class="col-md-10">
+    <h2>Profile</h2>
+  </div>
+</div>
+
+<div class="row">
+<%= simple_form_for [:account, @account], url: update_password_account_profile_path, wrapper: :horizontal_form, html: {class: 'form-horizontal', id: 'edit_profile_password'} do |f| %>
+  <%= f.input :current_password %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+
+  <div class="form-group">
+    <label class="col-sm-3"></label>
+    <div class="col-sm-9">
+      <%= f.submit t('view.submit', default: 'Submit'), class: 'btn btn-sm btn-primary'%>
+    </div>
+  </div>
+<% end %>
+</div>

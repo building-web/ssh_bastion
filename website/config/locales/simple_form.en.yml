@@ -29,3 +29,11 @@ en:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
+    labels:
+      account:
+        show:
+          password: 'New password'
+          password_confirmation: 'New password confirmation'
+
+
+

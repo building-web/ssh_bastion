@@ -11,7 +11,7 @@
         <a href="<%= account_root_path %>" class="nav-link <%= 'active' if account_nav_is?(:dashboard) %>"><%= t('view.navbar.dashboard', default: 'Dashboard') %></a>
       </li>
       <li class="nav-item">
-        <a href="/account/profile" class="nav-link"><%= t('view.navbar.profile', default: 'Profile') %></a>
+        <a href="/account/profile" class="nav-link <%= 'active' if account_nav_is?(:profile) %>"><%= t('view.navbar.profile', default: 'Profile') %></a>
       </li>
       <li class="nav-item">
         <a href="<%= destroy_account_session_path %>" class="nav-link" data-method="delete"><%= t('view.navbar.sign_out', default: 'Sign out')%></a>
