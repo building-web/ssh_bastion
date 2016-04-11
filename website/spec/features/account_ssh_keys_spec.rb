@@ -162,4 +162,21 @@ RSpec.feature "AccountSshKeys", type: :feature do
     expect(page).to have_content 'has already been taken'
   end
 
+  scenario 'user2 delete a old ssh_key', js: true do
+    sign_in_user_with @user2.email, 'password'
+
+    visit '/account/ssh_keys'
+
+    expect(page).to have_selector "a[href='/account/ssh_keys/#{@user2_ssh_key.id}']", text: 'Delete'
+
+    find("a[href='/account/ssh_keys/#{@user2_ssh_key.id}']").click
+
+    accept_confirm
+
+    expect(page).to have_current_path('/account/ssh_keys')
+    user_sees_flash_notice 'SSH key was successfully destroyed.'
+
+    expect(page).to_not have_selector "a[href='/account/ssh_keys/#{@user2_ssh_key.id}']"
+  end
+
 end

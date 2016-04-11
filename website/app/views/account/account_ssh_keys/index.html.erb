@@ -27,7 +27,7 @@
             <tr>
               <td><%= account_ssh_key.title %></td>
               <td><%= account_ssh_key.fingerprint %></td>
-              <td><a href="<%= account_account_ssh_key_path(account_ssh_key.id) %>" data-method="delete" class="btn btn-danger btn-sm"><%= t('view.destroy', default: 'Delete')%></td>
+              <td><a href="<%= account_account_ssh_key_path(account_ssh_key.id) %>" data-method="delete" class="btn btn-danger btn-sm" data-confirm="<%= t('view.are_you_sure_to_delete') %>"><%= t('view.destroy', default: 'Delete')%></td>
             </tr>
           <% end %>
         </tbody>
