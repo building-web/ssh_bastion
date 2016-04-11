@@ -36,4 +36,14 @@ RSpec.feature "AccountSessions", type: :feature do
     user_sees_flash_alert 'Invalid email or password'
   end
 
+  scenario 'user sign_out' do
+    sign_in_user_with @user.email, 'password'
+
+    expect(page).to have_selector "a[href='/accounts/sign_out']"
+
+    find("a[href='/accounts/sign_out']").click
+
+    expect(page).to have_current_path('/')
+  end
+
 end
