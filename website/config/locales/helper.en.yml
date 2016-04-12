@@ -1,0 +1,5 @@
+en:
+  helpers:
+    submit:
+      account_ssh_key:
+        create: Add SSH key

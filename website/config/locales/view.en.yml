@@ -4,7 +4,3 @@ en:
     handle: Handle
     destroy: Delete
     submit: Submit
-    ssh:
-      fingerprint: Fingerprint
-    ssh_key:
-      submit: Add SSH key
