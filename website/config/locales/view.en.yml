@@ -1,3 +1,10 @@
 en:
   view:
     are_you_sure_to_delete: Are you sure to delete?
+    handle: Handle
+    destroy: Delete
+    submit: Submit
+    ssh:
+      fingerprint: Fingerprint
+    ssh_key:
+      submit: Add SSH key

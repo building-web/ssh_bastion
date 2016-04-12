@@ -2,21 +2,21 @@
   <ul class="nav nav-pills nav-stacked">
     <% if policy(BastionHost.new).index? %>
     <li class="nav-item">
-      <a href="/account/bastion_hosts" class="nav-link"><%= t('view.sidebar.bastion_hosts', default: 'Bastion hosts')%></a>
+      <a href="/account/bastion_hosts" class="nav-link"><%= t('view.sidebar.bastion_hosts')%></a>
     </li>
     <% end %>
 
     <% if policy(Host.new).index? %>
     <li class="nav-item">
-      <a href="/account/hosts" class="nav-link"><%= t('view.sidebar.hosts', default: 'Hosts')%></a>
+      <a href="/account/hosts" class="nav-link"><%= t('view.sidebar.hosts')%></a>
     </li>
     <% end %>
 
     <li class="nav-item">
-      <a href="/account/ssh_keys" class="nav-link <%= 'active' if account_nav_is?(:account_ssh_keys) %>"><%= t('view.sidebar.ssh_keys', default: 'SSH keys')%></a>
+      <a href="/account/ssh_keys" class="nav-link <%= 'active' if account_nav_is?(:account_ssh_keys) %>"><%= t('view.sidebar.ssh_keys')%></a>
     </li>
     <li class="nav-item">
-      <a href="/account/two_factor_authentication" class="nav-link"><%= t('view.sidebar.two_factor_authentication', default: 'Two-factor authentication')%></a>
+      <a href="/account/two_factor_authentication" class="nav-link"><%= t('view.sidebar.two_factor_authentication')%></a>
     </li>
   </ul>
 </div>

@@ -8,17 +8,17 @@
       <% if account_signed_in? %>
 
       <li class="nav-item">
-        <a href="<%= account_root_path %>" class="nav-link <%= 'active' if account_nav_is?(:dashboard) %>"><%= t('view.navbar.dashboard', default: 'Dashboard') %></a>
+        <a href="<%= account_root_path %>" class="nav-link <%= 'active' if account_nav_is?(:dashboard) %>"><%= t('view.navbar.dashboard') %></a>
       </li>
       <li class="nav-item">
-        <a href="/account/profile" class="nav-link <%= 'active' if account_nav_is?(:profile) %>"><%= t('view.navbar.profile', default: 'Profile') %></a>
+        <a href="<%= account_profile_path %>" class="nav-link <%= 'active' if account_nav_is?(:profile) %>"><%= t('view.navbar.profile') %></a>
       </li>
       <li class="nav-item">
-        <a href="<%= destroy_account_session_path %>" class="nav-link" data-method="delete"><%= t('view.navbar.sign_out', default: 'Sign out')%></a>
+        <a href="<%= destroy_account_session_path %>" class="nav-link" data-method="delete"><%= t('view.navbar.sign_out')%></a>
       </li>
       <% else %>
       <li class="nav-item">
-        <a href="<%= new_account_session_path %>" class="nav-link"><%= t('view.navbar.sign_in', default: 'Sign in')%></a>
+        <a href="<%= new_account_session_path %>" class="nav-link"><%= t('view.navbar.sign_in')%></a>
       </li>
       <% end %>
     </ul>

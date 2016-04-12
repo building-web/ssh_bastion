@@ -18,8 +18,8 @@
         <thead>
           <tr>
             <th><%= AccountSshKey.human_attribute_name(:title) %></th>
-            <th><%= t('view.ssh.fingerprint', default: 'ssh Fingerprint') %></th>
-            <th><%= t('view.handle', default: 'handle') %></th>
+            <th><%= t('view.ssh.fingerprint') %></th>
+            <th><%= t('view.handle') %></th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
             <tr>
               <td><%= account_ssh_key.title %></td>
               <td><%= account_ssh_key.fingerprint %></td>
-              <td><a href="<%= account_account_ssh_key_path(account_ssh_key.id) %>" data-method="delete" class="btn btn-danger btn-sm" data-confirm="<%= t('view.are_you_sure_to_delete') %>"><%= t('view.destroy', default: 'Delete')%></td>
+              <td><a href="<%= account_account_ssh_key_path(account_ssh_key.id) %>" data-method="delete" class="btn btn-danger btn-sm" data-confirm="<%= t('view.are_you_sure_to_delete') %>"><%= t('view.destroy')%></td>
             </tr>
           <% end %>
         </tbody>
@@ -44,7 +44,7 @@
   <div class="form-group">
     <label class="col-sm-3"></label>
     <div class="col-sm-9">
-      <%= f.submit t('view.submit', default: 'Add SSH key'), class: 'btn btn-sm btn-primary'%>
+      <%= f.submit t('view.ssh_key.submit'), class: 'btn btn-sm btn-primary'%>
     </div>
   </div>
 
