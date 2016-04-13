@@ -4,9 +4,12 @@ FactoryGirl.define do
     association :creator_account, factory: :admin
 
     ip { FFaker::InternetSE.ip_v4_address }
+    port { 22 }
+
     code { SecureRandom.hex(4) }
-    port { '22' }
+
     comment { FFaker::Lorem.sentence }
+
   end
 
 end
