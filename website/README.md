@@ -10,8 +10,6 @@ $ cp .versions.conf.example .versions.conf
 
 $ cd .
 
-$ cp .env.example .env
-
 $ cp config/database.yml.example config/database.yml
 
 $ RAILS_ENV=development rake db:environment:set && rake db:drop:all && rake db:create && rake db:migrate && rake db:seed

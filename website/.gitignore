@@ -16,11 +16,16 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore database config file
 /config/database.yml
-/.env
 
+# Ignore version manage file
+/.ruby-version
+/.ruby-gemset
+/.rvmrc
 /.versions.conf
 
+# Ignore for gem https://github.com/railsconfig/config
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml

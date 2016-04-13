@@ -1,5 +1,11 @@
+# Ignore for vagrant
 /**/*.box
-/**/.vagrant
-
+/**/.vagrant/
 /**/Vagrantfile
+
+# Ignore for https://github.com/horosgrisa/autoenv
+/**/.env
+/**/.out
+
+
 
