@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AccountDashboard", type: :feature do
+RSpec.feature "Account::Dashboard", type: :feature do
 
   background do
     # new user

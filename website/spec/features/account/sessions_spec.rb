@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AccountSessions", type: :feature do
+RSpec.feature "Account::Sessions", type: :feature do
 
   background do
     @user = create :user, password: 'password'

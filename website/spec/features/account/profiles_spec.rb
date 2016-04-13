@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AccountProfiles", type: :feature do
+RSpec.feature "Account::Profiles", type: :feature do
 
   background do
     @user = create :user, password: 'password'

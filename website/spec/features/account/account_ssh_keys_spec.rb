@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AccountSshKeys", type: :feature do
+RSpec.feature "Account::AccountSshKeys", type: :feature do
 
   background do
     # user1 is a new user

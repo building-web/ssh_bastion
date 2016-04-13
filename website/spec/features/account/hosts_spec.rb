@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Hosts", type: :feature do
+RSpec.feature "Account::Hosts", type: :feature do
   background do
     @code1 = SecureRandom.hex(4)
     @code2 = SecureRandom.hex(4)
