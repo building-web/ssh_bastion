@@ -60,17 +60,23 @@ RSpec.feature "Account::Hosts", type: :feature do
 
   end
 
-  scenario 'admin1 add a new Host' do
+  scenario 'admin1 add a new Host', js: true do
     sign_in_user_with @admin1.email, password: 'password'
 
     visit '/account/hosts/new'
 
     expect(page).to have_selector "form#new_host[action='/account/hosts']"
 
+    expect(page).to have_content "User1 or User2 should not is 'root', User2 should not be blank."
+
     within('form#new_host') do
       fill_in 'IP', with: '8.8.8.8'
       fill_in 'Port', with: 22
-      fill_in  'Comment', with: 'host_comment'
+      fill_in 'Comment', with: 'host_comment'
+
+      fill_in 'User1', with: 'dev'
+      fill_in 'User2', with: 'app'
+
       click_button 'Add Host'
     end
 
@@ -82,7 +88,7 @@ RSpec.feature "Account::Hosts", type: :feature do
     expect(page).to have_content 'host_comment'
   end
 
-  scenario 'admin2 add a new Host that ip is exist' do
+  scenario 'admin2 add a new Host that IP is exist', js: true do
     sign_in_user_with @admin2.email, password: 'password'
 
     visit '/account/hosts/new'
@@ -92,7 +98,10 @@ RSpec.feature "Account::Hosts", type: :feature do
     within('form#new_host') do
       fill_in 'IP', with: '127.0.0.1'
       fill_in 'Port', with: '22'
-      fill_in  'Comment', with: 'host_comment'
+      fill_in 'Comment', with: 'host_comment'
+
+      fill_in 'User1', with: 'dev'
+
       click_button 'Add Host'
     end
 
@@ -100,7 +109,7 @@ RSpec.feature "Account::Hosts", type: :feature do
     user_sees_flash_notice 'IP has already been taken'
   end
 
-  scenario 'admin2 add a new Host that ip is invalid' do
+  scenario 'admin2 add a new Host that IP is invalid', js: true do
     sign_in_user_with @admin2.email, password: 'password'
 
     visit '/account/hosts/new'
@@ -110,7 +119,10 @@ RSpec.feature "Account::Hosts", type: :feature do
     within('form#new_account_ssh_key') do
       fill_in 'IP', with: '0.0.0.0'
       fill_in 'Port', with: '22'
-      fill_in  'Comment', with: 'host_comment'
+      fill_in 'Comment', with: 'host_comment'
+
+      fill_in 'User1', with: 'dev'
+
       click_button 'Add Host'
     end
 
@@ -118,7 +130,28 @@ RSpec.feature "Account::Hosts", type: :feature do
     user_sees_flash_notice 'IP is invalid'
   end
 
-  scenario 'admin2 update a old Host' do
+  scenario 'admin2 add a new Host that User is root', js: true do
+    sign_in_user_with @admin2.email, password: 'password'
+
+    visit '/account/hosts/new'
+
+    expect(page).to have_selector "form#new_host[action='/account/hosts']"
+
+    within('form#new_account_ssh_key') do
+      fill_in 'IP', with: '1.1.1.1'
+      fill_in 'Port', with: '22'
+      fill_in 'Comment', with: 'host_comment'
+
+      fill_in 'User1', with: 'root'
+
+      click_button 'Add Host'
+    end
+
+    expect(page).to have_current_path('/account/hosts')
+    user_sees_flash_notice 'User is invalid'
+  end
+
+  scenario 'admin2 update a old Host', js: true do
     sign_in_user_with @admin2.email, password: 'password'
 
     visit "/account/hosts/#{@admin_host2.id}/edit"
@@ -128,7 +161,7 @@ RSpec.feature "Account::Hosts", type: :feature do
     within('form#edit_host') do
       fill_in 'IP', with: '9.9.9.9'
       fill_in 'Port', with: '1022'
-      fill_in  'comment', with: 'new_host_comment'
+      fill_in 'comment', with: 'new_host_comment'
       click_button 'Update Host'
     end
 
@@ -140,7 +173,7 @@ RSpec.feature "Account::Hosts", type: :feature do
     expect(page).to have_content 'new_host_comment'
   end
 
-  scenario 'admin2 delete a old host' do
+  scenario 'admin2 delete a old host', js: true do
     sign_in_user_with @admin2.email, 'password'
 
     visit '/account/hosts'
