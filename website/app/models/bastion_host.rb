@@ -1,6 +1,6 @@
 class BastionHost < ApplicationRecord
 
-  validates :ip, :ip => { :format => :v4 }
+  validates :ip, ip: { format: :v4 }
 
   def self.build_default
     case Settings.Arch_mode.to_i

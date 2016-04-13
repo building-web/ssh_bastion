@@ -4,3 +4,5 @@ en:
     handle: Handle
     destroy: Delete
     submit: Submit
+    edit: Edit
+    new: New

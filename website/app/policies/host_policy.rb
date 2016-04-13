@@ -11,4 +11,7 @@ class HostPolicy < ApplicationPolicy
     account.submitted_ssh_key? and account.enabled_two_factor_authentication?
   end
 
+  def handle?
+    account.submitted_ssh_key? and account.enabled_two_factor_authentication? and account.role?(:admin)
+  end
 end

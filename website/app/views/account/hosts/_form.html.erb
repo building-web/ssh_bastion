@@ -1,0 +1,23 @@
+<div class="row">
+  <%= simple_form_for [:account, @host], wrapper: :horizontal_form do |f| %>
+
+    <%= f.input :ip %>
+    <%= f.input :port, as: :integer %>
+    <%= f.input :comment %>
+
+    <%= f.simple_fields_for :host_user_app do |ff| %>
+      <%= ff.input :name %>
+    <% end %>
+
+    <%= f.simple_fields_for :host_user_dev do |ff| %>
+      <%= ff.input :name %>
+    <% end %>
+
+    <div class="form-group">
+      <label class="col-sm-3"></label>
+      <div class="col-sm-9">
+        <%= f.submit class: 'btn btn-sm btn-primary'%>
+      </div>
+    </div>
+  <% end %>
+</div>

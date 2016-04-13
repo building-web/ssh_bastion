@@ -8,6 +8,8 @@ module ApplicationHelper
       controller_name == 'account_ssh_keys'
     when :profile
       controller_name == 'profiles'
+    when :hosts
+      controller_name == 'hosts'
     else
       false
     end
