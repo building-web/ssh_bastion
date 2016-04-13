@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406052780) do
+ActiveRecord::Schema.define(version: 20160413061748) do
 
   create_table "account_ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "account_id"
@@ -65,12 +65,13 @@ ActiveRecord::Schema.define(version: 20160406052780) do
   add_index "accounts_host_users", ["host_user_id"], name: "index_accounts_host_users_on_host_user_id", using: :btree
 
   create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.integer  "arch_mode",  default: 1
+    t.integer  "arch_mode",                    default: 1
     t.string   "ip"
     t.string   "user"
     t.string   "desc"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.text     "ssh_public_key", limit: 65535
   end
 
   create_table "host_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|

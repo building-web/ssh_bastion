@@ -3,12 +3,19 @@ time_zone: Beijing
 super_admin:
   email: admin@example.com
 
-website_GPG_key_ID: '99999999'
 two_step_encryption_key: '99999999999999999999999999999999'
+
+###############################################
+#
+# How to generate
+# ref https://fedoraproject.org/wiki/Creating_GPG_Keys#Creating_GPG_Keys_Using_the_Command_Line
+#
+website_GPG_key_ID: '99999999'
 
 #
 # 1 website and bastion_host in same host
 #
 Arch_mode: 1
-Arch_mode_one:
+Arch_mode_1st:
   user: dev
+  ssh_public_key: ''
