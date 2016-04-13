@@ -2,6 +2,12 @@
 
 ### Install vagrant
 
+#### Arch Linux
+
+```bash
+$ pacman -Syu virtualbox vagrant
+```
+
 TODO
 
 ### Create a vagrant base box with ubuntu 14.04
