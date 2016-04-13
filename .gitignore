@@ -1,0 +1,5 @@
+/vagrant/*
+!/vagrant/.keep
+!/vagrant/README.md
+
+
