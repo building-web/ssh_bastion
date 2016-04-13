@@ -16,5 +16,8 @@ TODO
 
 $ wget http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
 
+$ vagrant init ssh_bastion_development trusty-server-cloudimg-amd64-vagrant-disk1.box
+
+$ vagrant up
 
 ```
