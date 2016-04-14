@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Account::Hosts", type: :feature do
+
   background do
     @user = create :admin_with_enabled_two_factor
     create :account_ssh_key, account: @user

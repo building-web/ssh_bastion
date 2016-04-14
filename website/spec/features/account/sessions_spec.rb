@@ -8,6 +8,7 @@ RSpec.feature "Account::Sessions", type: :feature do
 
   scenario 'user enter right account' do
     visit new_account_session_path
+
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'password'
     click_button 'Sign in'
@@ -16,7 +17,9 @@ RSpec.feature "Account::Sessions", type: :feature do
     user_sees_flash_notice 'Signed in successfully'
   end
 
-  scenario 'user enter wrong account' do    visit new_account_session_path
+  scenario 'user enter wrong account' do
+    visit new_account_session_path
+
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'wrong password'
     click_button 'Sign in'
@@ -27,6 +30,7 @@ RSpec.feature "Account::Sessions", type: :feature do
 
   scenario 'user sign_out' do
     visit new_account_session_path
+
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'password'
     click_button 'Sign in'
