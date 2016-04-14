@@ -26,7 +26,7 @@ class Account < ApplicationRecord
   has_many :ssh_keys, class_name: 'AccountSshKey'
   has_many :hosts, class_name: 'Host', foreign_key: :creator_account_id
 
-  has_many :assigned_hosts, class_name: 'AccountsHostUser'
+  has_many :assigned_hosts
 
   ROLE_HASH = {
     user: 1,

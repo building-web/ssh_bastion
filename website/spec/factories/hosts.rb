@@ -10,6 +10,9 @@ FactoryGirl.define do
 
     comment { FFaker::Lorem.sentence }
 
+    user1 { FFaker::Internet.domain_name }
+    user2 { FFaker::Internet.domain_name }
+    user3 { FFaker::Internet.domain_name }
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413061748) do
+ActiveRecord::Schema.define(version: 20160406052780) do
 
   create_table "account_ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "account_id"
@@ -52,36 +52,29 @@ ActiveRecord::Schema.define(version: 20160413061748) do
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
 
-  create_table "accounts_host_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "assigned_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "account_id"
     t.integer  "host_id"
-    t.integer  "host_user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "mark"
+    t.string   "user1"
+    t.string   "user2"
+    t.string   "user3"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "accounts_host_users", ["account_id"], name: "index_accounts_host_users_on_account_id", using: :btree
-  add_index "accounts_host_users", ["host_id"], name: "index_accounts_host_users_on_host_id", using: :btree
-  add_index "accounts_host_users", ["host_user_id"], name: "index_accounts_host_users_on_host_user_id", using: :btree
+  add_index "assigned_hosts", ["account_id"], name: "index_assigned_hosts_on_account_id", using: :btree
+  add_index "assigned_hosts", ["host_id"], name: "index_assigned_hosts_on_host_id", using: :btree
 
   create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "arch_mode",                    default: 1
     t.string   "ip"
     t.string   "user"
     t.string   "desc"
+    t.text     "ssh_public_key", limit: 65535
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.text     "ssh_public_key", limit: 65535
   end
-
-  create_table "host_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "host_id"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "host_users", ["host_id"], name: "index_host_users_on_host_id", using: :btree
 
   create_table "hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "creator_account_id"
@@ -89,6 +82,9 @@ ActiveRecord::Schema.define(version: 20160413061748) do
     t.string   "code"
     t.integer  "port"
     t.string   "comment"
+    t.string   "user1"
+    t.string   "user2"
+    t.string   "user3"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -96,8 +92,6 @@ ActiveRecord::Schema.define(version: 20160413061748) do
   add_index "hosts", ["creator_account_id"], name: "index_hosts_on_creator_account_id", using: :btree
 
   add_foreign_key "account_ssh_keys", "accounts"
-  add_foreign_key "accounts_host_users", "accounts"
-  add_foreign_key "accounts_host_users", "host_users"
-  add_foreign_key "accounts_host_users", "hosts"
-  add_foreign_key "host_users", "hosts"
+  add_foreign_key "assigned_hosts", "accounts"
+  add_foreign_key "assigned_hosts", "hosts"
 end

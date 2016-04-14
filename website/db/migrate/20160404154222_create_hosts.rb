@@ -6,6 +6,9 @@ class CreateHosts < ActiveRecord::Migration[5.0]
       t.string :code
       t.integer :port
       t.string :comment
+      t.string :user1
+      t.string :user2
+      t.string :user3
 
       t.timestamps
     end
