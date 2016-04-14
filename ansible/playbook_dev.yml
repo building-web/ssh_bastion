@@ -31,14 +31,12 @@
       tags: redis
       redis_bind: 127.0.0.1
 
-    - role: jdauphant.nginx
-      tags: nginx
-
     - role: rvm_io.rvm1-ruby
       tags: ruby
       rvm1_rubies:
         - 'ruby-2.2.2'
       rvm1_rvm_check_for_updates: false
+      rvm1_gpg_key_server: pgp.mit.edu
 
     - role: geerlingguy.nodejs
       tags: nodejs
