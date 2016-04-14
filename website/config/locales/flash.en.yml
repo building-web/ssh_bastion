@@ -7,7 +7,7 @@ en:
         notice: "%{resource_name} was successfully updated."
       destroy:
         notice: "%{resource_name} was successfully destroyed."
-        alert: "{{resource_name}} could not be destroyed."
+        alert: "%{resource_name} could not be destroyed."
     account:
       profiles:
         update_password:

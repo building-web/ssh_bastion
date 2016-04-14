@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe HostPolicy, type: :policy do
+RSpec.describe AccountsHostUserPolicy, type: :policy do
 
   subject { described_class }
 
@@ -18,11 +18,9 @@ RSpec.describe HostPolicy, type: :policy do
       expect(subject).not_to permit(account, host)
     end
 
-
     it "grants access if account was has_ssh_key and enabled_two_factor_authentication" do
       allow(account).to receive(:has_ssh_key?).and_return(true)
       allow(account).to receive(:enabled_two_factor_authentication?).and_return(true)
-      allow(account).to receive(:role?).with(:admin).and_return(true)
       expect(subject).to permit(account, host)
     end
   end

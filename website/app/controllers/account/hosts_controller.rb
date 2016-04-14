@@ -2,23 +2,23 @@ class Account::HostsController < Account::BaseController
   before_action :set_host, only: [:edit, :update, :destroy]
 
   def index
-    # these hosts inlcude two part, ones created, ones aimed, I think we should divded them
-    @hosts = current_account.creator_hosts
+    @hosts = current_account.hosts.page(params[:page])
+
+    authorize @hosts, :index?
   end
 
   def new
-    @host = current_account.creator_hosts.new
+    @host = current_account.hosts.new
 
-    authorize @host, :handle?
+    authorize @host, :new?
 
-    @host.build_host_user_app
-    @host.build_host_user_dev
+    2.times { @host.host_users.new }
   end
 
   def create
-    @host = current_account.creator_hosts.new(host_param)
+    @host = current_account.hosts.new(host_param)
 
-    authorize @host, :handle?
+    authorize @host, :create?
 
     if @host.save
       redirect_to account_hosts_path, notice: t('flash.actions.create.notice', resource_name: 'Host')
@@ -28,10 +28,11 @@ class Account::HostsController < Account::BaseController
   end
 
   def edit
+    authorize @host, :edit?
   end
 
   def update
-    authorize @host, :handle?
+    authorize @host, :update?
 
     if @host.update(host_param)
       redirect_to account_hosts_path, notice: t('flash.actions.update.notice', resource_name: 'Host')
@@ -41,25 +42,24 @@ class Account::HostsController < Account::BaseController
   end
 
   def destroy
-    authorize @host, :handle?
+    authorize @host, :destroy?
 
-    if @account_ssh_key.destroy
+    if @host.destroy
       redirect_to account_hosts_path, notice: t('flash.actions.destroy.notice', resource_name: 'Host')
     else
-      ###  TODO
+      redirect_to account_host_path(@host), notice: t('flash.actions.destroy.alert', resource_name: 'Host')
     end
   end
 
   private
   def set_host
-    @host = current_account.creator_hosts.find(params[:id])
+    @host = current_account.hosts.find(params[:id])
   end
 
   def host_param
     params.require(:host).permit(
       :ip, :port, :comment,
-      host_user_app_attributes: [:id, :name],
-      host_user_dev_attributes: [:id, :name],
+      host_users_attributes: [:id, :name],
       )
   end
 end

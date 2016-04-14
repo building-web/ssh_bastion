@@ -37,52 +37,54 @@ RSpec.feature "Account::Dashboard", type: :feature do
   scenario 'user1 visit' do
     switch_user @user1
 
-    expect(page).to have_selector "a[href='/account']", text: :Dashboard
-    expect(page).to have_selector "a[href='/account/profile']", text: :Profile
-    expect(page).to have_selector "a[href='/accounts/sign_out']", text: :'Sign out'
+    expect(page).to have_selector "a[href='/account']", text: 'Dashboard'
+    expect(page).to have_selector "a[href='/account/profile']", text: 'Profile'
+    expect(page).to have_selector "a[href='/accounts/sign_out']", text: 'Sign out'
 
-    expect(page).to have_selector "a[href='/account/ssh_keys']", text: :'SSH keys'
-    expect(page).to have_selector "a[href='/account/two_factor_authentication']", text: :'Two-factor authentication'
+    expect(page).to have_selector "a[href='/account/ssh_keys']", text: 'SSH keys'
+    expect(page).to have_selector "a[href='/account/two_factor_authentication']", text: 'Two-factor authentication'
 
-    expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to_not have_selector "a[href='/account/hosts']", text: 'Hosts'
   end
 
   scenario 'user2 visit' do
     switch_user @user2
 
-    expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to_not have_selector "a[href='/account/hosts']", text: 'Hosts'
   end
 
   scenario 'user3 visit' do
     switch_user @user3
 
-    expect(page).to have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to have_selector "a[href='/account/hosts']", text: 'Hosts'
+    expect(page).to have_selector "a[href='/account/assigned_hosts']", text: 'Assigned Hosts'
   end
 
   scenario 'admin1 visit' do
     switch_user @admin1
 
-    expect(page).to have_selector "a[href='/account']", text: :Dashboard
-    expect(page).to have_selector "a[href='/account/profile']", text: :Profile
-    expect(page).to have_selector "a[href='/accounts/sign_out']", text: :'Sign out'
+    expect(page).to have_selector "a[href='/account']", text: 'Dashboard'
+    expect(page).to have_selector "a[href='/account/profile']", text: 'Profile'
+    expect(page).to have_selector "a[href='/accounts/sign_out']", text: 'Sign out'
 
-    expect(page).to have_selector "a[href='/account/ssh_keys']", text: :'SSH keys'
-    expect(page).to have_selector "a[href='/account/two_factor_authentication']", text: :'Two-factor authentication'
+    expect(page).to have_selector "a[href='/account/ssh_keys']", text: 'SSH keys'
+    expect(page).to have_selector "a[href='/account/two_factor_authentication']", text: 'Two-factor authentication'
 
-    expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to_not have_selector "a[href='/account/hosts']", text: 'Hosts'
   end
 
   scenario 'admin2 visit' do
     switch_user @admin2
 
-    expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to_not have_selector "a[href='/account/hosts']", text: 'Hosts'
   end
 
   scenario 'admin3 visit' do
     switch_user @admin3
 
-    expect(page).to have_selector "a[href='/account/hosts']", text: :Hosts
-    expect(page).to have_selector "a[href='/account/bastion_hosts']", text: :'Bastion hosts'
+    expect(page).to have_selector "a[href='/account/hosts']", text: 'Hosts'
+    expect(page).to have_selector "a[href='/account/assigned_hosts']", text: 'Assigned Hosts'
+    expect(page).to have_selector "a[href='/account/bastion_hosts']", text: 'Bastion hosts'
   end
 
 end

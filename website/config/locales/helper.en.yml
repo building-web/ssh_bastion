@@ -3,3 +3,6 @@ en:
     submit:
       account_ssh_key:
         create: Add SSH key
+      host:
+        create: Add Host
+        update: Update Host

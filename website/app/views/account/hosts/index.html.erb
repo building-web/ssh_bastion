@@ -1,12 +1,14 @@
 <div class="row sub-header">
   <div class="col-md-10">
-    <h2>SSH keys</h2>
+    <h2>Hosts</h2>
   </div>
-  <% if policy(@hosts).handle? %>
-    <div class="col-md-2">
+  <div class="col-md-2">
+    <% if policy(current_account.hosts.build).new? %>
       <a href="<%= new_account_host_path %>" class="btn btn-primary">New Host</a>
-    </div>
-  <% end %>
+    <% else %>
+      <a href="javascript:void(0);" class="btn btn-primary disabled">New Host</a>
+    <% end %>
+  </div>
 </div>
 
 <div class="row">
@@ -38,4 +40,5 @@
       </table>
     <% end %>
   </div>
+</div>
 

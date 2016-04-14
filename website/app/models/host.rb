@@ -1,12 +1,14 @@
 class Host < ApplicationRecord
 
   belongs_to :creator_account, class_name: 'Account', foreign_key: 'creator_account_id'
-  has_one :host_user_app, class_name: 'HostUser'
-  accepts_nested_attributes_for :host_user_app
 
-  has_one :host_user_dev, class_name: 'HostUser'
-  accepts_nested_attributes_for :host_user_dev
+  has_many :host_users, dependent: :destroy
+  validates_associated :host_users
+  accepts_nested_attributes_for :host_users
 
-  validates :ip, ip: { format: :v4 }
-  # TODO host_user_dev host_user_app not eq  and not eq root
+  has_many :accounts_host_users, dependent: :destroy
+  has_many :assigned_accounts, through: :accounts_host_users, source: :account
+
+  validates :ip, ip: { format: :v4 }, uniqueness: true
+  validates :host_users, nested_attributes_uniqueness: {field: :name}
 end

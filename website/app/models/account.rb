@@ -24,8 +24,9 @@ class Account < ApplicationRecord
 
 
   has_many :ssh_keys, class_name: 'AccountSshKey'
-  has_many :creator_hosts, class_name: 'Host', foreign_key: :creator_account_id
+  has_many :hosts, class_name: 'Host', foreign_key: :creator_account_id
 
+  has_many :assigned_hosts, class_name: 'AccountsHostUser'
 
   ROLE_HASH = {
     user: 1,
@@ -48,6 +49,10 @@ class Account < ApplicationRecord
 
   def enabled_two_factor_authentication?
     !otp_secret.nil? and !consumed_timestep.nil?
+  end
+
+  def secret_matched?
+    has_ssh_key? and enabled_two_factor_authentication?
   end
 
 end

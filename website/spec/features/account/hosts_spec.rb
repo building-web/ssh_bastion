@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Account::Hosts", type: :feature do
 
   background do
-    @user = create :admin_with_enabled_two_factor
+    @user = create :user_with_enabled_two_factor
     create :account_ssh_key, account: @user
 
     @admin1 = create :admin_with_enabled_two_factor
@@ -21,6 +21,7 @@ RSpec.feature "Account::Hosts", type: :feature do
 
     expect(page).to have_selector "a.active[href='/account/hosts']"
   end
+
 
   scenario "user cannot see new host button" do
     switch_user @user
@@ -58,7 +59,6 @@ RSpec.feature "Account::Hosts", type: :feature do
 
     expect(page).to have_selector "a[href='/account/hosts/#{@admin_host2.id}/edit']", text: 'Edit'
     expect(page).to have_selector "a[data-method='delete'][href='/account/hosts/#{@admin_host2.id}']", text: 'Delete'
-
   end
 
   scenario 'admin1 add a new Host', js: true do
@@ -68,15 +68,15 @@ RSpec.feature "Account::Hosts", type: :feature do
 
     expect(page).to have_selector "form#new_host[action='/account/hosts']"
 
-    expect(page).to have_content "User1 or User2 should not is 'root', User2 should not be blank."
+    expect(page).to have_content "Users should not is 'root', User must have less than one value"
 
     within('form#new_host') do
       fill_in 'IP', with: '8.8.8.8'
       fill_in 'Port', with: 22
       fill_in 'Comment', with: 'host_comment'
 
-      fill_in 'User1', with: 'dev'
-      fill_in 'User2', with: 'app'
+      fill_in 'host[host_users_attributes][0][name]', with: 'dev'
+      fill_in 'host[host_users_attributes][1][name]', with: 'app'
 
       click_button 'Add Host'
     end
@@ -97,17 +97,17 @@ RSpec.feature "Account::Hosts", type: :feature do
     expect(page).to have_selector "form#new_host[action='/account/hosts']"
 
     within('form#new_host') do
-      fill_in 'IP', with: '127.0.0.1'
+      fill_in 'IP', with: @admin_host2.ip
       fill_in 'Port', with: '22'
       fill_in 'Comment', with: 'host_comment'
 
-      fill_in 'User1', with: 'dev'
+      fill_in 'host[host_users_attributes][0][name]', with: 'dev'
 
       click_button 'Add Host'
     end
 
     expect(page).to have_current_path('/account/hosts')
-    user_sees_flash_notice 'IP has already been taken'
+    expect(page).to have_content 'has already been taken'
   end
 
   scenario 'admin2 add a new Host that IP is invalid', js: true do
@@ -117,18 +117,18 @@ RSpec.feature "Account::Hosts", type: :feature do
 
     expect(page).to have_selector "form#new_host[action='/account/hosts']"
 
-    within('form#new_account_ssh_key') do
-      fill_in 'IP', with: '0.0.0.0'
+    within('form#new_host') do
+      fill_in 'IP', with: '0.0'
       fill_in 'Port', with: '22'
       fill_in 'Comment', with: 'host_comment'
 
-      fill_in 'User1', with: 'dev'
+      fill_in 'host[host_users_attributes][0][name]', with: 'dev'
 
       click_button 'Add Host'
     end
 
     expect(page).to have_current_path('/account/hosts')
-    user_sees_flash_notice 'IP is invalid'
+    expect(page).to have_content 'is invalid'
   end
 
   scenario 'admin2 add a new Host that User is root', js: true do
@@ -138,18 +138,40 @@ RSpec.feature "Account::Hosts", type: :feature do
 
     expect(page).to have_selector "form#new_host[action='/account/hosts']"
 
-    within('form#new_account_ssh_key') do
+    within('form#new_host') do
       fill_in 'IP', with: '1.1.1.1'
       fill_in 'Port', with: '22'
       fill_in 'Comment', with: 'host_comment'
 
-      fill_in 'User1', with: 'root'
+      fill_in 'host[host_users_attributes][0][name]', with: 'root'
 
       click_button 'Add Host'
     end
 
     expect(page).to have_current_path('/account/hosts')
-    user_sees_flash_notice 'User is invalid'
+    expect(page).to have_content "can not be same as 'root'"
+  end
+
+  scenario 'admin2 add a new Host that Users same', js: true do
+    switch_user @admin2
+
+    visit '/account/hosts/new'
+
+    expect(page).to have_selector "form#new_host[action='/account/hosts']"
+
+    within('form#new_host') do
+      fill_in 'IP', with: '1.1.1.1'
+      fill_in 'Port', with: '22'
+      fill_in 'Comment', with: 'host_comment'
+
+      fill_in 'host[host_users_attributes][0][name]', with: 'dev'
+      fill_in 'host[host_users_attributes][1][name]', with: 'dev'
+
+      click_button 'Add Host'
+    end
+
+    expect(page).to have_current_path('/account/hosts')
+    expect(page).to have_content "has already been taken"
   end
 
   scenario 'admin2 update a old Host', js: true do
@@ -157,17 +179,17 @@ RSpec.feature "Account::Hosts", type: :feature do
 
     visit "/account/hosts/#{@admin_host2.id}/edit"
 
-    expect(page).to have_selector "form#edit_host[action='/account/hosts/#{@admin_host2.id}']"
+    expect(page).to have_selector "form#edit_host_#{@admin_host2.id}[action='/account/hosts/#{@admin_host2.id}']"
 
-    within('form#edit_host') do
+    within("form#edit_host_#{@admin_host2.id}") do
       fill_in 'IP', with: '9.9.9.9'
       fill_in 'Port', with: '1022'
-      fill_in 'comment', with: 'new_host_comment'
+      fill_in 'Comment', with: 'new_host_comment'
       click_button 'Update Host'
     end
 
     expect(page).to have_current_path('/account/hosts')
-    user_sees_flash_notice 'Host was successfully update.'
+    user_sees_flash_notice 'Host was successfully updated.'
 
     expect(page).to have_content '9.9.9.9'
     expect(page).to have_content '1022'

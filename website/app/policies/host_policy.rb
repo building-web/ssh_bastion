@@ -8,10 +8,29 @@ class HostPolicy < ApplicationPolicy
   end
 
   def index?
-    account.has_ssh_key? and account.enabled_two_factor_authentication?
+    account.secret_matched?
   end
 
-  def handle?
-    account.has_ssh_key? and account.enabled_two_factor_authentication? and account.role?(:admin)
+  def new?
+    create?
   end
+
+  def create?
+    account.secret_matched? and account.role?(:admin)
+  end
+
+  def edit?
+    update?
+  end
+
+  def update?
+    account.secret_matched? and host.creator_account == account
+  end
+
+  def destroy?
+    update?
+  end
+
+  private
+
 end
