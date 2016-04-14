@@ -15,9 +15,6 @@ gem 'jbuilder', '~> 2.4.1'
 
 gem 'puma', '~> 3.0.2', require: false
 
-# pre remove
-# gem 'dotenv-rails', '~> 2.1.0'
-
 gem 'config', '~> 1.1.0'
 
 gem 'rails-i18n', '~> 5.0.0.beta3'
