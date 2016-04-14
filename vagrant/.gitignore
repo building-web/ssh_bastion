@@ -6,6 +6,7 @@
 # Ignore for https://github.com/horosgrisa/autoenv
 /**/.env
 /**/.out
-
+/**/.autoenv_in
+/**/.autoenv_out
 
 
