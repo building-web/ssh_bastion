@@ -4,30 +4,30 @@ RSpec.feature "Account::Dashboard", type: :feature do
 
   background do
     # new user
-    @user1 = create :user, password: 'password'
+    @user1 = create :user
 
     # was submitted a ssh_key
-    @user2 = create :user, password: 'password'
+    @user2 = create :user
     create :account_ssh_key, account: @user2
 
     # was submitted a ssh_key and enabled two-factor_authentication
-    @user3 = create :user_with_enabled_two_factor, password: 'password'
+    @user3 = create :user_with_enabled_two_factor
     create :account_ssh_key, account: @user3
 
     # new admin
-    @admin1 = create :admin, password: 'password'
+    @admin1 = create :admin
 
     # was submitted a ssh_key
-    @admin2 = create :admin, password: 'password'
+    @admin2 = create :admin
     create :account_ssh_key, account: @admin2
 
     # was submitted a ssh_key and enabled two-factor_authentication
-    @admin3 = create :admin_with_enabled_two_factor, password: 'password'
+    @admin3 = create :admin_with_enabled_two_factor
     create :account_ssh_key, account: @admin3
   end
 
   scenario "the 'Dashboard' navbar should active" do
-    sign_in_user_with @user1.email, 'password'
+    switch_user @user1
 
     visit '/account'
 
@@ -35,7 +35,7 @@ RSpec.feature "Account::Dashboard", type: :feature do
   end
 
   scenario 'user1 visit' do
-    sign_in_user_with @user1.email, 'password'
+    switch_user @user1
 
     expect(page).to have_selector "a[href='/account']", text: :Dashboard
     expect(page).to have_selector "a[href='/account/profile']", text: :Profile
@@ -48,19 +48,19 @@ RSpec.feature "Account::Dashboard", type: :feature do
   end
 
   scenario 'user2 visit' do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
   end
 
   scenario 'user3 visit' do
-    sign_in_user_with @user3.email, 'password'
+    switch_user @user3
 
     expect(page).to have_selector "a[href='/account/hosts']", text: :Hosts
   end
 
   scenario 'admin1 visit' do
-    sign_in_user_with @admin1.email, 'password'
+    switch_user @admin1
 
     expect(page).to have_selector "a[href='/account']", text: :Dashboard
     expect(page).to have_selector "a[href='/account/profile']", text: :Profile
@@ -73,13 +73,13 @@ RSpec.feature "Account::Dashboard", type: :feature do
   end
 
   scenario 'admin2 visit' do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
   end
 
   scenario 'admin3 visit' do
-    sign_in_user_with @admin3.email, 'password'
+    switch_user @admin3
 
     expect(page).to have_selector "a[href='/account/hosts']", text: :Hosts
     expect(page).to have_selector "a[href='/account/bastion_hosts']", text: :'Bastion hosts'
