@@ -36,7 +36,7 @@ RSpec.configure do |config|
 
   config.include SwitchUser::RSpecFeatures, type: :feature
 
-  config.before do
+  config.before(:each) do
     allow_any_instance_of(SwitchUserController).to receive(:available?).and_return true
   end
 
