@@ -8,10 +8,31 @@ class HostPolicy < ApplicationPolicy
   end
 
   def index?
-    account.submitted_ssh_key? and account.enabled_two_factor_authentication?
+    host_operator?
   end
 
-  def handle?
+  def new?
+    host_operator?
+  end
+
+  def create?
+    host_operator?
+  end
+
+  def edit?
+    host_operator?
+  end
+
+  def update?
+    host_operator?
+  end
+
+  def destroy?
+    host_operator?
+  end
+
+  private
+  def host_operator?
     account.submitted_ssh_key? and account.enabled_two_factor_authentication? and account.role?(:admin)
   end
 end

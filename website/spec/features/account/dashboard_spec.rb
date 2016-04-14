@@ -56,7 +56,8 @@ RSpec.feature "Account::Dashboard", type: :feature do
   scenario 'user3 visit' do
     sign_in_user_with @user3.email, 'password'
 
-    expect(page).to have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to_not have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to have_selector "a[href='/account/assigned_hosts']", text: :'Assigned Hosts'
   end
 
   scenario 'admin1 visit' do
@@ -82,6 +83,7 @@ RSpec.feature "Account::Dashboard", type: :feature do
     sign_in_user_with @admin3.email, 'password'
 
     expect(page).to have_selector "a[href='/account/hosts']", text: :Hosts
+    expect(page).to have_selector "a[href='/account/assigned_hosts']", text: :'Assigned Hosts'
     expect(page).to have_selector "a[href='/account/bastion_hosts']", text: :'Bastion hosts'
   end
 

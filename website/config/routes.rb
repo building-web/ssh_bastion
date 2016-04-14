@@ -22,8 +22,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :hosts
-
+    resources :hosts, expect: [:show]
+    resources :assigned_hosts, only: [:index]
   end
 
 end

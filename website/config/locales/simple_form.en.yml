@@ -34,13 +34,16 @@ en:
         show:
           password: 'New password'
           password_confirmation: 'New password confirmation'
-      host_user_app:
+      host:
         new:
-          name: "user1"
-      host_user_dev:
+          ip: IP
+        edit:
+          ip: IP
+      host_users:
         new:
-          name: "user2"
+          name: User
+
     hints:
-      host_user_dev:
-        name: "User1 or User2 should not is 'root', User2 should not be blank."
+      host_users:
+        name: "Users should not is 'root', User must have less than one value"
 

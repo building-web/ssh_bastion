@@ -24,6 +24,7 @@
 /.ruby-gemset
 /.rvmrc
 /.versions.conf
+/.env
 
 # Ignore for gem https://github.com/railsconfig/config
 config/settings.local.yml

@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160413061748) do
 
-  create_table "account_ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "account_ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "account_id"
     t.string   "title"
     t.text     "key",        limit: 65535
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160413061748) do
 
   add_index "account_ssh_keys", ["account_id"], name: "index_account_ssh_keys_on_account_id", using: :btree
 
-  create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                                   default: "", null: false
     t.string   "encrypted_password",                      default: "", null: false
     t.string   "reset_password_token"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20160413061748) do
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
 
-  create_table "accounts_host_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "accounts_host_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "account_id"
     t.integer  "host_id"
     t.integer  "host_user_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20160413061748) do
   add_index "accounts_host_users", ["host_id"], name: "index_accounts_host_users_on_host_id", using: :btree
   add_index "accounts_host_users", ["host_user_id"], name: "index_accounts_host_users_on_host_user_id", using: :btree
 
-  create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "arch_mode",                    default: 1
     t.string   "ip"
     t.string   "user"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160413061748) do
     t.text     "ssh_public_key", limit: 65535
   end
 
-  create_table "host_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "host_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "host_id"
     t.string   "name"
     t.datetime "created_at", null: false
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20160413061748) do
 
   add_index "host_users", ["host_id"], name: "index_host_users_on_host_id", using: :btree
 
-  create_table "hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "creator_account_id"
     t.string   "ip"
     t.string   "code"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20160413061748) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "hosts", ["creator_account_id"], name: "index_hosts_on_creator_account_id", unique: true, using: :btree
+  add_index "hosts", ["creator_account_id"], name: "index_hosts_on_creator_account_id", using: :btree
 
   add_foreign_key "account_ssh_keys", "accounts"
   add_foreign_key "accounts_host_users", "accounts"

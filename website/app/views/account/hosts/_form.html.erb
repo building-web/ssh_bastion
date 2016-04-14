@@ -5,11 +5,7 @@
     <%= f.input :port, as: :integer %>
     <%= f.input :comment %>
 
-    <%= f.simple_fields_for :host_user_app do |ff| %>
-      <%= ff.input :name %>
-    <% end %>
-
-    <%= f.simple_fields_for :host_user_dev do |ff| %>
+    <%= f.simple_fields_for :host_users do |ff| %>
       <%= ff.input :name %>
     <% end %>
 

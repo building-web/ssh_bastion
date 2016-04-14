@@ -7,8 +7,14 @@
     <% end %>
 
     <% if policy(Host.new).index? %>
+      <li class="nav-item">
+        <a href="/account/hosts" class="nav-link <%= 'active' if account_nav_is?(:hosts) %>"><%= t('view.sidebar.hosts')%></a>
+      </li>
+    <% end %>
+
+    <% if policy(AccountsHostUser.new).index? %>
     <li class="nav-item">
-      <a href="/account/hosts" class="nav-link <%= 'active' if account_nav_is?(:hosts) %>"><%= t('view.sidebar.hosts')%></a>
+      <a href="/account/assigned_hosts" class="nav-link <%= 'active' if account_nav_is?(:assigned_hosts) %>"><%= t('view.sidebar.assigned_hosts')%></a>
     </li>
     <% end %>
 

@@ -3,5 +3,6 @@ en:
     sidebar:
       bastion_hosts: Bastion hosts
       hosts: Hosts
+      assigned_hosts: Assigned Hosts
       ssh_keys: SSH keys
       two_factor_authentication: Two-factor authentication

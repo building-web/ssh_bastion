@@ -10,6 +10,6 @@ class CreateHosts < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :hosts, :creator_account_id, unique: true
+    add_index :hosts, :creator_account_id
   end
 end
