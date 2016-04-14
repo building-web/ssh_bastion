@@ -42,7 +42,7 @@ class Account < ApplicationRecord
     send("role_#{_role}?")
   end
 
-  def submitted_ssh_key?
+  def has_ssh_key?
     ssh_keys.count > 0
   end
 
