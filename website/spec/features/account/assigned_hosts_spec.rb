@@ -5,23 +5,23 @@ RSpec.feature "Account::AssignedHost", type: :feature do
     @host = create :host
     @host_user = create :host_user, host: @host
 
-    @user1 = create :user_with_enabled_two_factor, password: 'password'
+    @user1 = create :user_with_enabled_two_factor
     create :account_ssh_key, account: @user1
 
-    @user2 = create :user_with_enabled_two_factor, password: 'password'
+    @user2 = create :user_with_enabled_two_factor
     create :account_ssh_key, account: @user2
     create :accounts_host_user, account: @user2, host_user: @host_user
 
-    @admin1 = create :admin_with_enabled_two_factor, password: 'password'
+    @admin1 = create :admin_with_enabled_two_factor
     create :account_ssh_key, account: @admin1
 
-    @admin2 = create :admin_with_enabled_two_factor, password: 'password'
+    @admin2 = create :admin_with_enabled_two_factor
     create :account_ssh_key, account: @admin2
     create :accounts_host_user, account: @admin2, host_user: @host_user
   end
 
   scenario "the 'Hosts' sidebar should active" do
-    sign_in_user_with @user1.email, 'password'
+    switch_user @user1
 
     visit '/account/assigned_hosts'
 
@@ -29,7 +29,7 @@ RSpec.feature "Account::AssignedHost", type: :feature do
   end
 
   scenario "user1 show list" do
-    sign_in_user_with @user1.email, 'password'
+    switch_user @user1
 
     visit '/account/assigned_hosts'
 
@@ -37,7 +37,7 @@ RSpec.feature "Account::AssignedHost", type: :feature do
   end
 
   scenario 'user2 show list' do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     visit '/account/assigned_hosts'
 
@@ -48,7 +48,7 @@ RSpec.feature "Account::AssignedHost", type: :feature do
   end
 
   scenario "admin1 show list" do
-    sign_in_user_with @admin1.email, 'password'
+    switch_user @admin1
 
     visit '/account/assigned_hosts'
 
@@ -56,7 +56,7 @@ RSpec.feature "Account::AssignedHost", type: :feature do
   end
 
   scenario 'admin2 show list' do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit '/account/assigned_hosts'
 

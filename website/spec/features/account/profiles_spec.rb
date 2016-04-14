@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.feature "Account::Profiles", type: :feature do
 
   background do
-    @user = create :user, password: 'password'
+    @user = create :user
   end
 
   scenario "the 'Profile' navbar should active" do
-    sign_in_user_with @user.email, 'password'
+    switch_user @user
 
     visit '/account/profile'
 
@@ -16,7 +16,7 @@ RSpec.feature "Account::Profiles", type: :feature do
 
 
   scenario 'user enter right current_password and new password to update password' do
-    sign_in_admin_with @user.email, 'password'
+    switch_user @user
 
     visit '/account/profile'
 
@@ -32,7 +32,7 @@ RSpec.feature "Account::Profiles", type: :feature do
   end
 
   scenario 'user enter wrong current_password and new password to update password' do
-    sign_in_admin_with @user.email, 'password'
+    switch_user @user
 
     visit '/account/profile'
 

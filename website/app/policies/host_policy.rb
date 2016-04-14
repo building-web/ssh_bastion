@@ -8,31 +8,29 @@ class HostPolicy < ApplicationPolicy
   end
 
   def index?
-    host_operator?
+    account.secret_matched?
   end
 
   def new?
-    host_operator?
+    create?
   end
 
   def create?
-    host_operator?
+    account.secret_matched? and account.role?(:admin)
   end
 
   def edit?
-    host_operator?
+    update?
   end
 
   def update?
-    host_operator?
+    account.secret_matched? and host.creator_account == account
   end
 
   def destroy?
-    host_operator?
+    update?
   end
 
   private
-  def host_operator?
-    account.submitted_ssh_key? and account.enabled_two_factor_authentication? and account.role?(:admin)
-  end
+
 end

@@ -1,25 +1,39 @@
 require 'rails_helper'
 
 RSpec.feature "Account::Hosts", type: :feature do
+
   background do
-    @admin1 = create :admin_with_enabled_two_factor, password: 'password'
+    @user = create :user_with_enabled_two_factor
+    create :account_ssh_key, account: @user
+
+    @admin1 = create :admin_with_enabled_two_factor
     create :account_ssh_key, account: @admin1
 
-    @admin2 = create :admin_with_enabled_two_factor, password: 'password'
+    @admin2 = create :admin_with_enabled_two_factor
     create :account_ssh_key, account: @admin2
     @admin_host2 = create :host, creator_account: @admin2
   end
 
   scenario "the 'Hosts' sidebar should active" do
-    sign_in_user_with @admin1.email, 'password'
+    switch_user @user
 
     visit '/account/hosts'
 
     expect(page).to have_selector "a.active[href='/account/hosts']"
   end
 
+
+  scenario "user cannot see new host button" do
+    switch_user @user
+
+    visit '/account/hosts'
+
+    expect(page).to_not have_selector "a[href='/account/hosts/new']"
+    expect(page).to have_selector "a.disabled[href='javascript:void(0);']", text: 'New Host'
+  end
+
   scenario "admin1 can see new host button" do
-    sign_in_user_with @admin1.email, 'password'
+    switch_user @admin1
 
     visit '/account/hosts'
 
@@ -27,7 +41,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin1 show list' do
-    sign_in_user_with @admin1.email, 'password'
+    switch_user @admin1
 
     visit '/account/hosts'
 
@@ -35,7 +49,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin2 show list' do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit '/account/hosts'
 
@@ -48,7 +62,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin1 add a new Host', js: true do
-    sign_in_user_with @admin1.email, 'password'
+    switch_user @admin1
 
     visit '/account/hosts/new'
 
@@ -76,7 +90,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin2 add a new Host that IP is exist', js: true do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit '/account/hosts/new'
 
@@ -97,7 +111,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin2 add a new Host that IP is invalid', js: true do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit '/account/hosts/new'
 
@@ -118,7 +132,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin2 add a new Host that User is root', js: true do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit '/account/hosts/new'
 
@@ -139,7 +153,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin2 add a new Host that Users same', js: true do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit '/account/hosts/new'
 
@@ -161,7 +175,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin2 update a old Host', js: true do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit "/account/hosts/#{@admin_host2.id}/edit"
 
@@ -183,7 +197,7 @@ RSpec.feature "Account::Hosts", type: :feature do
   end
 
   scenario 'admin2 delete a old host', js: true do
-    sign_in_user_with @admin2.email, 'password'
+    switch_user @admin2
 
     visit '/account/hosts'
 

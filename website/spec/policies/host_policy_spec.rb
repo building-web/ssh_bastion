@@ -8,8 +8,8 @@ RSpec.describe HostPolicy, type: :policy do
     let(:account) { create(:account) }
     let(:host) { create(:host) }
 
-    it "denies access if account was not submitted_ssh_key" do
-      allow(account).to receive(:submitted_ssh_key?).and_return(false)
+    it "denies access if account was not has_ssh_key" do
+      allow(account).to receive(:has_ssh_key?).and_return(false)
       expect(subject).not_to permit(account, host)
     end
 
@@ -18,8 +18,9 @@ RSpec.describe HostPolicy, type: :policy do
       expect(subject).not_to permit(account, host)
     end
 
-    it "grants access if account was submitted_ssh_key and enabled_two_factor_authentication and role admin" do
-      allow(account).to receive(:submitted_ssh_key?).and_return(true)
+
+    it "grants access if account was has_ssh_key and enabled_two_factor_authentication" do
+      allow(account).to receive(:has_ssh_key?).and_return(true)
       allow(account).to receive(:enabled_two_factor_authentication?).and_return(true)
       allow(account).to receive(:role?).with(:admin).and_return(true)
       expect(subject).to permit(account, host)

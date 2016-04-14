@@ -4,11 +4,11 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
 
   background do
     # user1 is a new user
-    @user1 = create :user, password: 'password'
+    @user1 = create :user
     @user1_ssh_public_key = generate_ssh_public_key('RSA', 'user1@example.com')
 
     # user2 is not a new user, he was created a ssh_key
-    @user2 = create :user, password: 'password'
+    @user2 = create :user
     @user2_ssh_public_key = generate_ssh_public_key('RSA', 'user2@example.com')
     _, _, comment = @user2_ssh_public_key.split(' ')
     @user2_ssh_key = create :account_ssh_key, account: @user2, title: 'user2_first_ssh_key', key: @user2_ssh_public_key, comment: comment
@@ -17,7 +17,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario "the 'SSH keys' sidebar should active" do
-    sign_in_user_with @user1.email, 'password'
+    switch_user @user1
 
     visit '/account/ssh_keys'
 
@@ -25,7 +25,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user1 show ssh_key list' do
-    sign_in_user_with @user1.email, 'password'
+    switch_user @user1
 
     visit '/account/ssh_keys'
 
@@ -33,7 +33,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user2 show ssh_key list' do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     visit '/account/ssh_keys'
 
@@ -44,7 +44,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user1 add a new ssh_key', js: true do
-    sign_in_user_with @user1.email, 'password'
+    switch_user @user1
 
     visit '/account/ssh_keys'
 
@@ -78,7 +78,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user2 add a new ssh_key', js: true do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     visit '/account/ssh_keys'
 
@@ -112,7 +112,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user2 add a invalid ssh_key that Key is exists', js: true do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     visit '/account/ssh_keys'
 
@@ -129,7 +129,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user2 add a invalid ssh_key that Key is invalid', js: true do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     visit '/account/ssh_keys'
 
@@ -146,7 +146,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user2 add a invalid ssh_key that Title is exists', js: true do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     visit '/account/ssh_keys'
 
@@ -163,7 +163,7 @@ RSpec.feature "Account::AccountSshKeys", type: :feature do
   end
 
   scenario 'user2 delete a old ssh_key', js: true do
-    sign_in_user_with @user2.email, 'password'
+    switch_user @user2
 
     visit '/account/ssh_keys'
 

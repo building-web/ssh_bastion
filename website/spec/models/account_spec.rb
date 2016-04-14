@@ -7,7 +7,7 @@ RSpec.describe Account, type: :model do
   describe "public instance methods" do
     context "responds to its methods" do
       it { expect(subject).to respond_to(:role?) }
-      it { expect(subject).to respond_to(:submitted_ssh_key?) }
+      it { expect(subject).to respond_to(:has_ssh_key?) }
       it { expect(subject).to respond_to(:enabled_two_factor_authentication?) }
     end
 
@@ -25,18 +25,18 @@ RSpec.describe Account, type: :model do
       end
     end
 
-    context "#submitted_ssh_key?" do
+    context "#has_ssh_key?" do
       it "return false" do
         user = create :user
 
-        expect(user.submitted_ssh_key?).to eq(false)
+        expect(user.has_ssh_key?).to eq(false)
       end
 
       it "return true" do
         user = create :user
         create :account_ssh_key, account: user
 
-        expect(user.submitted_ssh_key?).to eq(true)
+        expect(user.has_ssh_key?).to eq(true)
       end
     end
 
