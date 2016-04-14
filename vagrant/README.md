@@ -1,6 +1,6 @@
-## Setup
+## Create development system
 
-### Install vagrant
+### Install Vagrant
 
 #### Arch Linux
 
@@ -10,7 +10,7 @@ $ pacman -Syu virtualbox vagrant
 
 TODO
 
-### with ubuntu 14.04
+### Up Vagrant with ubuntu 14.04
 
 ```bash
 
@@ -21,5 +21,7 @@ $ cp Vagrantfile.example Vagrantfile
 $ wget -nc http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
 
 $ vagrant up
+
+$ vagrant provision
 
 ```

@@ -1,0 +1,6 @@
+/roles/*
+!/roles/.keep
+!/roles/ssh_bastion.*
+
+/*.retry
+

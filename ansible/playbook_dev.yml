@@ -1,0 +1,44 @@
+---
+- name: Build development system
+  hosts: all
+  become: true
+  roles:
+    - role: ssh_bastion.system_basic
+      tags: system
+
+    - role: tschifftner.datetime
+      tags: system
+      datetime_timezone: Asia/Shanghai
+      datetime_ntp_config_server: ['cn.pool.ntp.org']
+
+    - role: geerlingguy.mysql
+      tags: mysql
+      mysql_packages:
+        - mariadb-client
+        - mariadb-server
+        - python-mysqldb
+        - libmysqlclient-dev
+      mysql_bind_address: '127.0.0.1'
+      mysql_databases:
+        - name: ssh_bastion_development
+      mysql_users:
+        - name: ssh_bastion
+          host: "%"
+          password: pa123456
+          priv: "ssh_bastion_development.*:ALL"
+
+    - role: DavidWittman.redis
+      tags: redis
+      redis_bind: 127.0.0.1
+
+    - role: jdauphant.nginx
+      tags: nginx
+
+    - role: rvm_io.rvm1-ruby
+      tags: ruby
+      rvm1_rubies:
+        - 'ruby-2.2.2'
+      rvm1_rvm_check_for_updates: false
+
+    - role: geerlingguy.nodejs
+      tags: nodejs
