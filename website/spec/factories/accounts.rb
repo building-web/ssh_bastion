@@ -18,6 +18,7 @@ FactoryGirl.define do
       role { :user }
       factory :user_with_enabled_two_factor do
         otp_secret { Account.generate_otp_secret }
+        consumed_timestep { 48669715 }
         otp_required_for_login { false }
       end
     end
