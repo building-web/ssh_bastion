@@ -74,7 +74,6 @@
       rvm1_rubies:
         - '2.2.2'
       rvm1_gpg_key_server: pgp.mit.edu
-      rvm1_rvm_check_for_updates: False
 
     - role: geerlingguy.nodejs
       tags: nodejs
