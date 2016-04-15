@@ -1,5 +1,5 @@
-- src: https://github.com/tschifftner/ansible-role-datetime
-  name: tschifftner.datetime
+- src: https://github.com/geerlingguy/ansible-role-ntp
+  name: geerlingguy.ntp
 
 - src: https://github.com/jdauphant/ansible-role-nginx
   name: jdauphant.nginx
@@ -7,14 +7,17 @@
 - src: https://github.com/geerlingguy/ansible-role-mysql
   name: geerlingguy.mysql
 
-- src: https://github.com/DavidWittman/ansible-redis
-  name: DavidWittman.redis
+- src: https://github.com/geerlingguy/ansible-role-redis
+  name: geerlingguy.redis
 
 - src: https://github.com/geerlingguy/ansible-role-repo-epel
   name: geerlingguy.repo-epel
 
 - src: https://github.com/geerlingguy/ansible-role-nodejs
   name: geerlingguy.nodejs
+
+- src: https://github.com/geerlingguy/ansible-role-git
+  name: geerlingguy.git
 
 - src: https://github.com/rvm/rvm1-ansible
   name: rvm_io.rvm1-ruby

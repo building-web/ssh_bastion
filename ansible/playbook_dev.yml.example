@@ -19,17 +19,21 @@
       tags: ruby
 
     - name: 'replace sources.list'
-      template: "src=ubuntu-14.04_163_sources.list.j2 dest=/etc/apt/sources.list"
+      template: "src=ubuntu-14.04_sohu_sources.list.j2 dest=/etc/apt/sources.list"
       tags: system
 
   roles:
     - role: ssh_bastion.system_basic
       tags: system
 
-    - role: tschifftner.datetime
+    - role: geerlingguy.ntp
       tags: system
-      datetime_timezone: Asia/Shanghai
-      datetime_ntp_config_server: ['cn.pool.ntp.org']
+      ntp_timezone: Asia/Shanghai
+      ntp_servers:
+        - cn.pool.ntp.org iburst
+
+    - role: geerlingguy.git
+      tags: git
 
     - role: geerlingguy.mysql
       tags: mysql
@@ -47,12 +51,10 @@
           password: pa123456
           priv: "ssh_bastion_development.*:ALL"
 
-    - role: DavidWittman.redis
+    - role: geerlingguy.redis
       tags: redis
-      redis_bind: 127.0.0.1
-
-    - role: geerlingguy.nodejs
-      tags: nodejs
+      redis_port: 6379
+      redis_bind_interface: 127.0.0.1
 
     - role: rvm_io.rvm1-ruby
       tags: ruby
@@ -61,4 +63,5 @@
       rvm1_rvm_check_for_updates: false
       rvm1_gpg_key_server: pgp.mit.edu
 
-
+    - role: geerlingguy.nodejs
+      tags: nodejs
