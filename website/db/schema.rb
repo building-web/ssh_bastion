@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406052780) do
-
-  create_table "account_ssh_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "account_id"
-    t.string   "title"
-    t.text     "key",        limit: 65535
-    t.string   "comment"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  add_index "account_ssh_keys", ["account_id"], name: "index_account_ssh_keys_on_account_id", using: :btree
+ActiveRecord::Schema.define(version: 20160415014310) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                                   default: "", null: false
@@ -67,13 +56,12 @@ ActiveRecord::Schema.define(version: 20160406052780) do
   add_index "assigned_hosts", ["host_id"], name: "index_assigned_hosts_on_host_id", using: :btree
 
   create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "arch_mode",                    default: 1
+    t.integer  "arch_mode",  default: 1
     t.string   "ip"
     t.string   "user"
     t.string   "desc"
-    t.text     "ssh_public_key", limit: 65535
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -91,7 +79,18 @@ ActiveRecord::Schema.define(version: 20160406052780) do
 
   add_index "hosts", ["creator_account_id"], name: "index_hosts_on_creator_account_id", using: :btree
 
-  add_foreign_key "account_ssh_keys", "accounts"
+  create_table "public_key_boxes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "public_key_boxable_type"
+    t.integer  "public_key_boxable_id"
+    t.string   "title"
+    t.text     "key",                     limit: 65535
+    t.string   "comment"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "public_key_boxes", ["public_key_boxable_type", "public_key_boxable_id"], name: "index_public_key_boxes_on_public_key_boxable", using: :btree
+
   add_foreign_key "assigned_hosts", "accounts"
   add_foreign_key "assigned_hosts", "hosts"
 end

@@ -23,7 +23,7 @@ class Account < ApplicationRecord
                   encode_salt: true
 
 
-  has_many :ssh_keys, class_name: 'AccountSshKey'
+  has_many :ssh_keys, class_name: 'PublicKeyBox', as: :public_key_boxable
   has_many :hosts, class_name: 'Host', foreign_key: :creator_account_id
 
   has_many :assigned_hosts

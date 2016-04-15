@@ -46,6 +46,10 @@ gem 'kaminari', github: 'amatsuda/kaminari',
               branch: 'master', ref: '9d66373b4f3123c3ebc7fc79ad15dbdc8c82ac0c'
 gem 'kaminari-i18n', '~> 0.4.0'
 
+gem 'default_value_for', github: 'matthewd/default_value_for',
+                   branch: 'master', ref: '604ab5e7cd799f293279115e490b039e64c609c4'
+
+
 group :development, :test do
   gem 'byebug', '~> 8.2.2'
 
