@@ -22,17 +22,17 @@ user_with_enabled_two_factors = []
 end
 
 puts 'create account_ssh_keys'
-admins.each do |account|
+admin_with_enabled_two_factors.each do |account|
   FactoryGirl.create :account_ssh_key, account: account
 end
-users.each do |account|
+user_with_enabled_two_factors.each do |account|
   FactoryGirl.create :account_ssh_key, account: account
 end
 
 puts 'create host'
 hosts = []
 admin_with_enabled_two_factors.each do |account|
-  host = FactoryGirl.create :host
+  host = FactoryGirl.create :host, creator_account: account
   hosts << host
 end
 

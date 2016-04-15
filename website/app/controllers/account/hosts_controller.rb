@@ -3,6 +3,7 @@ class Account::HostsController < Account::BaseController
 
   def index
     @hosts = current_account.hosts.page(params[:page])
+    @assigned_hosts = current_account.assigned_hosts.page(params[:page])
 
     authorize @hosts, :index?
   end
@@ -11,8 +12,6 @@ class Account::HostsController < Account::BaseController
     @host = current_account.hosts.new
 
     authorize @host, :new?
-
-    2.times { @host.host_users.new }
   end
 
   def create
@@ -58,8 +57,7 @@ class Account::HostsController < Account::BaseController
 
   def host_param
     params.require(:host).permit(
-      :ip, :port, :comment,
-      host_users_attributes: [:id, :name],
+      :ip, :port, :comment, :user1, :user2, :user3
       )
   end
 end

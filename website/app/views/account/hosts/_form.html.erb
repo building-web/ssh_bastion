@@ -4,10 +4,9 @@
     <%= f.input :ip %>
     <%= f.input :port, as: :integer %>
     <%= f.input :comment %>
-
-    <%= f.simple_fields_for :host_users do |ff| %>
-      <%= ff.input :name %>
-    <% end %>
+    <%= f.input :user1 %>
+    <%= f.input :user2 %>
+    <%= f.input :user3 %>
 
     <div class="form-group">
       <label class="col-sm-3"></label>

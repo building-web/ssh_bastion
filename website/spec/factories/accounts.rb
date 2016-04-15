@@ -1,12 +1,16 @@
 FactoryGirl.define do
 
-  sequence :account_email do |n|
+  sequence :user_email do |n|
     "user%s@example.com" % n
+  end
+
+  sequence :admin_email do |n|
+    "admin%s@example.com" % n
   end
 
   factory :account do
 
-    email { generate :account_email }
+    email { generate :user_email }
     password { 'password' }
     role { :user }
 
@@ -21,6 +25,7 @@ FactoryGirl.define do
 
     factory :admin do
       role { :admin }
+      email { generate :admin_email }
 
       factory :admin_with_enabled_two_factor do
         otp_secret { '123456' }

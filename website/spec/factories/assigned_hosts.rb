@@ -6,8 +6,6 @@ FactoryGirl.define do
     mark { FFaker::Lorem.word }
 
     user1 { |record| record.host.user1 }
-    user2 { |record| record.host.user2 }
-    user3 { |record| record.host.user3 }
   end
 
 end

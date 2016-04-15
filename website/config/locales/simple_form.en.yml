@@ -44,6 +44,8 @@ en:
           name: User
 
     hints:
-      host_users:
-        name: "Users should not is 'root', User must have less than one value"
+      host:
+        user1: "User1 should not is 'root'"
+        user2: "User2 should not is 'root'"
+        user3: "User3 should not is 'root', Users should not same"
 

@@ -11,10 +11,50 @@
   </div>
 </div>
 
-<div class="row">
+<% if policy(current_account.hosts.build).new? %>
+  <div class="row">
+    <div class="col-md-12">
+      <% if @hosts.blank? %>
+        <p>There are no hosts avaliable to your account.</p>
+      <% else %>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th><%= Host.human_attribute_name(:ip) %></th>
+              <th><%= Host.human_attribute_name(:port) %></th>
+              <th><%= Host.human_attribute_name(:comment) %></th>
+              <th><%= Host.human_attribute_name(:user1) %></th>
+              <th><%= Host.human_attribute_name(:user2) %></th>
+              <th><%= Host.human_attribute_name(:user3) %></th>
+              <th><%= t('view.handle') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @hosts.each do |host|%>
+              <tr>
+                <td><%= host.ip %></td>
+                <td><%= host.port %></td>
+                <td><%= host.comment %></td>
+                <td><%= host.user1 %></td>
+                <td><%= host.user2 %></td>
+                <td><%= host.user3 %></td>
+                <td>
+                  <a href="<%= edit_account_host_path(host.id)%>" class="btn btn-primary btn-sm"><%= t('view.edit') %></a>
+                  <a href="<%= account_host_path(host.id) %>" data-method="delete" class="btn btn-danger btn-sm" data-confirm="<%= t('view.are_you_sure_to_delete') %>"><%= t('view.destroy')%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+  <h2>Assigned Hosts</h2>
+<% end %>
+
+<div class="row" id="index">
   <div class="col-md-12">
-    <% if @hosts.blank? %>
-      <p>There are no hosts avaliable to your account.</p>
+    <% if @assigned_hosts.blank? %>
+      <p>There are no hosts assigned to your account.</p>
     <% else %>
       <table class="table table-striped table-hover">
         <thead>
@@ -22,18 +62,21 @@
             <th><%= Host.human_attribute_name(:ip) %></th>
             <th><%= Host.human_attribute_name(:port) %></th>
             <th><%= Host.human_attribute_name(:comment) %></th>
+            <th><%= AssignedHost.human_attribute_name(:user1) %></th>
+            <th><%= AssignedHost.human_attribute_name(:user2) %></th>
+            <th><%= AssignedHost.human_attribute_name(:user3) %></th>
             <th><%= t('view.handle') %></th>
           </tr>
         </thead>
         <tbody>
-          <% @hosts.each do |host|%>
+          <% @assigned_hosts.each do |assigned_host|%>
             <tr>
-              <td><%= host.ip %></td>
-              <td><%= host.port %></td>
-              <td><%= host.comment %></td>
-              <td>
-                <a href="<%= edit_account_host_path(host.id)%>" class="btn btn-primary btn-sm"><%= t('view.edit') %></a>
-                <a href="<%= account_host_path(host.id) %>" data-method="delete" class="btn btn-danger btn-sm" data-confirm="<%= t('view.are_you_sure_to_delete') %>"><%= t('view.destroy')%></td>
+              <td><%= assigned_host.host.ip %></td>
+              <td><%= assigned_host.host.try(:port) %></td>
+              <td><%= assigned_host.host.try(:comment) %></td>
+              <td><%= assigned_host.user1 %></td>
+              <td><%= assigned_host.user2 %></td>
+              <td><%= assigned_host.user3 %></td>
             </tr>
           <% end %>
         </tbody>
@@ -41,4 +84,3 @@
     <% end %>
   </div>
 </div>
-

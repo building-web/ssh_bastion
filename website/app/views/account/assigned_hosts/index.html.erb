@@ -15,7 +15,9 @@
             <th><%= Host.human_attribute_name(:ip) %></th>
             <th><%= Host.human_attribute_name(:port) %></th>
             <th><%= Host.human_attribute_name(:comment) %></th>
-            <th><%= HostUser.human_attribute_name(:name) %></th>
+            <th><%= AccountsHost.human_attribute_name(:user1) %></th>
+            <th><%= AccountsHost.human_attribute_name(:user2) %></th>
+            <th><%= AccountsHost.human_attribute_name(:user3) %></th>
           </tr>
         </thead>
         <tbody>
@@ -24,7 +26,9 @@
               <td><%= assigned_host.host.ip %></td>
               <td><%= assigned_host.host.try(:port) %></td>
               <td><%= assigned_host.host.try(:comment) %></td>
-              <td><%= assigned_host.host_user.try(:name) %></td>
+              <td><%= assigned_host.user1 %></td>
+              <td><%= assigned_host.user2 %></td>
+              <td><%= assigned_host.user3 %></td>
             </tr>
           <% end %>
         </tbody>

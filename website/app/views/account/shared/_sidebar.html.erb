@@ -12,12 +12,6 @@
       </li>
     <% end %>
 
-    <% if policy(AccountsHostUser.new).index? %>
-    <li class="nav-item">
-      <a href="/account/assigned_hosts" class="nav-link <%= 'active' if account_nav_is?(:assigned_hosts) %>"><%= t('view.sidebar.assigned_hosts')%></a>
-    </li>
-    <% end %>
-
     <li class="nav-item">
       <a href="/account/ssh_keys" class="nav-link <%= 'active' if account_nav_is?(:account_ssh_keys) %>"><%= t('view.sidebar.ssh_keys')%></a>
     </li>
