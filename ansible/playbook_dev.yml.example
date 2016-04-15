@@ -24,8 +24,8 @@
       tags: ruby
 
     - name: 'Replace sources.list'
-      template: "src=ubuntu-14.04_sohu_sources.list.j2 dest=/etc/apt/sources.list"
-      when: (ansible_os_family == 'Debian') and (in_China == True)
+      copy: "dest=/etc/apt/sources.list backup=true src=files/ubuntu-14.04_sohu_sources.list"
+      when: (ansible_os_family == 'Debian') and (ansible_distribution_version == '14.04') and (in_China == True)
       tags: system
 
     - name: 'Run apt-get update'
