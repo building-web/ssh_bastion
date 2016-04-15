@@ -18,14 +18,21 @@
         - {key: 'ruby_url', val: 'https://ruby.taobao.org/mirrors/ruby'}
       tags: ruby
 
-    - name: 'replace sources.list'
+    - name: 'Replace sources.list'
       template: "src=ubuntu-14.04_sohu_sources.list.j2 dest=/etc/apt/sources.list"
       tags: system
 
-  roles:
-    - role: ssh_bastion.system_basic
+    - name: "Run 'apt-get update'"
+      apt: update_cache=yes
+      when: ansible_os_family == 'Debian'
       tags: system
 
+    - name: Update all packages
+      apt: upgrade=dist
+      when: ansible_os_family == 'Debian'
+      tags: system
+
+  roles:
     - role: geerlingguy.ntp
       tags: system
       ntp_timezone: Asia/Shanghai
