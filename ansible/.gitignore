@@ -5,3 +5,6 @@
 /*.retry
 
 /playbook_dev.yml
+
+/vars/main.yml
+

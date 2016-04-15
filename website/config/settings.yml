@@ -1,4 +1,4 @@
-time_zone: Beijing
+time_zone: Asia/Shanghai
 
 super_admin:
   email: admin@example.com

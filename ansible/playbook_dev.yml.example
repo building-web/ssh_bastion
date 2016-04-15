@@ -2,40 +2,46 @@
 - name: Build development system
   hosts: all
   become: true
+  vars_files:
+    - vars/main.yml
 
   pre_tasks:
     - name: 'create $rvm_path/user'
       file: "path='{{ rvm1_install_path }}/user' state=directory"
+      when: in_China == True
       tags: ruby
 
     - name: 'touch $rvm_path/user/db'
       file: "path='{{ rvm1_install_path }}/user/db' state=touch"
+      when: in_China == True
       tags: ruby
 
     - name: 'insert $rvm_path/user/db'
       lineinfile: "dest={{ rvm1_install_path }}/user/db state=present regexp='^{{ item.key }}=' line='{{ item.key }}={{ item.val }}'"
       with_items:
         - {key: 'ruby_url', val: 'https://ruby.taobao.org/mirrors/ruby'}
+      when: in_China == True
       tags: ruby
 
     - name: 'Replace sources.list'
       template: "src=ubuntu-14.04_sohu_sources.list.j2 dest=/etc/apt/sources.list"
+      when: (ansible_os_family == 'Debian') and (in_China == True)
       tags: system
 
-    - name: "Run 'apt-get update'"
+    - name: 'Run apt-get update'
       apt: update_cache=yes
       when: ansible_os_family == 'Debian'
       tags: system
 
-    - name: Update all packages
+    - name: 'Update all packages'
       apt: upgrade=dist
       when: ansible_os_family == 'Debian'
       tags: system
 
   roles:
     - role: geerlingguy.ntp
-      tags: system
-      ntp_timezone: Asia/Shanghai
+      tags: ntp
+      ntp_timezone: '{{time_zone}}'
       ntp_servers:
         - cn.pool.ntp.org iburst
 
@@ -68,8 +74,8 @@
       rvm1_rubies:
         - '2.2.2'
       rvm1_gpg_key_server: pgp.mit.edu
-      rvm1_rvm_check_for_updates: false
+      rvm1_rvm_check_for_updates: False
 
     - role: geerlingguy.nodejs
       tags: nodejs
-      nodejs_forever: false
+      nodejs_forever: False
