@@ -17,7 +17,9 @@ class BastionHost < ApplicationRecord
       bastion_host = BastionHost.find_or_initialize_by(arch_mode: arch_mode, ip: ip)
       bastion_host.attributes = attrs.slice(:user)
 
-      bastion_host.ssh_key_attributes = {key: attrs[:ssh_public_key], title: 'key'}
+      _key = attrs[:ssh_public_key].present? ? attrs[:ssh_public_key] : SSHKey.generate(comment: 'example@example.com').ssh_public_key
+
+      bastion_host.ssh_key_attributes = {key: _key , title: 'key'}
       bastion_host.save!
     end
   end

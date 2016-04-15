@@ -110,7 +110,6 @@ RSpec.feature "Account::Hosts", type: :feature do
       fill_in 'Port', with: 22
       fill_in 'Comment', with: 'host_comment'
       fill_in 'User1', with: 'dev'
-      fill_in 'User2', with: 'app'
 
       click_button 'Add Host'
     end
@@ -122,7 +121,6 @@ RSpec.feature "Account::Hosts", type: :feature do
     expect(page).to have_content '22'
     expect(page).to have_content 'host_comment'
     expect(page).to have_content 'dev'
-    expect(page).to have_content 'app'
   end
 
   scenario 'admin2 add a new Host that IP is exist', js: true do
@@ -175,11 +173,12 @@ RSpec.feature "Account::Hosts", type: :feature do
     expect(page).to have_selector "form#new_host[action='/account/hosts']"
 
     within('form#new_host') do
-      fill_in 'IP', with: '0.0'
+      fill_in 'IP', with: ''
       fill_in 'Port', with: '22'
       fill_in 'Comment', with: 'host_comment'
 
       fill_in 'User1', with: 'dev'
+      fill_in 'User2', with: 'demo'
 
       click_button 'Add Host'
     end
@@ -210,7 +209,7 @@ RSpec.feature "Account::Hosts", type: :feature do
     expect(page).to have_content "is invalid"
   end
 
-  scenario 'admin2 add a new Host that User1 is blank', js: true do
+  scenario 'admin add a new Host that users are blank', js: true do
     switch_user @admin2
 
     visit '/account/hosts/new'
@@ -226,7 +225,7 @@ RSpec.feature "Account::Hosts", type: :feature do
     end
 
     expect(page).to have_current_path('/account/hosts')
-    expect(page).to have_content ""
+    expect(page).to have_content "users must be more than one"
   end
 
   scenario 'admin2 add a new Host that Users same', js: true do
@@ -243,6 +242,50 @@ RSpec.feature "Account::Hosts", type: :feature do
 
       fill_in 'User1', with: 'dev'
       fill_in 'User2', with: 'dev'
+
+      click_button 'Add Host'
+    end
+
+    expect(page).to have_current_path('/account/hosts')
+    expect(page).to have_content "has already been taken"
+  end
+
+  scenario 'admin2 add a new Host that Users same', js: true do
+    switch_user @admin2
+
+    visit '/account/hosts/new'
+
+    expect(page).to have_selector "form#new_host[action='/account/hosts']"
+
+    within('form#new_host') do
+      fill_in 'IP', with: '1.1.1.1'
+      fill_in 'Port', with: '22'
+      fill_in 'Comment', with: 'host_comment'
+
+      fill_in 'User1', with: 'dev'
+      fill_in 'User3', with: 'dev'
+
+      click_button 'Add Host'
+    end
+
+    expect(page).to have_current_path('/account/hosts')
+    expect(page).to have_content "has already been taken"
+  end
+
+  scenario 'admin2 add a new Host that Users same', js: true do
+    switch_user @admin2
+
+    visit '/account/hosts/new'
+
+    expect(page).to have_selector "form#new_host[action='/account/hosts']"
+
+    within('form#new_host') do
+      fill_in 'IP', with: '1.1.1.1'
+      fill_in 'Port', with: '22'
+      fill_in 'Comment', with: 'host_comment'
+
+      fill_in 'User2', with: 'dev'
+      fill_in 'User3', with: 'dev'
 
       click_button 'Add Host'
     end

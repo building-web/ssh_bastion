@@ -57,7 +57,6 @@ RSpec.feature "Account::Dashboard", type: :feature do
     switch_user @user3
 
     expect(page).to have_selector "a[href='/account/hosts']", text: 'Hosts'
-    expect(page).to have_selector "a[href='/account/assigned_hosts']", text: 'Assigned Hosts'
   end
 
   scenario 'admin1 visit' do
@@ -83,7 +82,6 @@ RSpec.feature "Account::Dashboard", type: :feature do
     switch_user @admin3
 
     expect(page).to have_selector "a[href='/account/hosts']", text: 'Hosts'
-    expect(page).to have_selector "a[href='/account/assigned_hosts']", text: 'Assigned Hosts'
     expect(page).to have_selector "a[href='/account/bastion_hosts']", text: 'Bastion hosts'
   end
 
