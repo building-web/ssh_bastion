@@ -24,7 +24,7 @@
       tags: ruby
 
     - name: 'Replace sources.list'
-      copy: "dest=/etc/apt/sources.list backup=true src=files/ubuntu-14.04_sohu_sources.list"
+      copy: "dest=/etc/apt/sources.list backup=true src=files/ubuntu-14.04_163_sources.list"
       when: (ansible_os_family == 'Debian') and (ansible_distribution_version == '14.04') and (in_China == True)
       tags: system
 
