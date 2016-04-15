@@ -15,7 +15,7 @@
     - name: 'insert $rvm_path/user/db'
       lineinfile: "dest={{ rvm1_install_path }}/user/db state=present regexp='^{{ item.key }}=' line='{{ item.key }}={{ item.val }}'"
       with_items:
-        - {key: 'ruby_url', val: 'https://ruby.taobao.org/mirrors/ruby/'}
+        - {key: 'ruby_url', val: 'https://ruby.taobao.org/mirrors/ruby'}
       tags: ruby
 
     - name: 'replace sources.list'
@@ -59,9 +59,10 @@
     - role: rvm_io.rvm1-ruby
       tags: ruby
       rvm1_rubies:
-        - 'ruby-2.2.2'
-      rvm1_rvm_check_for_updates: false
+        - '2.2.2'
       rvm1_gpg_key_server: pgp.mit.edu
+      rvm1_rvm_check_for_updates: false
 
     - role: geerlingguy.nodejs
       tags: nodejs
+      nodejs_forever: false
