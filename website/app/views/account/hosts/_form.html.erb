@@ -1,3 +1,9 @@
+<div class="alert alert-error">
+  <% if @host.errors.present? %>
+    <%= @host.errors.full_messages.join(', ') %>
+  <% end %>
+</div>
+
 <div class="row">
   <%= simple_form_for [:account, @host], wrapper: :horizontal_form do |f| %>
 
