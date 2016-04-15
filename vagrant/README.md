@@ -6,6 +6,7 @@
 
 ```bash
 $ pacman -Syu virtualbox vagrant
+$ brew cask install virtualbox vagrant
 ```
 
 TODO
