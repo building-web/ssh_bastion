@@ -2,10 +2,17 @@
 
 ### Install Vagrant
 
+ref https://www.vagrantup.com/docs/installation/
+
 #### Arch Linux
 
 ```bash
 $ pacman -Syu virtualbox vagrant
+```
+
+#### Mac
+
+```bash
 $ brew cask install virtualbox vagrant
 ```
 
