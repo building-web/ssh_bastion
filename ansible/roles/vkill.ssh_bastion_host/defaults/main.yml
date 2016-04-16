@@ -1,0 +1,7 @@
+---
+
+# Users
+ssh_bastion_host_users: []
+#   - name: dev
+#     ssh_public_key:
+#     ssh_private_key:

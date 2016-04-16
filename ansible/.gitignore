@@ -1,6 +1,6 @@
 /roles/*
 !/roles/.keep
-!/roles/ssh_bastion.*
+!/roles/vkill.*
 
 /*.retry
 

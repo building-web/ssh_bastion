@@ -1,0 +1,18 @@
+---
+
+time_zone: Asia/Shanghai
+
+db:
+  adapter: mysql2
+  host: 127.0.0.1
+  username: ssh_bastion
+  password: pa123456
+  database: ssh_bastion_development
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+
+smtp:
+  host: 127.0.0.1
+  port: 25
