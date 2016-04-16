@@ -35,6 +35,6 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
 
   private
   def account_params
-    params.require(:account).perimit(:otp_attempt)
+    params.require(:account).permit(:otp_attempt)
   end
 end
