@@ -30,7 +30,8 @@ gem 'attr_encrypted', '~> 3.0.1'
 gem 'devise-two-factor', github: 'tinfoil/devise-two-factor',
                          branch: 'devise-4'
 
-gem 'switch_user', '~> 1.2.1'
+gem 'switch_user', github: 'vkill/switch_user',
+                    branch: 'feature/support_capybara'
 
 gem 'activevalidators', '~> 3.0.0'
 
