@@ -1,0 +1,30 @@
+<div class="row sub-header">
+  <div class="col-md-8">
+    <h2>
+      Two-factor Authorization
+      <div class="row">
+        <div class="col-md-2">
+          status:
+        </div>
+        <div class="col-md-2">
+          <% if policy(current_account).new? %>
+            <div class="text-danger">Off</div>
+          <% else %>
+            <div class="text-info">Actived</div>
+          <% end %>
+        </div>
+      </div>
+    </h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if policy(current_account).new? %>
+      <a href="<%= new_account_two_factor_authentication_path %>" class="btn btn-primary">Enabel Two-factor Authorization</a>
+    <% else %>
+      <a href="<%= reset_account_two_factor_authentication_path %>" class="btn btn-primary">Reset</a>
+      <a href="<%= recovery_codes_account_two_factor_authentication_path %>" class="btn btn-primary" data-method="patch">Download recovery codes</a>
+    <% end %>
+  </div>
+</div>

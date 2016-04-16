@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160415014310) do
     t.string   "encrypted_otp_secret_salt"
     t.integer  "consumed_timestep"
     t.boolean  "otp_required_for_login"
+    t.text     "otp_backup_codes",          limit: 65535
     t.integer  "role",                                    default: 1
   end
 

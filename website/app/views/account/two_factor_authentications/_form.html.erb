@@ -1,0 +1,23 @@
+<h3>Add SSH BashHost to your two-factor authentication app</h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <h4>1. Scan barcode</h4>
+    <p class="text-center"><%= image_tag @qr %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= simple_form_for [:account, current_account], url: account_two_factor_authentication_path, wrapper: :horizontal_form do |f| %>
+      <%= f.input :otp_attempt %>
+
+      <div class="form-group">
+        <label class="col-sm-3"></label>
+        <div class="col-sm-9">
+          <%= f.submit t('view.submit'), class: 'btn btn-sm btn-primary'%>
+        </div>
+    </div>
+  <% end %>
+  </div>
+</div>

@@ -8,7 +8,10 @@ class Account < ApplicationRecord
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
          :validatable, :confirmable,
          :two_factor_authenticatable,
-         otp_secret_encryption_key: Settings.two_step_encryption_key
+         :two_factor_backupable,
+         otp_secret_encryption_key: Settings.two_step_encryption_key,
+         otp_backup_code_length: 32,
+         otp_number_of_backup_codes: 10
 
   # https://github.com/attr-encrypted/attr_encrypted/blob/8800a289e2fef694647255d2e07b0a2aa1b5260b/lib/attr_encrypted.rb#L47
   # https://github.com/tinfoil/devise-two-factor/blob/devise-4/lib/devise_two_factor/models/two_factor_authenticatable.rb#L12
@@ -55,4 +58,11 @@ class Account < ApplicationRecord
     has_ssh_key? and enabled_two_factor_authentication?
   end
 
+  def two_factor_otp_url
+   "otpauth://totp/%{app_id}?secret=%{secret}&issuer=%{app}" % {
+      :secret => otp_secret,
+      :app    => "SSH_Bash_Host",
+      :app_id => email
+    }
+  end
 end
