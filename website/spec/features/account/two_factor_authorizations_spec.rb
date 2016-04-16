@@ -30,7 +30,7 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
     visit '/account/two_factor_authorization'
 
     expect(page).to have_contet "Actived"
-    expect(page).to have_contet "Reset"
+    expect(page).to have_selector "a.href['/account/two_factor_authorization/reset']"
     expect(page).to have_selector "a.href['/account/two_factor_authorization/recovery-codes.txt']", text: 'Download recovery codes'
   end
 
@@ -56,11 +56,20 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
   scenario 'user2 reset two-factor authorization' do
     switch_user @user2
 
-    visit '/account/two_factor_authorization'
+    visit '/account/two_factor_authorization/reset'
 
-    find("a[href='/account/two_factor_authorization/reset']").click
+    expect(page).to have_selector "img[alt='authorization device code']"
+    expect(page).to have_content "After scanning the barcode image, the app will display a six-digit code that you can enter below."
+    expect(page).to have_content "Enter the six-digit code from the application"
 
-    expect(page).to have_current_path('/account/two_factor_authorization/new')
+    within('form#new_two_factor') do
+      fill_in 'Otp Attempt', with: @user1.current_otp
+
+      click_button 'Enable two-factor authentication'
+    end
+
+    expect(page).to have_current_path('/account/two_factor_authorization')
+    user_sees_flash_notice 'Two-factor authentication was successfully reset.'
   end
 
   scenario 'user2 disabled two-factor authorization' do
