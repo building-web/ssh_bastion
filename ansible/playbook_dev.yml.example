@@ -3,12 +3,13 @@
   hosts: all
   become: true
   vars_files:
-    - vars/main.yml
+    - vars/settings_dev.yml
 
   pre_tasks:
+
     - name: 'Replace sources.list'
       copy: "dest=/etc/apt/sources.list backup=true src=files/ubuntu-14.04_sohu_sources.list"
-      when: (in_China == True) and (ansible_os_family == 'Debian') and (ansible_distribution_version == '14.04')
+      when: (ansible_os_family == 'Debian') and (ansible_distribution_version == '14.04')
       run_once: True
       tags: system
 
@@ -27,7 +28,7 @@
   roles:
     - role: geerlingguy.ntp
       tags: ntp
-      ntp_timezone: '{{time_zone}}'
+      ntp_timezone: "{{ time_zone }}"
       ntp_servers:
         - cn.pool.ntp.org iburst
 
@@ -43,33 +44,26 @@
         - libmysqlclient-dev
       mysql_bind_address: '127.0.0.1'
       mysql_databases:
-        - name: ssh_bastion_development
+        - name: "{{ db.database }}"
       mysql_users:
-        - name: ssh_bastion
+        - name: "{{ db.username }}"
           host: "%"
-          password: pa123456
-          priv: "ssh_bastion_development.*:ALL"
+          password: "{{ db.password }}"
+          priv: "{{ db.database }}.*:ALL"
+      when: (ansible_os_family == 'Debian') and (db.adapter == 'mysql2')
 
     - role: geerlingguy.redis
       tags: redis
-      redis_port: 6379
-      redis_bind_interface: 127.0.0.1
+      redis_port: "{{ redis.port }}"
+      redis_bind_interface: "{{ redis.host }}"
 
     - role: geerlingguy.ruby
       tags: ruby
       ruby_install_from_source: True
       ruby_version: 2.2.2
       ruby_install_gems: ['bundler']
+      # ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz
       ruby_download_url: https://ruby.taobao.org/mirrors/ruby/2.2/ruby-2.2.2.tar.gz
-      when: in_China == True
-
-    - role: geerlingguy.ruby
-      tags: ruby
-      ruby_install_from_source: True
-      ruby_version: 2.2.2
-      ruby_install_gems: ['bundler']
-      ruby_download_url: http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz
-      when: in_China == False
 
     - role: geerlingguy.nodejs
       tags: nodejs

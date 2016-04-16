@@ -6,5 +6,7 @@
 
 /playbook_dev.yml
 
-/vars/main.yml
+/vars/settings_dev.yml
+
+
 

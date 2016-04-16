@@ -13,7 +13,7 @@ $ ansible-galaxy install -r requirements.yml -p roles -v -f
 ### Copy and edit some yml files
 
 ```bash
-$ cp vars/main.yml.example vars/main.yml
+$ cp vars/settings_dev.yml.example vars/settings_dev.yml
 ```
 
 ```bash
