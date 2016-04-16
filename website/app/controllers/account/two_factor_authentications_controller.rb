@@ -12,7 +12,7 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
   def create
     if current_account.validate_and_consume_otp!(account_params[:otp_attempt])
       current_account.otp_required_for_login = true
-      current_user.generate_otp_backup_codes!
+      current_account.generate_otp_backup_codes!
       current_account.save!
       redirect_to account_two_factor_authentication_path, notice: t('flash.account.two_factor_authentications.create.notice')
     else
