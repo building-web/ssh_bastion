@@ -72,15 +72,20 @@
     - name: 'Replace gem source without become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
       become: False
+      tags: ruby
 
     - name: 'Replace gem source with become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
       become: True
+      tags: ruby
 
     - name: 'Replace bundle source without become'
       shell: bundle config mirror.https://rubygems.org https://gems.ruby-china.org
       become: False
+      tags: ruby
 
     - name: 'Replace bundle source with become'
       shell: bundle config mirror.https://rubygems.org https://gems.ruby-china.org
       become: True
+      tags: ruby
+
