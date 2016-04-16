@@ -16,6 +16,7 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
       current_account.save!
       redirect_to account_two_factor_authentication_path, notice: t('flash.account.two_factor_authentications.create.notice')
     else
+      # if reset should back reset
       render :new
     end
   end
