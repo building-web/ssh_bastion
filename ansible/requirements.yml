@@ -24,3 +24,6 @@
 
 - src: https://github.com/rvm/rvm1-ansible
   name: rvm_io.rvm1-ruby
+
+- src: https://github.com/willshersystems/ansible-sshd
+  name: mattwillsher.sshd

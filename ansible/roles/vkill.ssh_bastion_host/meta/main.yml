@@ -1,0 +1,19 @@
+galaxy_info:
+  author: vkill
+  description: SSH bastion host
+  company: vkill
+
+  license: license ((BSD, MIT))
+
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+
+  galaxy_tags:
+    - ssh
+
+dependencies:
+  - willshersystems.sshd
