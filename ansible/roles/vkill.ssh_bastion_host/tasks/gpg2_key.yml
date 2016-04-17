@@ -24,26 +24,26 @@
   become: yes
   become_user: "{{ sbh_user_name }}"
 
-- name: Generate new gpg key
+- name: Generate new secret key
   command: "gpg --batch --gen-key ~/{{ gpg2_key_path }}/generate_key_script chdir=~/{{ gpg2_key_path }}"
   become: yes
   become_user: "{{ sbh_user_name }}"
   when: gpg_keys.stdout == ""
 
-- name: Import generated key
+- name: Import generated secret key
   command: "gpg --import ~/{{ gpg2_key_path }}/{{ gpg2_key_public_file_name }} ~/{{ gpg2_key_path }}/{{ gpg2_key_private_file_name }}"
   become: yes
   become_user: "{{ sbh_user_name }}"
   when: gpg_keys.stdout == ""
 
-- name: Get generated gpg fingerprint
+- name: Generate secret key fingerprint file
   shell: "gpg --fingerprint {{ sbh_user_gpg2_key_uid }} | awk -F= '/Key fingerprint/ { gsub(/ /,\"\", $2); print $2 }' | tee ~/{{ gpg2_key_path }}/{{ gpg2_key_fingerprint_file_name }}"
   changed_when: false
   become: yes
   become_user: "{{ sbh_user_name }}"
 
-- name: Get generated gpg uid
-  shell: "echo {{ sbh_user_gpg2_key_uid }} | tee ~/{{ gpg2_key_path }}/{{ gpg2_key_uid_file_name }}"
+- name: Generate secret key public ASCII file
+  shell: "gpg --armor --output ~/{{ gpg2_key_path }}/{{ gpg2_key_public_asc_file_name }} --export {{ sbh_user_gpg2_key_uid }}"
   changed_when: false
   become: yes
   become_user: "{{ sbh_user_name }}"
