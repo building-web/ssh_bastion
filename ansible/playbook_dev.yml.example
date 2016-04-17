@@ -27,6 +27,15 @@
       when: ansible_os_family == 'RedHat'
       tags: system
 
+    - name: 'Create x_host user'
+      user:
+        name: developer
+      with_items:
+        - "{{ local_bastion_host.user_name }}"
+        - "{{ local_website_host.user_name }}"
+        - "{{ local_remote_host.user_name }}"
+      tags: [system, user]
+
   roles:
     - role: geerlingguy.ntp
       tags: ntp

@@ -32,3 +32,9 @@ local_bastion_host:
   user_name: developer
   user_ssh_key_private_file: 'files/id_rsa-default'
   user_ssh_key_public_file: 'files/id_rsa-default.pub'
+
+local_website_host:
+  user_name: vagrant
+
+local_remote_host:
+  user_name: ubuntu
