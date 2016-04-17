@@ -26,13 +26,37 @@
     ssh_key_bits: 2048
     ssh_key_type: "{{ ssh_key_type }}"
     ssh_key_comment: "{{ inventory_hostname }}-{{ item.name }}@ssh_bastion"
-    ssh_key_file: "{{ ssh_key_path }}/{{ ssh_key_private_file }}"
+    ssh_key_file: "{{ ssh_key_path }}/{{ ssh_private_key_file }}"
   with_items: "{{ ssh_bastion_host_users }}"
 
-- name: Get ssh public keys stat
+- name: Replace ssh_public_key
+  copy:
+    src: "{{ item.ssh_public_key_file }}"
+    dest: "~/{{ ssh_key_path }}/{{ ssh_public_key_file }}"
+    backup: True
+  become: yes
+  become_user: "{{ item.name }}"
+  when:
+    - item.ssh_public_key_file is defined
+    - item.ssh_private_key_file is defined
+  with_items: "{{ ssh_bastion_host_users }}"
+
+- name: Replace ssh_private_key
+  copy:
+    src: "{{ item.ssh_private_key_file }}"
+    dest: "~/{{ ssh_key_path }}/{{ ssh_private_key_file }}"
+    backup: True
+  become: yes
+  become_user: "{{ item.name }}"
+  when:
+    - item.ssh_public_key_file is defined
+    - item.ssh_private_key_file is defined
+  with_items: "{{ ssh_bastion_host_users }}"
+
+- name: Register stat_with_ssh_public_key_files
   stat:
-    path: "~/{{ ssh_key_path }}/{{ ssh_key_public_file }}"
-  register: stat_ssh_key_public_files
+    path: "~/{{ ssh_key_path }}/{{ ssh_public_key_file }}"
+  register: stat_with_ssh_public_key_files
   become: yes
   become_user: "{{ item.name }}"
   with_items: "{{ ssh_bastion_host_users }}"
@@ -42,4 +66,4 @@
     msg: >
       The ssh public key ({{ item.stat.path if item.stat.exists == True else '' }}) should exists and can read it
   when: item.stat.exists == False or item.stat.rusr is not defined or item.stat.rusr == False or item.stat.size == 0
-  with_items: "{{ stat_ssh_key_public_files.results }}"
+  with_items: "{{ stat_with_ssh_public_key_files.results }}"

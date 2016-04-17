@@ -4,5 +4,5 @@
 ssh_bastion_host_users: {}
 #   - name: developer
 #     group: developer
-#     ssh_public_key:
-#     ssh_private_key:
+#     ssh_public_key_file:
+#     ssh_private_key_file:
