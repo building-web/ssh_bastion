@@ -22,6 +22,11 @@
       when: ansible_os_family == 'Debian'
       tags: system
 
+    - name: 'Upgrade all packages (RedHat)'
+      yum: name=* state=latest
+      when: ansible_os_family == 'RedHat'
+      tags: system
+
   roles:
     - role: geerlingguy.ntp
       tags: ntp
