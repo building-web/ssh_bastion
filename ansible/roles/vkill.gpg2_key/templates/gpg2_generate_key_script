@@ -3,11 +3,11 @@ Key-Type: 1
 Key-Length: 2048
 Subkey-Type: 1
 Subkey-Length: 2048
-Name-Real: {{ sbh_user_gpg2_key_uid }}
-Name-Email: {{ sbh_user_comment }}
+Name-Real: {{ gpg2_key_unique_uid }}
+Name-Email: {{ gpg2_user_email }}
 Expire-Date: 0
 Passphrase: {{ lookup('password', '/tmp/passwordfile') }}
-%pubring {{ gpg2_key_public_file_name }}
-%secring {{ gpg2_key_private_file_name }}
+%pubring {{ gpg2_key_public_file }}
+%secring {{ gpg2_key_private_file }}
 %commit
 %echo done

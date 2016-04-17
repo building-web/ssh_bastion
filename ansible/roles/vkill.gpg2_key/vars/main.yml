@@ -1,0 +1,18 @@
+---
+
+gpg2_user: developer
+gpg2_user_email: "{{ gpg2_user }}@example.com"
+
+gpg2_key_unique_uid: "{{ ansible_hostname }}-{{ gpg2_user }}@example.com"
+
+gpg2_path: ".gnupg"
+
+gpg2_key_path: "secret"
+
+gpg2_key_private_file: "{{ gpg2_key_path }}/key.priv"
+gpg2_key_public_file: "{{ gpg2_key_path }}/key.pub"
+gpg2_key_public_asc_file: "{{ gpg2_key_path }}/key.pub.asc"
+gpg2_key_fingerprint_file: "{{ gpg2_key_path }}/key.fingerprint"
+gpg2_key_uid_file: "{{ gpg2_key_path }}/key.uid"
+gpg2_key_uid_hash_file: "{{ gpg2_key_path }}/key.uid_hash"
+

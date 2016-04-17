@@ -27,13 +27,20 @@
       when: ansible_os_family == 'RedHat'
       tags: system
 
-    - name: 'Create x_host user'
+    - name: 'Create bastion_host user'
       user:
-        name: developer
-      with_items:
-        - "{{ local_bastion_host.user_name }}"
-        - "{{ local_website_host.user_name }}"
-        - "{{ local_remote_host.user_name }}"
+        name: "{{ local_bastion_host.user_name }}"
+        shell: /bin/false
+      tags: [system, user]
+
+    - name: 'Create website_host user'
+      user:
+        name: "{{ local_website_host.user_name }}"
+      tags: [system, user]
+
+    - name: 'Create remote_host user'
+      user:
+        name: "{{ local_remote_host.user_name }}"
       tags: [system, user]
 
   roles:
@@ -79,11 +86,22 @@
       tags: nodejs
       nodejs_forever: False
 
-    - role: vkill.ssh_bastion_host
+    - role: willshersystems.sshd
       tags: bastion_host
-      sbh_user_name: "{{ local_bastion_host.user_name }}"
-      sbh_user_ssh_key_public_file: "{{ local_bastion_host.user_ssh_key_public_file }}"
-      sbh_user_ssh_key_private_file: "{{ local_bastion_host.user_ssh_key_private_file }}"
+
+    - role: vkill.ssh_key
+      tags: bastion_host
+      ssh_user: "{{ local_bastion_host.user_name }}"
+      user_ssh_key_public_file: "{{ local_bastion_host.user_ssh_key_public_file }}"
+      user_ssh_key_private_file: "{{ local_bastion_host.user_ssh_key_private_file }}"
+
+    - role: vkill.gpg2_key
+      tags: bastion_host
+      gpg2_user: "{{ local_bastion_host.user_name }}"
+
+    - role: vkill.gpg2_key
+      tags: website_host
+      gpg2_user: "{{ local_website_host.user_name }}"
 
   tasks:
     - name: 'Replace gem source without become'

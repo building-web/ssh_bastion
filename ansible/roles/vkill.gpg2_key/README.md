@@ -1,7 +1,7 @@
-SSH bastion host
+GPG2 Key
 =========
 
-ssh bastion host.
+GPG2 Key.
 
 Requirements
 ------------
@@ -18,7 +18,7 @@ TODO
 Dependencies
 ------------
 
-[willshersystems.sshd](https://github.com/willshersystems/ansible-sshd)
+[shrikeh.haveged](https://github.com/shrikeh-ansible-roles/ansible-haveged)
 
 Example Playbook
 ----------------
@@ -26,7 +26,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - role: vkill.ssh_bastion_host
+     - role: vkill.gpg2_key
 ```
 
 License

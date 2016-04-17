@@ -1,6 +1,6 @@
 galaxy_info:
   author: vkill
-  description: SSH bastion host
+  description: GPG2 Key
   company: vkill
 
   license: license ((BSD, MIT))
@@ -16,5 +16,4 @@ galaxy_info:
     - ssh
 
 dependencies:
-  - willshersystems.sshd
   - shrikeh.haveged
