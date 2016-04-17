@@ -25,10 +25,10 @@ smtp:
 #
 # local_bastion_host:
 #   user_name: developer
-#   user_ssh_private_key_file: 'files/id_rsa-default'
-#   user_ssh_public_key_file: 'files/id_rsa-default.pub'
+#   user_ssh_key_private_file: 'files/id_rsa-default'
+#   user_ssh_key_public_file: 'files/id_rsa-default.pub'
 #
 local_bastion_host:
   user_name: developer
-  user_ssh_private_key_file: 'files/id_rsa-default'
-  user_ssh_public_key_file: 'files/id_rsa-default.pub'
+  user_ssh_key_private_file: 'files/id_rsa-default'
+  user_ssh_key_public_file: 'files/id_rsa-default.pub'

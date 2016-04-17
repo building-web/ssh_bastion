@@ -1,8 +1,13 @@
 ---
 
-# Users
-ssh_bastion_host_users: {}
-#   - name: developer
-#     group: developer
-#     ssh_public_key_file:
-#     ssh_private_key_file:
+sbh_user_name: developer
+sbh_user_group: "{{ sbh_user_name }}"
+sbh_user_ssh_key_public_file:
+sbh_user_ssh_key_private_file:
+
+sbh_host_unique_identity: "{{ inventory_hostname }}"
+
+sbh_user_comment: "{{ sbh_host_unique_identity }}-{{ sbh_user_name }}@ssh-bastion.building-web.com"
+
+sbh_user_gpg2_key_uid: "{{ sbh_host_unique_identity }}-{{ sbh_user_name }}@ssh-bastion.building-web.com"
+

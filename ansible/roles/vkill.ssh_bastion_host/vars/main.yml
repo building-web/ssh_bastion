@@ -2,6 +2,21 @@
 
 ssh_key_type: 'rsa'
 ssh_key_path: '.ssh'
-ssh_private_key_file: 'id_rsa'
-ssh_public_key_file: 'id_rsa.pub'
+ssh_key_private_file: 'id_rsa'
+ssh_key_public_file: 'id_rsa.pub'
+
+#
+#
+
+gpg2_key_prefix: "gpg2_ssh_bastion"
+
+gpg2_key_path: '.gnupg'
+
+gpg2_key_private_file_name: "{{ gpg2_key_prefix }}.priv"
+gpg2_key_public_file_name: "{{ gpg2_key_prefix }}.pub"
+
+gpg2_key_fingerprint_file_name: "{{ gpg2_key_prefix }}.fingerprint"
+
+gpg2_key_uid_file_name: "{{ gpg2_key_prefix }}.uid"
+gpg2_key_uid_hash_file_name: "{{ gpg2_key_prefix }}.uid_hash"
 

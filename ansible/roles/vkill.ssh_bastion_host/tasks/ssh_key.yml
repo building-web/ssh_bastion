@@ -1,0 +1,34 @@
+- name: Replace ssh_key_public
+  copy:
+    src: "{{ sbh_user_ssh_key_public_file }}"
+    dest: "~/{{ ssh_key_path }}/{{ ssh_key_public_file }}"
+    backup: True
+  become: yes
+  become_user: "{{ sbh_user_name }}"
+  when:
+    - sbh_user_ssh_key_public_file is defined
+    - sbh_user_ssh_key_private_file is defined
+
+- name: Replace ssh_key_private
+  copy:
+    src: "{{ sbh_user_ssh_key_private_file }}"
+    dest: "~/{{ ssh_key_path }}/{{ ssh_key_private_file }}"
+    backup: True
+  become: yes
+  become_user: "{{ sbh_user_name }}"
+  when:
+    - sbh_user_ssh_key_public_file is defined
+    - sbh_user_ssh_key_private_file is defined
+
+- name: Register stat_with_ssh_key_public_file
+  stat:
+    path: "~/{{ ssh_key_path }}/{{ ssh_key_public_file }}"
+  register: stat_with_ssh_key_public_file
+  become: yes
+  become_user: "{{ sbh_user_name }}"
+
+- name: Ensure the ssh public keys exists
+  fail:
+    msg: >
+      The ssh public key ({{ stat_with_ssh_key_public_file.stat.path if stat_with_ssh_key_public_file.stat.exists == True else '' }}) should exists and can read it
+  when: stat_with_ssh_key_public_file.stat.exists == False or stat_with_ssh_key_public_file.stat.rusr is not defined or stat_with_ssh_key_public_file.stat.rusr == False or stat_with_ssh_key_public_file.stat.size == 0

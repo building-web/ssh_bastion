@@ -27,3 +27,6 @@
 
 - src: https://github.com/willshersystems/ansible-sshd
   name: willshersystems.sshd
+
+- src: https://github.com/shrikeh-ansible-roles/ansible-haveged
+  name: shrikeh.haveged

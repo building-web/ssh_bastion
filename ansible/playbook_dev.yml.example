@@ -67,10 +67,9 @@
 
     - role: vkill.ssh_bastion_host
       tags: bastion_host
-      ssh_bastion_host_users:
-        - name: "{{ local_bastion_host.user_name }}"
-          ssh_public_key_file: "{{ local_bastion_host.user_ssh_public_key_file }}"
-          ssh_private_key_file: "{{ local_bastion_host.user_ssh_private_key_file }}"
+      sbh_user_name: "{{ local_bastion_host.user_name }}"
+      sbh_user_ssh_key_public_file: "{{ local_bastion_host.user_ssh_key_public_file }}"
+      sbh_user_ssh_key_private_file: "{{ local_bastion_host.user_ssh_key_private_file }}"
 
   tasks:
     - name: 'Replace gem source without become'
