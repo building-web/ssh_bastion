@@ -7,3 +7,25 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- name: Create groups
+  group:
+    name: "{{ item.group | default(item.name) }}"
+    state: present
+  with_items: "{{ssh_bastion_host_users}}"
+
+- name: Create users
+  user:
+    name: "{{ item.name }}"
+    state: present
+    group: "{{ item.group | default(item.name) }}"
+    groups: "{{ item.groups | default('') }}"
+    append: yes
+    createhome: yes
+    shell: /bin/false
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_type: "{{ ssh_key_type }}"
+    ssh_key_comment: "{{inventory_hostname}}-{{ item.name }}@ssh_bastion"
+    ssh_key_file: "{{ ssh_key_path }}/{{ ssh_key_private_file }}"
+  with_items: "{{ssh_bastion_host_users}}"
+

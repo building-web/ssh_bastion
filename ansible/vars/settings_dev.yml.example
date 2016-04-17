@@ -16,3 +16,8 @@ redis:
 smtp:
   host: 127.0.0.1
   port: 25
+
+local_bastion_host:
+  user_name: developer
+  user_ssh_public_key: ''
+  user_ssh_private_key: ''

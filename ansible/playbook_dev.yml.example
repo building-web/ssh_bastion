@@ -9,11 +9,11 @@
 
     - name: 'Replace sources.list'
       copy: "dest=/etc/apt/sources.list backup=true src=files/ubuntu-14.04_sohu_sources.list"
-      when: (ansible_os_family == 'Debian') and (ansible_distribution_version == '14.04')
+      when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
       tags: system
 
     - name: 'Update apt cache (Debian)'
-      apt: update_cache=yes
+      apt: update_cache=yes cache_valid_time=86400
       when: ansible_os_family == 'Debian'
       tags: system
 
@@ -47,7 +47,7 @@
           host: "%"
           password: "{{ db.password }}"
           priv: "{{ db.database }}.*:ALL"
-      when: (ansible_os_family == 'Debian') and (db.adapter == 'mysql2')
+      when: ansible_os_family == 'Debian' and db.adapter == 'mysql2'
 
     - role: geerlingguy.redis
       tags: redis
@@ -67,6 +67,10 @@
 
     - role: vkill.ssh_bastion_host
       tags: bastion_host
+      ssh_bastion_host_users:
+        - name: "{{ local_bastion_host.user_name }}"
+          ssh_public_key: "{{ local_bastion_host.user_ssh_public_key }}"
+          ssh_private_key: "{{ local_bastion_host.user_ssh_private_key }}"
 
   tasks:
     - name: 'Replace gem source without become'
