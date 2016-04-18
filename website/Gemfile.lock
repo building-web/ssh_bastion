@@ -261,9 +261,6 @@ GEM
     rotp (2.1.1)
     rqrcode (0.10.1)
       chunky_png (~> 1.0)
-    rqrcode_png (0.1.5)
-      chunky_png
-      rqrcode
     rspec (3.5.0.beta3)
       rspec-core (= 3.5.0.beta3)
       rspec-expectations (= 3.5.0.beta3)
@@ -371,7 +368,7 @@ DEPENDENCIES
   pundit (~> 1.1.0)
   rails (= 5.0.0.beta3)
   rails-i18n (~> 5.0.0.beta3)
-  rqrcode_png
+  rqrcode (~> 0.10.1)
   rspec (~> 3.5.0.beta3)
   rspec-rails (~> 3.5.0.beta3)
   sass-rails (~> 6.0.0.beta1)

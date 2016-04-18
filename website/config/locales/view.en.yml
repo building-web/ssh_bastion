@@ -1,8 +1,12 @@
 en:
   view:
     are_you_sure_to_delete: Are you sure to delete?
+    are_you_sure_to_disable: Are you sure to disable?
     handle: Handle
     destroy: Delete
     submit: Submit
     edit: Edit
     new: New
+    disable: Disable
+    two_factor_authentication:
+      submit: Enable two-factor authentication

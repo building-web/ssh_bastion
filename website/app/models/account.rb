@@ -58,6 +58,36 @@ class Account < ApplicationRecord
     has_ssh_key? and enabled_two_factor_authentication?
   end
 
+
+  def activate_two_factor otp_attempt
+    if self.validate_and_consume_otp!(otp_attempt)
+      self.otp_required_for_login = true
+      self.generate_otp_backup_codes!
+      self.save
+    else
+      errors.add :otp_attempt, :invalid
+      return false
+    end
+  end
+
+  def qr_code
+    qrcode = RQRCode::QRCode.new(two_factor_otp_url)
+
+    png = qrcode.as_png(
+          resize_gte_to: false,
+          resize_exactly_to: false,
+          fill: 'white',
+          color: 'black',
+          size: 248,
+          border_modules: 4,
+          module_px_size: 6,
+          file: nil # path to write
+          )
+    png.to_data_url
+  end
+
+  private
+
   def two_factor_otp_url
    "otpauth://totp/%{app_id}?secret=%{secret}&issuer=%{app}" % {
       :secret => otp_secret,

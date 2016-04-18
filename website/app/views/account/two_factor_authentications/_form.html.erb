@@ -3,7 +3,8 @@
 <div class="row">
   <div class="col-md-12">
     <h4>1. Scan barcode</h4>
-    <p class="text-center"><%= image_tag @qr %></p>
+    <p class="text-center"><%= image_tag current_account.qr_code, alt: 'authentication device code' %></p>
+    <p>After scanning the barcode image, the app will display a six-digit code that you can enter below.</p>
   </div>
 </div>
 
@@ -15,7 +16,8 @@
       <div class="form-group">
         <label class="col-sm-3"></label>
         <div class="col-sm-9">
-          <%= f.submit t('view.submit'), class: 'btn btn-sm btn-primary'%>
+          <p>Enter the six-digit code from the application</p>
+          <%= f.submit t('view.two_factor_authentication.submit'), class: 'btn btn-sm btn-primary'%>
         </div>
     </div>
   <% end %>

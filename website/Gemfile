@@ -29,7 +29,7 @@ gem 'devise-bootstrap-views', '~> 0.0.8'
 gem 'attr_encrypted', '~> 3.0.1'
 gem 'devise-two-factor', github: 'tinfoil/devise-two-factor',
                          branch: 'devise-4'
-gem 'rqrcode_png'
+gem 'rqrcode', '~> 0.10.1'
 
 gem 'switch_user', github: 'vkill/switch_user',
                     branch: 'feature/support_capybara'

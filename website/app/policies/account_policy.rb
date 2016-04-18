@@ -8,11 +8,7 @@ class AccountPolicy < ApplicationPolicy
   end
 
   def new?
-    !account.secret_matched?
-  end
-
-  def destroy?
-    update?
+    !account.enabled_two_factor_authentication?
   end
 
   private

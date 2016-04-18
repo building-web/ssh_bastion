@@ -12,6 +12,8 @@ module ApplicationHelper
       controller_name == 'hosts'
     when :assigned_hosts
       controller_name == 'assigned_hosts'
+    when :two_factor_authentication
+      controller_name == 'two_factor_authentications'
     else
       false
     end
