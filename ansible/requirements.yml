@@ -7,8 +7,14 @@
 - src: https://github.com/geerlingguy/ansible-role-mysql
   name: geerlingguy.mysql
 
+- src: https://github.com/ANXS/postgresql
+  name: ANXS.postgresql
+
 - src: https://github.com/geerlingguy/ansible-role-redis
   name: geerlingguy.redis
+
+- src: https://github.com/DavidWittman/ansible-redis
+  name: DavidWittman.redis
 
 - src: https://github.com/geerlingguy/ansible-role-repo-epel
   name: geerlingguy.repo-epel
