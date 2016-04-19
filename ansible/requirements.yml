@@ -36,3 +36,15 @@
 
 - src: https://github.com/shrikeh-ansible-roles/ansible-haveged
   name: shrikeh.haveged
+
+- src: https://github.com/geerlingguy/ansible-role-mailhog
+  name: geerlingguy.mailhog
+
+- src: https://github.com/pgolm/ansible-playbook-monit
+  name: pgolm.monit
+
+- src: https://github.com/Graylog2/graylog-ansible-role
+  name: graylog2.graylog
+
+- src: https://github.com/nickhammond/ansible-logrotate
+  name: nickhammond.logrotate
