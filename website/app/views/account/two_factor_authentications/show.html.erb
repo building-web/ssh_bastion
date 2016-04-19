@@ -10,7 +10,7 @@
           <% if policy(current_account).new? %>
             <div class="text-danger">Off</div>
           <% else %>
-            <div class="text-info">Actived</div>
+            <div class="text-info">On</div>
           <% end %>
         </div>
       </div>
@@ -23,9 +23,8 @@
     <% if policy(current_account).new? %>
       <a href="<%= new_account_two_factor_authentication_path %>" class="btn btn-primary">Enabel Two-factor Authorization</a>
     <% else %>
-      <a href="<%= reset_account_two_factor_authentication_path %>" class="btn btn-primary">Reset</a>
+      <a href="<%= reset_account_two_factor_authentication_path %>" class="btn btn-primary">Reset with recovery codes</a>
       <a href="<%= recovery_codes_account_two_factor_authentication_path %>" class="btn btn-primary" data-method="patch">Download recovery codes</a>
-      <a href="<%= account_two_factor_authentication_path %>" data-method="delete" class="btn btn-danger btn-sm" data-confirm="<%= t('view.are_you_sure_to_disable') %>"><%= t('view.disable')%></a>
     <% end %>
   </div>
 </div>

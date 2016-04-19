@@ -61,11 +61,10 @@ class Account < ApplicationRecord
 
   def activate_two_factor otp_attempt
     if self.validate_and_consume_otp!(otp_attempt)
-      self.otp_required_for_login = true
       self.generate_otp_backup_codes!
       self.save
     else
-      errors.add :otp_attempt, :invalid
+      errors.add :otp_attempt, 'Otp attempt is not match, please input agian'
       return false
     end
   end

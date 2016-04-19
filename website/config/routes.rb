@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
     resources :hosts, expect: [:show]
 
-    resource :two_factor_authentication, only: [:new, :create, :show, :destroy] do
+    resource :two_factor_authentication, only: [:new, :create, :show] do
       member do
         get :reset
         patch :recovery_codes

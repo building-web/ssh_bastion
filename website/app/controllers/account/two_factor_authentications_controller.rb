@@ -16,18 +16,11 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
   end
 
   def reset
-    current_account.otp_secret = Account.generate_otp_secret
-    current_account.otp_required_for_login = false
-    current_account.save!
   end
 
-  def destroy
-    current_account.otp_required_for_login = false
-    current_account.consumed_timestep = nil
-    current_account.otp_secret = nil
-    current_account.save!
-
-    redirect_to account_two_factor_authentication_path, notice: t('flash.actions.destroy.notice', resource_name: 'Two-factor authentication')
+  def recovery_codes
+    #TODO downlaod only once
+    send_data current_account.otp_backup_codes, filename: 'recovery_codes.txt'
   end
 
   private
