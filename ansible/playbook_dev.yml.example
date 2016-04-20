@@ -103,6 +103,27 @@
       tags: website_host
       gpg2_user: "{{ local_website_host.user_name }}"
 
+    - role: geerlingguy.mailhog
+      tags: website_host
+      mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
+      ssmtp_mailhub: "{{ smtp.host }}:{{ smtp.port }}"
+
+    - role: graylog2.graylog
+      tags: bastion_host
+
+    - role: nickhammond.logrotate
+      tags: website_host
+      logrotate_scripts:
+        - name: ssh_bastion_website
+          path: "/website/log/*.log"
+          options:
+            - weekly
+            - size 25M
+            - missingok
+            - compress
+            - delaycompress
+            - copytruncate
+
   tasks:
     - name: 'Replace gem source without become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
@@ -122,6 +143,20 @@
     - name: 'Replace bundle source with become'
       shell: bundle config mirror.https://rubygems.org https://gems.ruby-china.org
       become: True
+      tags: ruby
+
+    - name: 'Config bundle path'
+      shell: bundle config --local path vendor/bundler
+      args:
+        chdir: /website
+      become: False
+      tags: ruby
+
+    - name: 'Config bundle frozen'
+      shell: bundle config --local frozen true
+      args:
+        chdir: /website
+      become: False
       tags: ruby
 
     - name: 'Replace npm registry without become'

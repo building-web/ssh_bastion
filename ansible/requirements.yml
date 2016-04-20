@@ -37,6 +37,9 @@
 - src: https://github.com/shrikeh-ansible-roles/ansible-haveged
   name: shrikeh.haveged
 
+- src: https://github.com/geerlingguy/ansible-role-daemonize
+  name: geerlingguy.daemonize
+
 - src: https://github.com/geerlingguy/ansible-role-mailhog
   name: geerlingguy.mailhog
 
