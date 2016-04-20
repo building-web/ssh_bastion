@@ -3,7 +3,7 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
   end
 
   def new
-    current_account.otp_secret ||= Account.generate_otp_secret
+    current_account.otp_secret ||= Account.generate_otp_secret(10)
     current_account.save!
   end
 
