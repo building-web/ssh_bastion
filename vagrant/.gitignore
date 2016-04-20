@@ -9,4 +9,5 @@
 /**/.autoenv_in
 /**/.autoenv_out
 
-
+#
+/**/MailHog_*

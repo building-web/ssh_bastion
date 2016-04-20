@@ -28,6 +28,8 @@ $ cp Vagrantfile.example Vagrantfile
 
 $ wget -nc http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
 
+$ wget -nc https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
+
 $ vagrant up --no-provision
 
 $ vagrant provision

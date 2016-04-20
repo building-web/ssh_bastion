@@ -105,11 +105,11 @@
 
     - role: geerlingguy.mailhog
       tags: website_host
-      mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
+      mailhog_binary_url: file:///vagrant/MailHog_linux_amd64
       ssmtp_mailhub: "{{ smtp.host }}:{{ smtp.port }}"
 
-    - role: graylog2.graylog
-      tags: bastion_host
+    # - role: graylog2.graylog
+    #   tags: bastion_host
 
     - role: nickhammond.logrotate
       tags: website_host
