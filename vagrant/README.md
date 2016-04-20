@@ -34,8 +34,8 @@ $ vagrant up --no-provision
 
 $ vagrant provision
 
-$ open http://127.0.0.1:13000
+$ open http://127.0.0.1:3000
 
-$ open http://127.0.0.1:18025
+$ open http://127.0.0.1:8025
 
 ```
