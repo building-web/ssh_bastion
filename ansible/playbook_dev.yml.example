@@ -60,7 +60,7 @@
         - mariadb-server
         - python-mysqldb
         - libmysqlclient-dev
-      mysql_bind_address: '127.0.0.1'
+      mysql_bind_address: '0.0.0.0'
       mysql_databases:
         - name: "{{ db.database }}"
       mysql_users:
@@ -72,7 +72,7 @@
 
     - role: geerlingguy.redis
       tags: redis
-      redis_port: '127.0.0.1'
+      redis_port: '0.0.0.0'
       redis_bind_interface: "{{ redis.host }}"
 
     - role: geerlingguy.ruby
@@ -107,10 +107,12 @@
       tags: website_host
       # mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
       mailhog_binary_url: file:///vagrant/MailHog_linux_amd64
-      ssmtp_mailhub: "{{ smtp.host }}:{{ smtp.port }}"
+      ssmtp_mailhub: "0.0.0.0:{{ smtp.port }}"
 
-    # - role: graylog2.graylog
-    #   tags: bastion_host
+    - role: graylog2.graylog
+      tags: bastion_host
+      graylog_web_listen_address: '0.0.0.0'
+      graylog_web_port: 9000
 
     - role: nickhammond.logrotate
       tags: website_host
@@ -145,20 +147,6 @@
     - name: 'Replace bundle source with become'
       shell: bundle config mirror.https://rubygems.org https://gems.ruby-china.org
       become: True
-      tags: ruby
-
-    - name: 'Config bundle path'
-      shell: bundle config --local path vendor/bundler
-      args:
-        chdir: /website
-      become: False
-      tags: ruby
-
-    - name: 'Config bundle frozen'
-      shell: bundle config --local frozen true
-      args:
-        chdir: /website
-      become: False
       tags: ruby
 
     - name: 'Replace npm registry without become'
