@@ -41,8 +41,11 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
     visit '/account/two_factor_authentication/new'
 
     expect(page).to have_selector "img[alt='authentication device code']"
-    expect(page).to have_content "After scanning the barcode image, the app will display a six-digit code that you can enter below."
-    expect(page).to have_content "Enter the six-digit code from the application"
+    expect(page).to have_content 'After scanning the barcode image, the app will display a six-digit code that you can enter below.'
+    expect(page).to have_content 'Enter the six-digit code from the application'
+    expect(page).to have_selector "a[href='https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2']"
+    expect(page).to have_selector "a[href='https://play.google.com/store/apps/details?id=com.duosecurity.duomobile']"
+
 
     @user1.reload
     within("form#edit_account_#{@user1.id}") do
@@ -61,8 +64,8 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
     visit '/account/two_factor_authentication/new'
 
     expect(page).to have_selector "img[alt='authentication device code']"
-    expect(page).to have_content "After scanning the barcode image, the app will display a six-digit code that you can enter below."
-    expect(page).to have_content "Enter the six-digit code from the application"
+    expect(page).to have_content 'After scanning the barcode image, the app will display a six-digit code that you can enter below.'
+    expect(page).to have_content 'Enter the six-digit code from the application'
 
     @user1.reload
     within("form#edit_account_#{@user1.id}") do
@@ -70,6 +73,6 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
 
       click_button 'Enable two-factor authentication'
     end
-    expect(page).to have_content 'Otp attempt is not match, please input agianf'
+    expect(page).to have_content 'Otp attempt is not match, please input agian'
   end
 end
