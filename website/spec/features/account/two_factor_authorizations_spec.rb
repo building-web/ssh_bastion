@@ -6,6 +6,8 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
     @user1 = create :user
     @user2 = create :user_with_enabled_two_factor
 
+    @user3 = create :user_with_enabled_two_factor
+    @user3.touch(:download_at)
   end
 
   scenario "the 'Two-factor authentication' sidebar should active" do
@@ -32,6 +34,16 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
 
     expect(page).to have_content 'On'
     expect(page).to have_selector "a[href='/account/two_factor_authentication/recovery_codes']", text: 'Download recovery codes'
+    expect(page).to have_selector "a[href='/account/two_factor_authentication/reset']", text: 'Reset with recovery codes'
+  end
+
+  scenario "user3 show list" do
+    switch_user @user3
+
+    visit '/account/two_factor_authentication'
+
+    expect(page).to have_content 'On'
+    expect(page).to_not have_selector "a[href='/account/two_factor_authentication/recovery_codes']", text: 'Download recovery codes'
     expect(page).to have_selector "a[href='/account/two_factor_authentication/reset']", text: 'Reset with recovery codes'
   end
 

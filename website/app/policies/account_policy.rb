@@ -11,6 +11,10 @@ class AccountPolicy < ApplicationPolicy
     !account.enabled_two_factor_authentication?
   end
 
+  def recovery_codes?
+    account.enabled_two_factor_authentication? and account.download_at.blank?
+  end
+
   private
 
 end

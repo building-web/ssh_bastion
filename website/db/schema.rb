@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415014310) do
+ActiveRecord::Schema.define(version: 20160421143849) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                                   default: "", null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160415014310) do
     t.boolean  "otp_required_for_login"
     t.text     "otp_backup_codes",          limit: 65535
     t.integer  "role",                                    default: 1
+    t.datetime "download_at"
   end
 
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree

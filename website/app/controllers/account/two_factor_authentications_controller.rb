@@ -3,6 +3,8 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
   end
 
   def new
+    authorize current_account, :new?
+
     current_account.otp_secret ||= Account.generate_otp_secret(10)
     current_account.save!
   end
@@ -19,7 +21,8 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
   end
 
   def recovery_codes
-    #TODO downlaod only once
+    authorize current_account, :recovery_codes?
+    current_account.touch(:download_at)
     send_data current_account.otp_backup_codes, filename: 'recovery_codes.txt'
   end
 

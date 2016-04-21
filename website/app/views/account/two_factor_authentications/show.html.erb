@@ -24,6 +24,9 @@
       <a href="<%= new_account_two_factor_authentication_path %>" class="btn btn-primary">Enabel Two-factor Authorization</a>
     <% else %>
       <a href="<%= reset_account_two_factor_authentication_path %>" class="btn btn-primary">Reset with recovery codes</a>
+    <% end %>
+
+    <% if policy(current_account).recovery_codes? %>
       <a href="<%= recovery_codes_account_two_factor_authentication_path %>" class="btn btn-primary" data-method="patch">Download recovery codes</a>
     <% end %>
   </div>
