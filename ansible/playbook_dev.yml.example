@@ -113,6 +113,8 @@
       tags: bastion_host
       graylog_web_listen_address: '0.0.0.0'
       graylog_web_port: 9000
+      graylog_rest_listen_uri: http://0.0.0.0:12900/
+      graylog_rest_transport_uri: http://0.0.0.0:12900/
 
     - role: nickhammond.logrotate
       tags: website_host
