@@ -7,12 +7,12 @@ class AccountPolicy < ApplicationPolicy
     @two_factor_module = two_factor_module
   end
 
-  def new?
+  def enabled_two_factor_authentication?
     !account.enabled_two_factor_authentication?
   end
 
   def recovery_codes?
-    account.enabled_two_factor_authentication? and account.download_at.blank?
+    account.enabled_two_factor_authentication? and account.downloaded_at.blank?
   end
 
   private

@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160421143849) do
     t.boolean  "otp_required_for_login"
     t.text     "otp_backup_codes",          limit: 65535
     t.integer  "role",                                    default: 1
-    t.datetime "download_at"
+    t.datetime "downloaded_at"
   end
 
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
