@@ -25,7 +25,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - role: vkill.ssh_key
+     - role: vkill.ssh_key_mgr
 ```
 
 License
