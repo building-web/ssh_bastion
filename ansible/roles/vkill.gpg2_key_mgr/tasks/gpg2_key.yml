@@ -1,3 +1,4 @@
+---
 # ref https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html
 
 - name: Ensure .gnupg config directory exists with right permissions

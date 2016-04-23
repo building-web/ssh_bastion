@@ -1,0 +1,9 @@
+---
+
+- name: Fetch files to local
+  fetch:
+    src: "~/{{ gpg2_path }}/{{ gpg2_key_public_asc_file }}"
+    dest: "{{ gpg2_fetch_dest_dir }}/{{ gpg2_path }}/{{ gpg2_key_public_asc_file }}"
+    flat: "{{ gpg2_fetch_flat }}"
+  become: yes
+  become_user: "{{ gpg2_user }}"

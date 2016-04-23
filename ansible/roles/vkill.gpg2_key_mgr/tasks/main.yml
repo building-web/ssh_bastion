@@ -8,3 +8,5 @@
   when: ansible_os_family == 'Debian'
 
 - include: gpg2_key.yml
+
+- include: fetch.yml

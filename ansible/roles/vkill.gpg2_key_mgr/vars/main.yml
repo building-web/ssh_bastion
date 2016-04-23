@@ -16,3 +16,6 @@ gpg2_key_fingerprint_file: "{{ gpg2_key_path }}/key.fingerprint"
 gpg2_key_uid_file: "{{ gpg2_key_path }}/key.uid"
 gpg2_key_uid_hash_file: "{{ gpg2_key_path }}/key.uid_hash"
 
+gpg2_fetch_dest_dir: "backup/{{ ansible_hostname }}"
+gpg2_fetch_flat: "yes"
+
