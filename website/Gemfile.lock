@@ -17,15 +17,6 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
-  remote: git://github.com/matthewd/default_value_for.git
-  revision: 604ab5e7cd799f293279115e490b039e64c609c4
-  ref: 604ab5e7cd799f293279115e490b039e64c609c4
-  branch: master
-  specs:
-    default_value_for (3.0.1)
-      activerecord (>= 3.2.0, < 5.0)
-
-GIT
   remote: git://github.com/tinfoil/devise-two-factor.git
   revision: 93cae99a3765309ad3cc7f38075b0f3d81022153
   branch: devise-4
@@ -344,7 +335,6 @@ DEPENDENCIES
   coffee-rails (~> 4.1.1)
   config (~> 1.1.0)
   database_cleaner!
-  default_value_for!
   devise (~> 4.0.0.rc2)
   devise-bootstrap-views (~> 0.0.8)
   devise-i18n (~> 1.0.1)
