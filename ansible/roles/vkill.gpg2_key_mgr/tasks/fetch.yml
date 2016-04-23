@@ -2,8 +2,9 @@
 
 - name: Fetch files to local
   fetch:
-    src: "~/{{ gpg2_path }}/{{ gpg2_key_public_asc_file }}"
-    dest: "{{ gpg2_fetch_dest_dir }}/{{ gpg2_path }}/{{ gpg2_key_public_asc_file }}"
-    flat: "{{ gpg2_fetch_flat }}"
+    src: "~/{{ gpg2_key_basedir }}/{{ gpg2_key_path }}/{{ gpg2_key_files[item] }}"
+    dest: "{{ gpg2_key_fetch_dest_basedir }}/{{ gpg2_key_basedir }}/{{ gpg2_key_path }}/{{ gpg2_key_files[item] }}"
+    flat: "{{ gpg2_key_fetch_flat }}"
   become: yes
-  become_user: "{{ gpg2_user }}"
+  become_user: "{{ gpg2_key_user }}"
+  with_items: "{{ gpg2_key_fetch_files }}"

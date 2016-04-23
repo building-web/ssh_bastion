@@ -1,2 +1,23 @@
 ---
 
+gpg2_key_user: developer
+gpg2_key_user_name: "gpg2_key"
+gpg2_key_user_email: "{{ ansible_hostname }}-{{ gpg2_key_user }}@example.com"
+
+gpg2_key_basedir: ".gnupg"
+
+gpg2_key_uid: "{{ gpg2_key_user_name }} <{{ gpg2_key_user_email }}>"
+
+gpg2_key_path: "{{ gpg2_key_uid | hash('md5') }}"
+
+gpg2_key_files:
+  private: "key.priv"
+  public: "key.pub"
+  public_asc: "key.pub.asc"
+  fingerprint: "key.fingerprint"
+  uid: "key.uid"
+  uid_hash: "key.uid_hash"
+
+gpg2_key_fetch_dest_basedir: "backup"
+gpg2_key_fetch_flat: "yes"
+gpg2_key_fetch_files: []

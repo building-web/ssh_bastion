@@ -2,6 +2,7 @@
 - name: Build development system
   hosts: all
   become: true
+
   vars_files:
     - vars/settings_dev.yml
 
@@ -89,19 +90,22 @@
     - role: willshersystems.sshd
       tags: bastion_host
 
-    - role: vkill.ssh_key
+    - role: vkill.ssh_key_mgr
       tags: bastion_host
       ssh_user: "{{ local_bastion_host.user_name }}"
       user_ssh_key_public_file: "{{ local_bastion_host.user_ssh_key_public_file }}"
       user_ssh_key_private_file: "{{ local_bastion_host.user_ssh_key_private_file }}"
 
-    - role: vkill.gpg2_key
+    - role: vkill.gpg2_key_mgr
       tags: bastion_host
-      gpg2_user: "{{ local_bastion_host.user_name }}"
+      gpg2_key_user: "{{ local_bastion_host.user_name }}"
 
-    - role: vkill.gpg2_key
+    - role: vkill.gpg2_key_mgr
       tags: website_host
-      gpg2_user: "{{ local_website_host.user_name }}"
+      gpg2_key_user: "{{ local_website_host.user_name }}"
+      gpg2_key_fetch_files:
+        - public_asc
+        - uid
 
     - role: geerlingguy.mailhog
       tags: website_host
@@ -131,6 +135,14 @@
             - copytruncate
 
   tasks:
+    - debug:
+        var: "{{website_host_gpg2_public_key_assic}}"
+
+    - pause:
+
+    - fail:
+        msg: 'xxx'
+
     - name: 'Replace gem source without become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
       become: False
