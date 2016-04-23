@@ -99,10 +99,15 @@
     - role: vkill.gpg2_key_mgr
       tags: bastion_host
       gpg2_key_user: "{{ local_bastion_host.user_name }}"
+      gpg2_key_fetch_dest_basedir: "backup/local_bastion_host"
+      gpg2_key_fetch_files:
+        - public_asc
+        - uid
 
     - role: vkill.gpg2_key_mgr
       tags: website_host
       gpg2_key_user: "{{ local_website_host.user_name }}"
+      gpg2_key_fetch_dest_basedir: "backup/local_website_host"
       gpg2_key_fetch_files:
         - public_asc
         - uid
@@ -135,14 +140,6 @@
             - copytruncate
 
   tasks:
-    - debug:
-        var: "{{website_host_gpg2_public_key_assic}}"
-
-    - pause:
-
-    - fail:
-        msg: 'xxx'
-
     - name: 'Replace gem source without become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
       become: False
