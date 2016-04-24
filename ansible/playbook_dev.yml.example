@@ -155,34 +155,22 @@
       ssh_user: "{{ local_bastion_host.user_name }}"
 
   tasks:
-    - name: 'Replace gem source without become'
-      shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-      become: False
-      tags: ruby
-
     - name: 'Replace gem source with become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-      become: True
-      tags: ruby
-
-    - name: 'Replace bundle source without become'
-      shell: bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-      become: False
+      become: yes
+      become_user: "{{ local_website_host.user_name }}"
       tags: ruby
 
     - name: 'Replace bundle source with become'
       shell: bundle config mirror.https://rubygems.org https://gems.ruby-china.org
-      become: True
+      become: yes
+      become_user: "{{ local_website_host.user_name }}"
       tags: ruby
-
-    - name: 'Replace npm registry without become'
-      shell: npm config set registry https://registry.npm.taobao.org
-      become: False
-      tags: nodejs
 
     - name: 'Replace npm registry with become'
       shell: npm config set registry https://registry.npm.taobao.org
-      become: True
+      become: yes
+      become_user: "{{ local_website_host.user_name }}"
       tags: nodejs
 
 
