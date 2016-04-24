@@ -9,7 +9,10 @@
   pre_tasks:
 
     - name: 'Replace sources.list'
-      copy: "dest=/etc/apt/sources.list backup=true src=files/ubuntu-14.04_sohu_sources.list"
+      copy:
+        dest: '/etc/apt/sources.list'
+        backup: true
+        src: 'files/ubuntu-14.04_sohu_sources.list'
       when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
       tags: system
 
@@ -111,6 +114,16 @@
       gpg2_key_fetch_files:
         - public_asc
         - uid
+
+    - role: vkill.gpg2_key_mgr
+      tags: bastion_host
+      gpg2_key_action: 'import'
+      gpg2_key_import_local_public_key_file: "backup/local_website_host/public_asc"
+
+    - role: vkill.gpg2_key_mgr
+      tags: website_host
+      gpg2_key_action: 'import'
+      gpg2_key_import_local_public_key_file: "backup/local_bastion_host/public_asc"
 
     - role: geerlingguy.mailhog
       tags: website_host

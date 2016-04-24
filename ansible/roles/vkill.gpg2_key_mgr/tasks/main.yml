@@ -7,6 +7,10 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- include: gpg2_key.yml
+- include: common.yml
 
-- include: fetch.yml
+- include: generate.yml
+  when: gpg2_key_action == 'generate'
+
+- include: import.yml
+  when: gpg2_key_action == 'import'

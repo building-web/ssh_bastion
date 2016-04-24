@@ -18,6 +18,4 @@ gpg2_key_files:
   uid: "key.uid"
   uid_hash: "key.uid_hash"
 
-gpg2_key_fetch_dest_basedir: "backup"
-gpg2_key_fetch_flat: "yes"
-gpg2_key_fetch_files: []
+

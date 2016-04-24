@@ -1,1 +1,10 @@
 ---
+
+gpg2_key_action: 'generate'
+
+gpg2_key_fetch_dest_basedir: "backup"
+gpg2_key_fetch_flat: "yes"
+gpg2_key_fetch_files: []
+
+gpg2_key_import_local_public_key_file: ''
+
