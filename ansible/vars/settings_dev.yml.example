@@ -20,20 +20,8 @@ smtp:
 web:
   ip: 192.168.100.100
 
-# e.g.
-#
-# local_bastion_host:
-#   user_name: developer
-#
-# local_bastion_host:
-#   user_name: developer
-#   user_ssh_key_private_file: 'files/id_rsa-default'
-#   user_ssh_key_public_file: 'files/id_rsa-default.pub'
-#
 local_bastion_host:
   user_name: developer
-  user_ssh_key_private_file: 'files/id_rsa-default'
-  user_ssh_key_public_file: 'files/id_rsa-default.pub'
 
 local_website_host:
   user_name: vagrant
