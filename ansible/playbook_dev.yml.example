@@ -99,32 +99,6 @@
       user_ssh_key_public_file: "{{ local_bastion_host.user_ssh_key_public_file }}"
       user_ssh_key_private_file: "{{ local_bastion_host.user_ssh_key_private_file }}"
 
-    - role: vkill.gpg2_key_mgr
-      tags: bastion_host
-      gpg2_key_user: "{{ local_bastion_host.user_name }}"
-      gpg2_key_fetch_dest_basedir: "backup/local_bastion_host"
-      gpg2_key_fetch_files:
-        - public_asc
-        - uid
-
-    - role: vkill.gpg2_key_mgr
-      tags: website_host
-      gpg2_key_user: "{{ local_website_host.user_name }}"
-      gpg2_key_fetch_dest_basedir: "backup/local_website_host"
-      gpg2_key_fetch_files:
-        - public_asc
-        - uid
-
-    - role: vkill.gpg2_key_mgr
-      tags: bastion_host
-      gpg2_key_action: 'import'
-      gpg2_key_import_local_public_key_file: "backup/local_website_host/public_asc"
-
-    - role: vkill.gpg2_key_mgr
-      tags: website_host
-      gpg2_key_action: 'import'
-      gpg2_key_import_local_public_key_file: "backup/local_bastion_host/public_asc"
-
     - role: geerlingguy.mailhog
       tags: website_host
       # mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
@@ -151,6 +125,34 @@
             - delaycompress
             - notifempty
             - copytruncate
+
+    - role: vkill.gpg2_key_mgr
+      tags: bastion_host
+      gpg2_key_user: "{{ local_bastion_host.user_name }}"
+      gpg2_key_fetch_dest_basedir: "backup/local_bastion_host"
+      gpg2_key_fetch_files:
+        - public_asc
+        - uid
+
+    - role: vkill.gpg2_key_mgr
+      tags: website_host
+      gpg2_key_user: "{{ local_website_host.user_name }}"
+      gpg2_key_fetch_dest_basedir: "backup/local_website_host"
+      gpg2_key_fetch_files:
+        - public_asc
+        - uid
+
+    - role: vkill.gpg2_key_mgr
+      tags: bastion_host
+      gpg2_key_user: "{{ local_bastion_host.user_name }}"
+      gpg2_key_action: 'import'
+      gpg2_key_import_local_public_key_file: "backup/local_website_host/public_asc"
+
+    - role: vkill.gpg2_key_mgr
+      tags: website_host
+      gpg2_key_user: "{{ local_website_host.user_name }}"
+      gpg2_key_action: 'import'
+      gpg2_key_import_local_public_key_file: "backup/local_bastion_host/public_asc"
 
   tasks:
     - name: 'Replace gem source without become'
