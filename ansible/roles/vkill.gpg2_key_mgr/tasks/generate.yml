@@ -67,7 +67,7 @@
 
 # TODO
 - name: Generate secret key uid hash file
-  shell: "echo '{{ gpg2_key_uid }}' > '{{ gpg2_key_basedir }}/{{ gpg2_key_path }}/{{ gpg2_key_files.uid_hash }}'"
+  shell: "gpg --list-keys '{{ gpg2_key_uid }}' | sed -n '/^pub/p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $2}' > '{{ gpg2_key_basedir }}/{{ gpg2_key_path }}/{{ gpg2_key_files.uid_hash }}'"
   args:
     chdir: "~"
   changed_when: false
