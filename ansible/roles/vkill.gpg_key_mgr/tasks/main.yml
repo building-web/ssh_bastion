@@ -10,7 +10,7 @@
 - include: common.yml
 
 - include: generate.yml
-  when: gpg2_key_action == 'generate'
+  when: gpg_key_action == 'generate'
 
 - include: import.yml
-  when: gpg2_key_action == 'import'
+  when: gpg_key_action == 'import'

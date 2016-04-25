@@ -1,7 +1,7 @@
-GPG2 Key
+GPG Key
 =========
 
-GPG2 Key.
+GPG Key.
 
 Requirements
 ------------
@@ -26,7 +26,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - role: vkill.gpg2_key_mgr
+     - role: vkill.gpg_key_mgr
 ```
 
 License

@@ -1,0 +1,26 @@
+---
+
+gpg_key_user: developer
+gpg_key_user_name: "gpg_key"
+gpg_key_user_email: "{{ ansible_hostname }}-{{ gpg_key_user }}@example.com"
+
+gpg_key_basedir: ".gnupg"
+
+gpg_key_type: 1
+gpg_key_length: 2048
+gpg_key_expire_date: 0
+gpg_key_passphrase: "{{ lookup('password', '/tmp/passwordfile') }}"
+
+gpg_key_uid: "{{ gpg_key_user_name }} <{{ gpg_key_user_email }}>"
+
+gpg_key_path: "{{ gpg_key_uid | hash('md5') }}"
+
+gpg_key_files:
+  private: "key.priv"
+  public: "key.pub"
+  public_asc: "key.pub.asc"
+  fingerprint: "key.fingerprint"
+  uid: "key.uid"
+  uid_hash: "key.uid_hash"
+
+
