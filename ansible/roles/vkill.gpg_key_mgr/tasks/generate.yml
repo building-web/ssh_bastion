@@ -9,14 +9,6 @@
   become: yes
   become_user: "{{ gpg_key_user }}"
 
-- name: Copy gpg_key_generate_script
-  template:
-    src: "gpg_key_generate_script"
-    dest: "~/{{ gpg_key_basedir }}/{{ gpg_key_path }}/generate_script"
-    mode: 0600
-  become: yes
-  become_user: "{{ gpg_key_user }}"
-
 - name: Check existing secret key
   shell: "gpg --list-secret-keys | grep '{{ gpg_key_uid }}'"
   changed_when: false
@@ -25,10 +17,27 @@
   become: yes
   become_user: "{{ gpg_key_user }}"
 
+- name: Copy gpg_key_generate_script
+  template:
+    src: "gpg_key_generate_script"
+    dest: "~/{{ gpg_key_basedir }}/{{ gpg_key_path }}/generate_script"
+    mode: 0600
+  become: yes
+  become_user: "{{ gpg_key_user }}"
+  when: gpg_keys.stdout == ""
+
 - name: Generate new secret key
   command: "gpg --batch --gen-key ~/{{ gpg_key_basedir }}/{{ gpg_key_path }}/generate_script"
   args:
     chdir: "~/{{ gpg_key_basedir }}"
+  become: yes
+  become_user: "{{ gpg_key_user }}"
+  when: gpg_keys.stdout == ""
+
+- name: Shred gpg_key_generate_script
+  command: "shred -u -z '{{ gpg_key_basedir }}/{{ gpg_key_path }}/generate_script'"
+  args:
+    chdir: "~"
   become: yes
   become_user: "{{ gpg_key_user }}"
   when: gpg_keys.stdout == ""
