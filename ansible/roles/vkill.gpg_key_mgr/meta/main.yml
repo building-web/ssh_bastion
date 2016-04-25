@@ -1,3 +1,8 @@
+---
+dependencies:
+  - role: shrikeh.haveged
+    when: gpg_key_mgr_install_haveged
+
 galaxy_info:
   author: vkill
   description: GPG Key
@@ -5,7 +10,7 @@ galaxy_info:
 
   license: license ((BSD, MIT))
 
-  min_ansible_version: 1.2
+  min_ansible_version: 1.8
 
   platforms:
   - name: Ubuntu
@@ -13,7 +18,4 @@ galaxy_info:
     - trusty
 
   galaxy_tags:
-    - ssh
-
-dependencies:
-  - shrikeh.haveged
+    - gpg

@@ -23,4 +23,4 @@ gpg_key_files:
   uid: "key.uid"
   uid_hash: "key.uid_hash"
 
-
+gpg_key_mgr_install_haveged: true
