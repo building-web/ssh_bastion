@@ -10,9 +10,6 @@
 - src: https://github.com/ANXS/postgresql
   name: ANXS.postgresql
 
-- src: https://github.com/geerlingguy/ansible-role-redis
-  name: geerlingguy.redis
-
 - src: https://github.com/DavidWittman/ansible-redis
   name: DavidWittman.redis
 

@@ -74,10 +74,10 @@
           priv: "{{ db.database }}.*:ALL"
       when: ansible_os_family == 'Debian' and db.adapter == 'mysql2'
 
-    - role: geerlingguy.redis
+    - role: DavidWittman.redis
       tags: redis
-      redis_port: '0.0.0.0'
-      redis_bind_interface: "{{ redis.host }}"
+      redis_port: "{{ redis.port }}"
+      redis_bind: "{{ redis.host }}"
 
     - role: geerlingguy.ruby
       tags: ruby
