@@ -161,6 +161,12 @@
       ssh_key_gen_fetch_dest_basedir: "backup/local_bastion_host/ssh_key"
 
   tasks:
+    - name: "Append local_bastion_host's user ssh public key to local_remote_host's user ssh authorized_key"
+      authorized_key:
+        user: "{{ local_remote_host.user_name }}"
+        key: "{{ lookup('file', 'backup/local_bastion_host/ssh_key/id_rsa.pub') }}"
+      tags: ssh_key
+
     - name: 'Replace gem source with become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
       become: yes
