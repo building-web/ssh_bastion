@@ -19,7 +19,7 @@
 
 - name: Copy generate_script
   template:
-    src: "generate_script"
+    src: "generate_script.j2"
     dest: "~/{{ gpg_key_basedir }}/{{ gpg_key_gen_path }}/generate_script"
     mode: 0600
   become: yes

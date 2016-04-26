@@ -6,7 +6,7 @@ gpg_key_basedir: ".gnupg"
 
 gpg_key_gen_enable: true
 
-gpg_key_gen_user_name: "gpg_key"
+gpg_key_gen_user_name: "{{ gpg_key_user }}"
 gpg_key_gen_user_email: "{{ ansible_hostname }}-{{ gpg_key_user }}@example.com"
 gpg_key_gen_type: 1
 gpg_key_gen_length: 2048
