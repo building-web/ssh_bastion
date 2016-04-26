@@ -26,7 +26,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - role: vkill.gpg_key_mgr
+     - role: vkill.gpg_key
 ```
 
 License

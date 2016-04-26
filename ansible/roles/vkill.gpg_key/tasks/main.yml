@@ -9,8 +9,8 @@
 
 - include: common.yml
 
-- include: generate.yml
-  when: gpg_key_action == 'generate'
+- include: gen.yml
+  when: gpg_key_gen_enable
 
 - include: import.yml
-  when: gpg_key_action == 'import'
+  when: gpg_key_import_enable

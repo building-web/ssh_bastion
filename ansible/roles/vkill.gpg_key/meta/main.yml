@@ -1,7 +1,7 @@
 ---
 dependencies:
   - role: shrikeh.haveged
-    when: gpg_key_mgr_install_haveged
+    when: gpg_key_install_haveged
 
 galaxy_info:
   author: vkill
