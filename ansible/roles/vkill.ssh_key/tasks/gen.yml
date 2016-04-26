@@ -1,0 +1,32 @@
+- name: Create user ssh key
+  user:
+    name: "{{ ssh_key_user }}"
+    createhome: yes
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_type: "{{ ssh_key_gen_type }}"
+    ssh_key_comment: "{{ ssh_key_gen_comment }}"
+    ssh_key_file: "{{ ssh_key_path }}/{{ ssh_key_gen_private_file }}"
+
+- name: Register stat with ssh public key
+  stat:
+    path: "~/{{ ssh_key_path }}/{{ ssh_key_gen_public_file }}"
+  register: stat
+  become: yes
+  become_user: "{{ ssh_key_user }}"
+
+- name: Ensure the ssh public key exists
+  fail:
+    msg: >
+      The ssh public key ({{ stat.stat.path if stat.stat.exists == True else '' }}) should exists and can read it
+  when: stat.stat.exists == False or stat.stat.rusr is not defined or stat.stat.rusr == False or stat.stat.size == 0
+
+- name: Fetch files to local
+  fetch:
+    src: "~/{{ ssh_key_path }}/{{ ssh_key_gen_public_file }}"
+    dest: "{{ ssh_key_gen_fetch_dest_basedir }}/{{ ssh_key_gen_public_file }}"
+    flat: "{{ ssh_key_gen_fetch_flat }}"
+  become: yes
+  become_user: "{{ gpg_key_user }}"
+  when: ssh_key_gen_fetch_enable
+

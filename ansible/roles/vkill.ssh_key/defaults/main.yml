@@ -1,0 +1,16 @@
+---
+
+ssh_key_user: "{{ ansible_ssh_user }}"
+
+ssh_key_basedir: ".ssh"
+
+ssh_key_gen_enable: true
+
+ssh_key_gen_type: "rsa"
+ssh_key_gen_comment: "{{ ansible_hostname }}-{{ ssh_key_user }}@example.com"
+ssh_key_gen_private_file: "id_{{ ssh_key_gen_type }}"
+ssh_key_gen_public_file: "{{ ssh_key_gen_private_file }}.pub"
+
+ssh_key_gen_fetch_enable: false
+ssh_key_gen_fetch_dest_basedir: "backup"
+ssh_key_gen_fetch_flat: "yes"

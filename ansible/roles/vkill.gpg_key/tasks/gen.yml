@@ -74,7 +74,6 @@
   become: yes
   become_user: "{{ gpg_key_user }}"
 
-# TODO
 - name: Generate secret key uid hash file
   shell: "gpg --list-keys '{{ gpg_key_gen_uid }}' | sed -n '/^pub/p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $2}' > '{{ gpg_key_basedir }}/{{ gpg_key_gen_path }}/{{ gpg_key_gen_files.uid_hash }}'"
   args:
