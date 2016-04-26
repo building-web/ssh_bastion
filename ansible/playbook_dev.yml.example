@@ -144,12 +144,14 @@
       tags: gpg_key
       gpg_key_user: "{{ local_bastion_host.user_name }}"
       gpg_key_gen_enable: false
+      gpg_key_import_enable: true
       gpg_key_import_local_public_key_file: "backup/local_website_host/gpg_key/public_asc"
 
     - role: vkill.gpg_key
       tags: gpg_key
       gpg_key_user: "{{ local_website_host.user_name }}"
       gpg_key_gen_enable: false
+      gpg_key_import_enable: true
       gpg_key_import_local_public_key_file: "backup/local_bastion_host/gpg_key/public_asc"
 
     - role: vkill.ssh_key

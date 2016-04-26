@@ -6,11 +6,11 @@
     ssh_key_bits: 2048
     ssh_key_type: "{{ ssh_key_gen_type }}"
     ssh_key_comment: "{{ ssh_key_gen_comment }}"
-    ssh_key_file: "{{ ssh_key_path }}/{{ ssh_key_gen_private_file }}"
+    ssh_key_file: "{{ ssh_key_basedir }}/{{ ssh_key_gen_private_file }}"
 
 - name: Register stat with ssh public key
   stat:
-    path: "~/{{ ssh_key_path }}/{{ ssh_key_gen_public_file }}"
+    path: "~/{{ ssh_key_basedir }}/{{ ssh_key_gen_public_file }}"
   register: stat
   become: yes
   become_user: "{{ ssh_key_user }}"
@@ -23,10 +23,10 @@
 
 - name: Fetch files to local
   fetch:
-    src: "~/{{ ssh_key_path }}/{{ ssh_key_gen_public_file }}"
+    src: "~/{{ ssh_key_basedir }}/{{ ssh_key_gen_public_file }}"
     dest: "{{ ssh_key_gen_fetch_dest_basedir }}/{{ ssh_key_gen_public_file }}"
     flat: "{{ ssh_key_gen_fetch_flat }}"
   become: yes
-  become_user: "{{ gpg_key_user }}"
+  become_user: "{{ ssh_key_user }}"
   when: ssh_key_gen_fetch_enable
 

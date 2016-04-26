@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
     ansible.verbose = "v"
     ansible.playbook = "../../ansible/playbook_dev.yml"
     ansible.raw_arguments  = [
-      '--tags=gpg_key,ssh_key'
+      '--tags=user,gpg_key,ssh_key'
     ]
   end
 
