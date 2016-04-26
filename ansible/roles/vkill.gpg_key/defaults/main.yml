@@ -1,6 +1,6 @@
 ---
 
-gpg_key_user: developer
+gpg_key_user: "{{ ansible_ssh_user }}"
 
 gpg_key_basedir: ".gnupg"
 

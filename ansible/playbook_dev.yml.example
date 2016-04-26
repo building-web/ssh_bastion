@@ -120,34 +120,36 @@
             - notifempty
             - copytruncate
 
-    - role: vkill.gpg_key_mgr
+    - role: vkill.gpg_key
       tags: gpg_key
+      gpg_key_import_enable: false
       gpg_key_user: "{{ local_bastion_host.user_name }}"
-      gpg_key_fetch_dest_basedir: "backup/local_bastion_host"
-      gpg_key_fetch_files:
+      gpg_key_gen_fetch_dest_basedir: "backup/local_bastion_host"
+      gpg_key_gen_fetch_files:
         - public_asc
         - uid
         - uid_hash
 
-    - role: vkill.gpg_key_mgr
+    - role: vkill.gpg_key
       tags: gpg_key
+      gpg_key_import_enable: false
       gpg_key_user: "{{ local_website_host.user_name }}"
-      gpg_key_fetch_dest_basedir: "backup/local_website_host"
-      gpg_key_fetch_files:
+      gpg_key_gen_fetch_dest_basedir: "backup/local_website_host"
+      gpg_key_gen_fetch_files:
         - public_asc
         - uid
         - uid_hash
 
-    - role: vkill.gpg_key_mgr
+    - role: vkill.gpg_key
       tags: gpg_key
       gpg_key_user: "{{ local_bastion_host.user_name }}"
-      gpg_key_action: 'import'
+      gpg_key_gen_enable: false
       gpg_key_import_local_public_key_file: "backup/local_website_host/public_asc"
 
-    - role: vkill.gpg_key_mgr
+    - role: vkill.gpg_key
       tags: gpg_key
       gpg_key_user: "{{ local_website_host.user_name }}"
-      gpg_key_action: 'import'
+      gpg_key_gen_enable: false
       gpg_key_import_local_public_key_file: "backup/local_bastion_host/public_asc"
 
     - role: vkill.ssh_key_mgr
