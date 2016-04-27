@@ -133,7 +133,7 @@
       gpg_key_gen_fetch_files:
         - public_asc
         - uid
-        - uid_hash
+        - public_id
 
     - role: vkill.gpg_key
       tags: gpg_key
@@ -143,7 +143,7 @@
       gpg_key_gen_fetch_files:
         - public_asc
         - uid
-        - uid_hash
+        - public_id
 
     - role: vkill.gpg_key
       tags: gpg_key
@@ -190,5 +190,11 @@
       become_user: "{{ local_website_host.user_name }}"
       tags: nodejs
 
+  post_tasks:
+    - name: "Generate webiste settings.local.yml"
+      template:
+        src: "website_settings_local.yml.j2"
+        dest: "/website/config/settings.local.yml"
+      tags: config
 
 

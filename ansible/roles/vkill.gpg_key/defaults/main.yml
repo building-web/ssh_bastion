@@ -23,7 +23,8 @@ gpg_key_gen_files:
   public_asc: "key.pub.asc"
   fingerprint: "key.fingerprint"
   uid: "key.uid"
-  uid_hash: "key.uid_hash"
+  public_id: "key.pub_id"
+  private_id: "key.priv_id"
 
 gpg_key_gen_fetch_dest_basedir: "backup"
 gpg_key_gen_fetch_flat: "yes"

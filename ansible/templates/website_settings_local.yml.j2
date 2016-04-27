@@ -1,0 +1,7 @@
+time_zone: "Asia/Shanghai"
+
+website_gpg_key:
+  public_asc: |
+    {{ lookup('file', 'backup/local_website_host/gpg_key/public_asc') }}
+  public_id: "{{ lookup('file', 'backup/local_website_host/gpg_key/public_id') }}"
+

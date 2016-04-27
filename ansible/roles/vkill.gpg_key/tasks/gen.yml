@@ -74,8 +74,16 @@
   become: yes
   become_user: "{{ gpg_key_user }}"
 
-- name: Generate secret key uid hash file
-  shell: "gpg --list-keys '{{ gpg_key_gen_uid }}' | sed -n '/^pub/p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $2}' > '{{ gpg_key_basedir }}/{{ gpg_key_gen_path }}/{{ gpg_key_gen_files.uid_hash }}'"
+- name: Generate secret key public id file
+  shell: "gpg --list-keys '{{ gpg_key_gen_uid }}' | sed -n '/^pub/p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $2}' > '{{ gpg_key_basedir }}/{{ gpg_key_gen_path }}/{{ gpg_key_gen_files.public_id }}'"
+  args:
+    chdir: "~"
+  changed_when: false
+  become: yes
+  become_user: "{{ gpg_key_user }}"
+
+- name: Generate secret key private id file
+  shell: "gpg --list-secret-keys '{{ gpg_key_gen_uid }}' | sed -n '/^sec/p' | awk -F ' ' '{print $2}' | awk -F '/' '{print $2}' > '{{ gpg_key_basedir }}/{{ gpg_key_gen_path }}/{{ gpg_key_gen_files.private_id }}'"
   args:
     chdir: "~"
   changed_when: false
