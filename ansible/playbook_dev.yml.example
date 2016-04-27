@@ -47,6 +47,12 @@
         name: "{{ local_remote_host.user_name }}"
       tags: [system, user]
 
+    - name: 'Copy MailHog bin'
+      copy:
+        src: '/vagrant/MailHog_linux_amd64'
+        dest: '/opt/mailhog/mailhog'
+        remote_src: true
+
   roles:
     - role: geerlingguy.ntp
       tags: ntp

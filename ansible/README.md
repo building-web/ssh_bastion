@@ -1,6 +1,6 @@
 ## Ansible
 
-### Install Ansible
+### Install Ansible 2.0+
 
 ref http://docs.ansible.com/ansible/intro_installation.html
 
