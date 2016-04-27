@@ -101,8 +101,7 @@
 
     - role: geerlingguy.mailhog
       tags: mailhog
-      # mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
-      mailhog_binary_url: file:///vagrant/MailHog_linux_amd64
+      mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
       ssmtp_mailhub: "0.0.0.0:{{ smtp.port }}"
 
     - role: graylog2.graylog
