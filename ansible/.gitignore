@@ -2,6 +2,8 @@
 !/roles/.keep
 !/roles/vkill.*
 
+/*_plugins/*.pyc
+
 /*.retry
 
 /playbook_dev.yml
