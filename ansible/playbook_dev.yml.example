@@ -31,20 +31,20 @@
       when: ansible_os_family == 'RedHat'
       tags: system
 
-    - name: 'Create bastion_host user'
+    - name: 'Create web_host user'
       user:
-        name: "{{ local_bastion_host.user_name }}"
-        shell: /bin/false
+        name: "{{ web_host.user }}"
       tags: [system, user]
 
-    - name: 'Create website_host user'
+    - name: 'Create bastion_host user'
       user:
-        name: "{{ local_website_host.user_name }}"
+        name: "{{ bastion_host.user }}"
+        shell: /bin/false
       tags: [system, user]
 
     - name: 'Create remote_host user'
       user:
-        name: "{{ local_remote_host.user_name }}"
+        name: "{{ remote_host.user }}"
       tags: [system, user]
 
     - name: 'Copy MailHog bin'
@@ -72,18 +72,18 @@
         - libmysqlclient-dev
       mysql_bind_address: '0.0.0.0'
       mysql_databases:
-        - name: "{{ db.database }}"
+        - name: "{{ web_db.database }}"
       mysql_users:
-        - name: "{{ db.username }}"
+        - name: "{{ web_db.username }}"
           host: "%"
-          password: "{{ db.password }}"
-          priv: "{{ db.database }}.*:ALL"
-      when: ansible_os_family == 'Debian' and db.adapter == 'mysql2'
+          password: "{{ web_db.password }}"
+          priv: "{{ web_db.database }}.*:ALL"
+      when: ansible_os_family == 'Debian' and web_db.adapter == 'mysql2'
 
     - role: DavidWittman.redis
       tags: redis
-      redis_port: "{{ redis.port }}"
-      redis_bind: "{{ redis.host }}"
+      redis_port: "{{ web_redis.port }}"
+      redis_bind: "{{ web_redis.host }}"
 
     - role: geerlingguy.ruby
       tags: ruby
@@ -102,14 +102,14 @@
     - role: geerlingguy.mailhog
       tags: mailhog
       mailhog_binary_url: https://github.com/mailhog/MailHog/releases/download/v0.2.0/MailHog_linux_amd64
-      ssmtp_mailhub: "0.0.0.0:{{ smtp.port }}"
+      ssmtp_mailhub: "0.0.0.0:{{ web_smtp.port }}"
 
     - role: graylog2.graylog
       tags: graylog
       graylog_web_listen_address: '0.0.0.0'
       graylog_web_port: 9000
       graylog_rest_listen_uri: http://0.0.0.0:12900/
-      graylog_rest_transport_uri: "http://{{ web.ip }}:12900/"
+      graylog_rest_transport_uri: "http://{{ web_url.host }}:12900/"
 
     - role: nickhammond.logrotate
       tags: logrotate
@@ -128,8 +128,8 @@
     - role: vkill.gpg_key
       tags: gpg_key
       gpg_key_import_enable: false
-      gpg_key_user: "{{ local_bastion_host.user_name }}"
-      gpg_key_gen_fetch_dest_basedir: "backup/local_bastion_host/gpg_key"
+      gpg_key_user: "{{ bastion_host.user }}"
+      gpg_key_gen_fetch_dest_basedir: "backup/bastion_host/gpg_key"
       gpg_key_gen_fetch_files:
         - public_asc
         - uid
@@ -138,8 +138,8 @@
     - role: vkill.gpg_key
       tags: gpg_key
       gpg_key_import_enable: false
-      gpg_key_user: "{{ local_website_host.user_name }}"
-      gpg_key_gen_fetch_dest_basedir: "backup/local_website_host/gpg_key"
+      gpg_key_user: "{{ web_host.user }}"
+      gpg_key_gen_fetch_dest_basedir: "backup/web_host/gpg_key"
       gpg_key_gen_fetch_files:
         - public_asc
         - uid
@@ -147,47 +147,47 @@
 
     - role: vkill.gpg_key
       tags: gpg_key
-      gpg_key_user: "{{ local_bastion_host.user_name }}"
+      gpg_key_user: "{{ bastion_host.user }}"
       gpg_key_gen_enable: false
       gpg_key_import_enable: true
-      gpg_key_import_local_public_key_file: "backup/local_website_host/gpg_key/public_asc"
+      gpg_key_import_public_key_file: "backup/web_host/gpg_key/public_asc"
 
     - role: vkill.gpg_key
       tags: gpg_key
-      gpg_key_user: "{{ local_website_host.user_name }}"
+      gpg_key_user: "{{ web_host.user }}"
       gpg_key_gen_enable: false
       gpg_key_import_enable: true
-      gpg_key_import_local_public_key_file: "backup/local_bastion_host/gpg_key/public_asc"
+      gpg_key_import_public_key_file: "backup/bastion_host/gpg_key/public_asc"
 
     - role: vkill.ssh_key
       tags: ssh_key
-      ssh_key_user: "{{ local_bastion_host.user_name }}"
+      ssh_key_user: "{{ bastion_host.user }}"
       ssh_key_gen_fetch_enable: true
-      ssh_key_gen_fetch_dest_basedir: "backup/local_bastion_host/ssh_key"
+      ssh_key_gen_fetch_dest_basedir: "backup/bastion_host/ssh_key"
 
   tasks:
-    - name: "Append local_bastion_host's user ssh public key to local_remote_host's user ssh authorized_key"
+    - name: "Append bastion_host's user ssh public key to remote_host's user ssh authorized_key"
       authorized_key:
-        user: "{{ local_remote_host.user_name }}"
-        key: "{{ lookup('file', 'backup/local_bastion_host/ssh_key/id_rsa.pub') }}"
+        user: "{{ remote_host.user }}"
+        key: "{{ lookup('file', 'backup/bastion_host/ssh_key/id_rsa.pub') }}"
       tags: ssh_key
 
     - name: 'Replace gem source with become'
       shell: gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
       become: yes
-      become_user: "{{ local_website_host.user_name }}"
+      become_user: "{{ web_host.user }}"
       tags: ruby
 
     - name: 'Replace bundle source with become'
       shell: bundle config mirror.https://rubygems.org https://gems.ruby-china.org
       become: yes
-      become_user: "{{ local_website_host.user_name }}"
+      become_user: "{{ web_host.user }}"
       tags: ruby
 
     - name: 'Replace npm registry with become'
       shell: npm config set registry https://registry.npm.taobao.org
       become: yes
-      become_user: "{{ local_website_host.user_name }}"
+      become_user: "{{ web_host.user }}"
       tags: nodejs
 
   post_tasks:

@@ -11,7 +11,7 @@
 - name: Copy local public key to remote
   copy:
     dest: "~/{{ gpg_key_basedir }}/tmp/public_key"
-    src: "{{ gpg_key_import_local_public_key_file }}"
+    src: "{{ gpg_key_import_public_key_file }}"
   become: yes
   become_user: "{{ gpg_key_user }}"
 

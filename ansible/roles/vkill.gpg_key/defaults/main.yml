@@ -32,6 +32,6 @@ gpg_key_gen_fetch_files: []
 
 
 gpg_key_import_enable: false
-gpg_key_import_local_public_key_file: ''
+gpg_key_import_public_key_file: ''
 
 gpg_key_install_haveged: true
