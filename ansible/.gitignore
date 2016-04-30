@@ -6,9 +6,9 @@
 
 /*.retry
 
-/playbook_dev.yml
+/playbook_*.yml
 
-/vars/settings_dev.yml
+/vars/settings_*.yml
 
 /backup/*
 !/backup/.keep
