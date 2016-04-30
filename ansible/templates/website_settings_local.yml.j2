@@ -1,25 +1,25 @@
 time_zone: "{{ time_zone }}"
 
-url:
+web_url:
   host: "{{ web_url.host }}"
   port: "{{ web_url.port }}"
 
-db:
+web_db:
   adapter: "{{ web_db.adapter }}"
   host: "{{ web_db.host }}"
   username: "{{ web_db.username }}"
   password: "{{ web_db.password }}"
   database: "{{ web_db.database }}"
 
-smtp:
+web_smtp:
   host: "{{ web_smtp.host }}"
   port: "{{ web_smtp.port }}"
 
-redis:
+web_redis:
   host: "{{ web_redis.host }}"
   port: "{{ web_redis.port }}"
 
-host:
+web_host:
   user: "{{ web_host.user }}"
   gpg_key:
     public_asc: |
