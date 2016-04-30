@@ -17,5 +17,5 @@ $ cp vars/settings_dev.yml.example vars/settings_dev.yml
 ```
 
 ```bash
-$ cp playbook_dev.yml.example playbook_dev.yml
+$ cp playbook_dev_all.yml.example playbook_dev_all.yml
 ```
