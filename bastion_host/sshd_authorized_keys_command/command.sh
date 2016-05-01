@@ -3,6 +3,9 @@
 config_file="$(pwd)/config"
 sub_command="$(pwd)/command_with_ssh_bastion.sh"
 
+
+# ref http://unix.stackexchange.com/questions/175648/use-config-file-for-my-shell-script
+
 typeset -A config
 
 config=(
