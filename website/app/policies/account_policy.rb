@@ -15,6 +15,30 @@ class AccountPolicy < ApplicationPolicy
     account.enabled_two_factor_authentication? and account.downloaded_at.blank?
   end
 
+  def index?
+    new?
+  end
+
+  def new?
+    account.enabled_two_factor_authentication? and account.role?(:admin)
+  end
+
+  def create?
+    new?
+  end
+
+  def edit?
+    new?
+  end
+
+  def update?
+    new?
+  end
+
+  def destroy?
+    new?
+  end
+
   private
 
 end

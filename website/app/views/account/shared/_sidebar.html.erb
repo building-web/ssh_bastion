@@ -12,6 +12,12 @@
       </li>
     <% end %>
 
+    <% if policy(Account.new).index? %>
+      <li class="nav-item">
+        <a href="/account/accounts" class="nav-link <%= 'active' if account_nav_is?(:accounts) %>"><%= t('view.sidebar.accounts')%></a>
+      </li>
+    <% end %>
+
     <li class="nav-item">
       <a href="/account/ssh_keys" class="nav-link <%= 'active' if account_nav_is?(:account_ssh_keys) %>"><%= t('view.sidebar.ssh_keys')%></a>
     </li>

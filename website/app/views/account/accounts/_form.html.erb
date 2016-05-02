@@ -1,0 +1,20 @@
+<div class="alert alert-error">
+  <% if @account.errors.present? %>
+    <%= @account.errors.full_messages.join(', ') %>
+  <% end %>
+</div>
+
+<div class="row">
+  <%= simple_form_for [:account, @account], wrapper: :horizontal_form do |f| %>
+
+    <%= f.input :email %>
+    <%= f.input :role, collection: Account.role.options, include_blank: false %>
+
+    <div class="form-group">
+      <label class="col-sm-3"></label>
+      <div class="col-sm-9">
+        <%= f.submit class: 'btn btn-sm btn-primary'%>
+      </div>
+    </div>
+  <% end %>
+</div>

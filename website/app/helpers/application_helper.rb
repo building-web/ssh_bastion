@@ -10,6 +10,8 @@ module ApplicationHelper
       controller_name == 'profiles'
     when :hosts
       controller_name == 'hosts'
+    when :accounts
+      controller_name == 'accounts'
     when :assigned_hosts
       controller_name == 'assigned_hosts'
     when :two_factor_authentication

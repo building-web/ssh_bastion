@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
 
     resources :hosts, expect: [:show]
+    resources :accounts
 
     resource :two_factor_authentication, only: [:new, :create, :show] do
       member do

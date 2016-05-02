@@ -26,10 +26,10 @@ class Account < ApplicationRecord
                   encode_salt: true
 
 
-  has_many :ssh_keys, class_name: 'AccountSshKey', foreign_key: :public_key_boxable_id
-  has_many :hosts, class_name: 'Host', foreign_key: :creator_account_id
+  has_many :ssh_keys, class_name: 'AccountSshKey', foreign_key: :public_key_boxable_id, dependent: :destroy
+  has_many :hosts, class_name: 'Host', foreign_key: :creator_account_id, dependent: :destroy
 
-  has_many :assigned_hosts
+  has_many :assigned_hosts, dependent: :destroy
 
   ROLE_HASH = {
     user: 1,

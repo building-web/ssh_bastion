@@ -1,0 +1,42 @@
+<div class="row sub-header">
+  <div class="col-md-10">
+    <h2>Accounts</h2>
+  </div>
+  <div class="col-md-2">
+    <% if policy(Account.new).new? %>
+      <a href="<%= new_account_account_path %>" class="btn btn-primary">New Account</a>
+    <% else %>
+      <a href="javascript:void(0);" class="btn btn-primary disabled">New Account</a>
+    <% end %>
+  </div>
+</div>
+
+<% if policy(Account.new).new? %>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th><%= Account.human_attribute_name(:role) %></th>
+            <th><%= Account.human_attribute_name(:email) %></th>
+            <th><%= t('view.handle') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @accounts.each do |account|%>
+            <tr>
+              <td><%= account.role_text %></td>
+              <td><%= account.email %></td>
+              <td>
+                <a href="<%= account_account_path(account) %>" data-method="delete" class="btn btn-danger btn-sm" data-confirm="<%= t('view.are_you_sure_to_delete') %>"><%= t('view.destroy')%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<div class="pagiate">
+  <%= paginate @accounts %>
+</div>
