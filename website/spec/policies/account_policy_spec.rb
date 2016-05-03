@@ -42,4 +42,29 @@ RSpec.describe AccountPolicy, type: :policy do
     end
   end
 
+  permissions :new? do
+    let(:account) { create(:account) }
+
+    it 'denies access if account not enabled two factor authentication false but role is admin' do
+      allow(account).to receive(:enabled_two_factor_authentication?).and_return(false)
+      allow(account).to receive(:role?).with(:admin).and_return(true)
+
+      expect(subject).not_to permit(account)
+    end
+
+    it 'grants access if account has enabled two factor authentication true but role is not admin' do
+      allow(account).to receive(:enabled_two_factor_authentication?).and_return(true)
+      allow(account).to receive(:role?).with(:admin).and_return(false)
+
+      expect(subject).not_to permit(account)
+    end
+
+    it 'grants access if account has enabled two factor authentication true and is admin' do
+      allow(account).to receive(:enabled_two_factor_authentication?).and_return(true)
+      allow(account).to receive(:role?).with(:admin).and_return(true)
+
+      expect(subject).to permit(account)
+    end
+  end
+
 end
