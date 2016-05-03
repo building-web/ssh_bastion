@@ -48,3 +48,6 @@
 
 - src: https://github.com/nickhammond/ansible-logrotate
   name: nickhammond.logrotate
+
+- src: https://github.com/vkill/ansible-role-gpg_key
+  name: vkill.gpg_key
