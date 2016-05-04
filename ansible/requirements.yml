@@ -25,6 +25,9 @@
 - src: https://github.com/geerlingguy/ansible-role-ruby
   name: geerlingguy.ruby
 
+- src: https://github.com/vkill/ansible-role-ruby
+  name: vkill.ruby
+
 - src: https://github.com/rvm/rvm1-ansible
   name: rvm_io.rvm1-ruby
 
