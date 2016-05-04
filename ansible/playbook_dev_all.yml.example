@@ -47,7 +47,12 @@
         name: "{{ remote_host.user }}"
       tags: [system, user]
 
-    - name: 'Copy MailHog bin'
+    - name: 'Create /opt/mailhog'
+      file:
+        path: '/opt/mailhog'
+        state: 'directory'
+
+    - name: 'Copy MailHog bin to /opt/mailhog'
       copy:
         src: '/vagrant/MailHog_linux_amd64'
         dest: '/opt/mailhog/mailhog'
