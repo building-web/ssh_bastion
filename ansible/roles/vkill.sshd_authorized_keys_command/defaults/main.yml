@@ -1,1 +1,17 @@
 ---
+
+sshd_config_dir: "/etc/ssh"
+
+sshd_command_dir_owner: "root"
+sshd_command_dir_group: "root"
+sshd_command_dir_mode: "0700"
+sshd_command_dir: "{{ sshd_config_dir }}/sshd_command"
+
+sshd_authorized_keys_command_file_owner: "root"
+sshd_authorized_keys_command_file_group: "root"
+sshd_authorized_keys_command_file_mode: "0600"
+sshd_authorized_keys_command_file: "{{ sshd_command_dir }}/authorized_keys_command.sh"
+
+sshd_authorized_keys_command_user: "nobody"
+
+
