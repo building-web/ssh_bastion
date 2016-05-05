@@ -9,11 +9,7 @@ $ sudo su - vagrant
 $ cd ~
 
 $ cat data.txt
-{
-  hosts: [
-    {ip: '127.0.0.1', user: 'ubuntu'}
-  ]
-}
+{"hosts":[{"ip":"127.0.0.1","user":"ubuntu"}]}
 
 $ cat data.txt | gpg --recipient 8CDBE8F5 --armor --encrypt > data.en.txt
 
