@@ -34,8 +34,6 @@ $ vagrant up --no-provision
 
 $ vagrant provision
 
-$ open http://192.168.100.100:3000 #access website
-
 $ open http://192.168.100.100:8025 #access mailhog web ui
 
 $ open http://192.168.100.100:9000 #access graylog web ui, default username is 'admin', password is 'admin'.

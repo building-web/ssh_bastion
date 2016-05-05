@@ -23,3 +23,9 @@ $ cd /website
 4. Run website
 
   ref [website/README.md](website/README.md)
+
+```base
+
+open http://192.168.100.100:3000/
+
+```
