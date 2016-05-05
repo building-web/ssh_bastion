@@ -1,22 +1,21 @@
 default: &default
-  adapter: mysql2
+  adapter: <%= Settings.web_db.adapter %>
   encoding: utf8
   pool: 5
-  username: root
-  password:
+  username: <%= Settings.web_db.username %>
+  password: <%= Settings.web_db.password %>
+  host: <%= Settings.web_db.host %>
+  socket: <%= Settings.web_db.socket %>
+  database: <%= Settings.web_db.database %>
 
 development:
   <<: *default
-  database: ssh_bastion_development
 
 test:
   <<: *default
-  database: ssh_bastion_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 production:
   <<: *default
-  database: ssh_bastion_production
 
 staging:
   <<: *default
-  database: ssh_bastion_staging
