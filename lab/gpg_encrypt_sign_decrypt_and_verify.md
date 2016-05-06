@@ -1,5 +1,11 @@
 ## gpg encrypt, sign, decrypt and verify
 
+### Background
+
+web_host user is vagrant, it's gpg secret key is 3A3D2A82, and imported gpg public key 8CDBE8F5 .
+
+bastion_host user is developer, it's gpg secret key is 8CDBE8F5, and imported gpg public key 3A3D2A82 .
+
 ### encrypt and sign by bash
 
 ```bash
