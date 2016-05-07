@@ -1,3 +1,6 @@
+
+devise_two_factor_otp_secret_encryption_key: "{{ lookup('password', '/tmp/passwordfile chars=ascii,numbers,digits,hexdigits,punctuation') | password_hash('sha512') }}"
+
 time_zone: "{{ time_zone }}"
 
 web_url:
@@ -19,12 +22,10 @@ web_redis:
   host: "{{ web_redis.host }}"
   port: "{{ web_redis.port }}"
 
-web_host:
-  user: "{{ web_host.user }}"
-  gpg_key:
-    public_asc: |
-      {{ lookup('file', 'backup/web_host/gpg_key/public_asc') | split('\n') | join("\n      ") }}
-    public_id: "{{ lookup('file', 'backup/web_host/gpg_key/public_id') }}"
+web_gpg_key:
+  public_asc: |
+    {{ lookup('file', 'backup/web_host/gpg_key/public_asc') | split('\n') | join("\n    ") }}
+  id: "{{ lookup('file', 'backup/web_host/gpg_key/public_id') }}"
 
 bastion_host:
   ip: "{{ bastion_host.ip }}"
@@ -32,7 +33,7 @@ bastion_host:
   gpg_key:
     public_asc: |
       {{ lookup('file', 'backup/bastion_host/gpg_key/public_asc') | split('\n') | join("\n      ") }}
-    public_id: "{{ lookup('file', 'backup/bastion_host/gpg_key/public_id') }}"
+    id: "{{ lookup('file', 'backup/bastion_host/gpg_key/public_id') }}"
   ssh_key:
     public: |
       {{ lookup('file', 'backup/bastion_host/ssh_key/id_rsa.pub') | split('\n') | join("\n      ") }}

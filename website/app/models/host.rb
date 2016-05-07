@@ -11,6 +11,19 @@ class Host < ApplicationRecord
 
   after_save :sync_user_to_assigned_hosts, on: :update
 
+  def self.build_default
+    remote_host_hash = Settings.remote_host.to_h
+    return if remote_host_hash.blank?
+
+    ip = remote_host_hash[:ip]
+    user = remote_host_hash[:user]
+
+    host = Host.find_or_initialize_by(ip: ip)
+    host.attributes = {user1: user}
+
+    host.save!
+  end
+
   private
   def user1_valid
     return errors.add :user1, :invalid if user1 == 'root'

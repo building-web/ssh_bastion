@@ -9,7 +9,7 @@ class Account < ApplicationRecord
          :validatable, :confirmable,
          :two_factor_authenticatable,
          :two_factor_backupable,
-         otp_secret_encryption_key: Settings.two_step_encryption_key,
+         otp_secret_encryption_key: Settings.devise_two_factor_otp_secret_encryption_key,
          otp_backup_code_length: 6,
          otp_number_of_backup_codes: 10
 
@@ -17,7 +17,7 @@ class Account < ApplicationRecord
   # https://github.com/tinfoil/devise-two-factor/blob/devise-4/lib/devise_two_factor/models/two_factor_authenticatable.rb#L12
   # fix "Mysql2::Error: Incorrect string value: '\xDD\xFB\xD8<6\xE8...' for column 'encrypted_otp_secret'"
   attr_encrypted :otp_secret,
-                  key:       Settings.two_step_encryption_key,
+                  key:       Settings.devise_two_factor_otp_secret_encryption_key,
                   mode:      :per_attribute_iv_and_salt,
                   algorithm: 'aes-256-cbc',
                   default_encoding: 'm',

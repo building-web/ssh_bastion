@@ -10,6 +10,8 @@ $ cp .versions.conf.example .versions.conf
 
 $ cd .
 
+$ touch config/settings.local.yml
+
 $ bundle
 
 $ RAILS_ENV=development rake db:environment:set && rake db:drop:all && rake db:create && rake db:migrate && rake db:seed

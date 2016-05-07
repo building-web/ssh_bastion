@@ -12,7 +12,7 @@ class AccountPolicy < ApplicationPolicy
   end
 
   def recovery_codes?
-    account.enabled_two_factor_authentication? and account.downloaded_at.blank?
+    account.enabled_two_factor_authentication? and account.otp_backup_codes_downloaded_at.blank?
   end
 
   def index?

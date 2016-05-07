@@ -21,22 +21,22 @@ RSpec.describe AccountPolicy, type: :policy do
   permissions :recovery_codes? do
     let(:account) { create(:account) }
 
-    it 'denies access if account not enabled two factor authentication downloaded_at true' do
+    it 'denies access if account not enabled two factor authentication otp_backup_codes_downloaded_at true' do
       allow(account).to receive(:enabled_two_factor_authentication?).and_return(false)
-      allow(account).to receive(:downloaded_at).and_return(nil)
+      allow(account).to receive(:otp_backup_codes_downloaded_at).and_return(nil)
       expect(subject).not_to permit(account)
     end
 
-    it 'grants access if account has enabled two factor authentication downloaded_at true' do
+    it 'grants access if account has enabled two factor authentication otp_backup_codes_downloaded_at true' do
       allow(account).to receive(:enabled_two_factor_authentication?).and_return(true)
-      allow(account).to receive(:downloaded_at).and_return('Mon, 18 Apr 2016 19:40:32 CST +08:00')
+      allow(account).to receive(:otp_backup_codes_downloaded_at).and_return('Mon, 18 Apr 2016 19:40:32 CST +08:00')
 
       expect(subject).not_to permit(account)
     end
 
-    it 'grants access if account has enabled two factor authentication downloaded_at flase' do
+    it 'grants access if account has enabled two factor authentication otp_backup_codes_downloaded_at flase' do
       allow(account).to receive(:enabled_two_factor_authentication?).and_return(true)
-      allow(account).to receive(:downloaded_at).and_return(nil)
+      allow(account).to receive(:otp_backup_codes_downloaded_at).and_return(nil)
 
       expect(subject).to permit(account)
     end

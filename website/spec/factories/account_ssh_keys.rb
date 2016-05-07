@@ -12,7 +12,7 @@ FactoryGirl.define do
       k = SSHKey.generate comment: FFaker::Internet.email
       _, _, comment = k.ssh_public_key.split(' ')
 
-      new key: k.ssh_public_key, comment: comment
+      new cat: :ssh, key: k.ssh_public_key, comment: comment
     end
 
   end

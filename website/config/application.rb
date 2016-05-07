@@ -23,6 +23,9 @@ module SshBastion
     # -- all .rb files in that directory are automatically loaded.
 
     Config::Integration::Rails::Railtie.preload
+    if ENV['VAGRANT'].to_s == '1'
+      Config.load_and_set_settings(Rails.root.join('config', 'settings', "vagrant_#{Rails.env}.local.yml").to_s)
+    end
 
     config.time_zone = Settings.time_zone
 
@@ -33,6 +36,8 @@ module SshBastion
       g.assets false
       g.helper false
     end
+
+    config.action_mailer.default_url_options = { host: Settings.web_url.host, port: Settings.web_url.port }
 
   end
 end

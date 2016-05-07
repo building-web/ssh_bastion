@@ -22,7 +22,7 @@ class Account::TwoFactorAuthenticationsController < Account::BaseController
 
   def recovery_codes
     authorize current_account, :recovery_codes?
-    current_account.touch(:downloaded_at)
+    current_account.touch(:otp_backup_codes_downloaded_at)
     send_data current_account.otp_backup_codes, filename: 'recovery_codes.txt'
   end
 

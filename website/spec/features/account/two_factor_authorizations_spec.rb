@@ -7,7 +7,7 @@ RSpec.feature "Account::TwoFactorAuthorization", type: :feature do
     @user2 = create :user_with_enabled_two_factor
 
     @user3 = create :user_with_enabled_two_factor
-    @user3.touch(:downloaded_at)
+    @user3.touch(:otp_backup_codes_downloaded_at)
   end
 
   scenario "the 'Two-factor authentication' sidebar should active" do

@@ -1,26 +1,25 @@
 
-super_admin:
-  email: admin@example.com
+super_admin_email: "admin@example.com"
 
-two_step_encryption_key: '99999999999999999999999999999999'
-
-###############################################
+devise_two_factor_otp_secret_encryption_key: "99999999999999999999999999999999"
 
 time_zone: "Asia/Shanghai"
 
-###############################################
-#
-# How to generate
-# ref https://fedoraproject.org/wiki/Creating_GPG_Keys#Creating_GPG_Keys_Using_the_Command_Line
-#
-# website_GPG_key_ID: '99999999'
+web_url:
+  host: "127.0.0.1"
+  port: "3000"
 
-#
-# 1 website and bastion_host in same host
-#
-# Arch_mode: 1
-# Arch_mode_1st:
-#   user: dev
-#   ssh_public_key: ''
+web_db:
+  adapter: "mysql2"
+  host: "127.0.0.1"
+  username: "root"
+  password: ""
+  database: "ssh_bastion_development"
 
+web_smtp:
+  host: "127.0.0.1"
+  port: "1025"
 
+web_redis:
+  host: "127.0.0.1"
+  port: "6379"
