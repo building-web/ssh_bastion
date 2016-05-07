@@ -206,10 +206,10 @@
       tags: nodejs
 
   post_tasks:
-    - name: "Generate webiste settings.local.yml"
+    - name: "Generate webiste settings development.local.yml"
       template:
         src: "website_settings_local.yml.j2"
-        dest: "/website/config/settings.local.yml"
+        dest: "/website/config/settings/development.local.yml"
       tags: config
 
 

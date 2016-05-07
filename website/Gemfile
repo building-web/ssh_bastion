@@ -1,19 +1,19 @@
 source 'https://rubygems.org'
 
-gem 'rails', '=5.0.0.beta3'
-gem 'mysql2', '~> 0.4.3'
+gem 'rails', '=5.0.0.rc1'
+gem 'mysql2', '~> 0.4.4'
 
 gem 'sprockets', '~> 4.0.0.beta2'
 gem 'sass-rails', '~> 6.0.0.beta1'
-gem 'uglifier', '~> 2.7.2'
+gem 'uglifier', '~> 3.0.0'
 gem 'coffee-rails', '~> 4.1.1'
 
-gem 'jquery-rails', '~> 4.1.0'
+gem 'jquery-rails', '~> 4.1.1'
 gem 'turbolinks', '~> 5.0.0.beta2'
 
 gem 'jbuilder', '~> 2.4.1'
 
-gem 'puma', '~> 3.0.2', require: false
+gem 'puma', '~> 3.4.0', require: false
 
 gem 'config', '~> 1.1.0'
 
@@ -22,7 +22,7 @@ gem 'rails-i18n', '~> 5.0.0.beta3'
 gem 'nokogiri', '~> 1.6.8.rc3' #gpgme and nokogiri require conflict
 gem 'gpgme', '~> 2.0.12'
 
-gem 'devise', '~> 4.0.0.rc2'
+gem 'devise', '~> 4.0.2'
 gem 'devise-i18n', '~> 1.0.1'
 gem 'devise-bootstrap-views', '~> 0.0.8'
 
@@ -31,10 +31,10 @@ gem 'devise-two-factor', github: 'tinfoil/devise-two-factor',
                          branch: 'devise-4'
 gem 'rqrcode', '~> 0.10.1'
 
-gem 'switch_user', github: 'vkill/switch_user',
-                    branch: 'feature/support_capybara'
+gem 'switch_user', github: 'flyerhzm/switch_user',
+                    branch: 'master'
 
-gem 'activevalidators', '~> 3.0.0'
+gem 'activevalidators', '~> 3.3.0'
 
 gem 'enumerize', '~> 1.1.1'
 
@@ -45,17 +45,17 @@ gem 'sshkey', '~> 1.8.0'
 gem 'simple_form', '~> 3.2.1'
 
 gem 'kaminari', github: 'amatsuda/kaminari',
-              branch: 'master', ref: '9d66373b4f3123c3ebc7fc79ad15dbdc8c82ac0c'
+              branch: 'master', ref: '9cfd00cd03e8850dc31319952d8471e7dab3d0f3'
 gem 'kaminari-i18n', '~> 0.4.0'
 
 
 group :development, :test do
-  gem 'byebug', '~> 8.2.2'
+  gem 'byebug', '~> 8.2.5'
 
   gem 'database_cleaner', github: 'DatabaseCleaner/database_cleaner',
-                          branch: 'master', ref: 'f318781a77228f5999f5f2371c12f59089c141f3',
+                          branch: 'master', ref: 'f15d7610a801e40d1570b56e869e563cdcff198a',
                           require: false
-  gem 'factory_girl_rails', '~> 4.6.0', require: false
+  gem 'factory_girl_rails', '~> 4.7.0', require: false
   gem 'ffaker', '~> 2.2.0', require: false
 
   gem 'pry-rails', '~> 0.3.4'
@@ -63,7 +63,7 @@ group :development, :test do
   gem 'rspec', '~> 3.5.0.beta3', require: false
   gem 'rspec-rails', '~> 3.5.0.beta3', require: false
 
-  gem 'guard', '~> 2.13', require: false
+  gem 'guard', '~> 2.13.0', require: false
   gem 'guard-rspec', '~> 4.6.5', require: false
 
   gem 'parallel_tests', '~> 2.5.0'
@@ -71,14 +71,14 @@ end
 
 group :development do
   gem 'web-console', '~> 3.1.1'
-  gem 'listen', '~> 3.0.6'
-  gem 'spring', '~> 1.6.4'
+  gem 'listen', '3.1.1'
+  gem 'spring', '~> 1.7.1'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
-  gem 'capybara', '~> 2.6.2', require: false
-  gem 'selenium-webdriver', '~> 2.53', require: false
+  gem 'capybara', '~> 2.7.1', require: false
+  gem 'selenium-webdriver', '~> 2.53.0', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
