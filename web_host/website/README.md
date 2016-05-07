@@ -2,6 +2,7 @@
 
 * System dependencies
 
+[PhantomJS](https://github.com/teampoltergeist/poltergeist#installing-phantomjs)
 
 * How to run
 

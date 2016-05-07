@@ -78,7 +78,14 @@ end
 
 group :test do
   gem 'capybara', '~> 2.7.1', require: false
+
+  gem 'poltergeist', '~> 1.9.0', require: false
   gem 'selenium-webdriver', '~> 2.53.0', require: false
+
+  gem 'capybara-screenshot', github: 'mattheworiordan/capybara-screenshot',
+                          branch: 'master', ref: 'c9c6eb85bff6576b851563e256599ea2fa054dbb',
+                          require: false
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

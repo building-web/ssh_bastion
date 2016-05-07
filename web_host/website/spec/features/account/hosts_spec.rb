@@ -206,7 +206,7 @@ RSpec.feature "Account::Hosts", type: :feature do
     end
 
     expect(page).to have_current_path('/account/hosts')
-    expect(page).to have_content "is invalid"
+    expect(page).to have_content "is reserved"
   end
 
   scenario 'admin add a new Host that users are blank', js: true do
