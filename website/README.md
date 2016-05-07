@@ -24,7 +24,7 @@ $ rails s -b 0.0.0.0 -p 3000
 
 ```bash
 
-$ RAILS_ENV=test rake db:drop && RAILS_ENV=test rake db:create && RAILS_ENV=test rake db:schema:load
+$ RAILS_ENV=test rake db:environment:set && RAILS_ENV=test rake db:drop && RAILS_ENV=test rake db:create && RAILS_ENV=test rake db:schema:load
 
 $ rspec # or guard
 

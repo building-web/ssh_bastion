@@ -42,12 +42,12 @@ RSpec.describe AccountSshKey, type: :model do
   end
 
   describe "private instance methods" do
-    context "#sub_key_comment" do
+    context "#sub_ssh_key_comment" do
       it "when comment blank" do
         key = generate_ssh_public_key('RSA', '')
         account_ssh_key = build :account_ssh_key, key: key
 
-        result = account_ssh_key.send(:sub_key_comment)
+        result = account_ssh_key.send(:sub_ssh_key_comment)
         expect(account_ssh_key.key).to eq(key)
       end
 
@@ -55,7 +55,7 @@ RSpec.describe AccountSshKey, type: :model do
         key = generate_ssh_public_key('RSA', 'abc@example.com')
         account_ssh_key = build :account_ssh_key, key: key
 
-        result = account_ssh_key.send(:sub_key_comment)
+        result = account_ssh_key.send(:sub_ssh_key_comment)
         expect(account_ssh_key.key).to match(%r{^ssh-rsa [A-Za-z0-9+/=]+$})
       end
     end

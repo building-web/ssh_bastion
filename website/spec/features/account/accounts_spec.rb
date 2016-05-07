@@ -40,7 +40,7 @@ RSpec.feature "Account::Accounts", type: :feature do
       fill_in 'Email', with: 'test1@example.com'
       select 'Admin', from: 'account[role]'
 
-      click_button 'Create account'
+      click_button 'Create Account'
     end
 
     expect(page).to have_current_path('/account/accounts')
@@ -60,7 +60,7 @@ RSpec.feature "Account::Accounts", type: :feature do
     within('form#new_account') do
       fill_in 'Email', with: 'test1@example.com'
       select 'User', from: 'account[role]'
-      click_button 'Create account'
+      click_button 'Create Account'
     end
 
     expect(page).to have_current_path('/account/accounts')
@@ -80,7 +80,7 @@ RSpec.feature "Account::Accounts", type: :feature do
     within('form#new_account') do
       fill_in 'Email', with: @admin1.email
       select 'User', from: 'account[role]'
-      click_button 'Create account'
+      click_button 'Create Account'
     end
 
     expect(page).to have_current_path('/account/accounts')
