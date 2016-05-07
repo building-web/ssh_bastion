@@ -22,7 +22,7 @@ $ cd /website
 
 4. Run website
 
-  ref [website/README.md](website/README.md)
+  ref [web_host/website/README.md](web_host/website/README.md)
 
 ```base
 
