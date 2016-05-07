@@ -29,6 +29,7 @@ web_gpg_key:
 
 bastion_host:
   ip: "{{ bastion_host.ip }}"
+  port: 22
   user: "{{ bastion_host.user }}"
   gpg_key:
     public_asc: |
@@ -40,5 +41,6 @@ bastion_host:
 
 remote_host:
   ip: "{{ remote_host.ip }}"
+  port: 22
   user: "{{ remote_host.user }}"
 

@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160415014310) do
 
   create_table "bastion_hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "ip"
+    t.integer  "port"
     t.string   "user"
     t.string   "desc"
     t.datetime "created_at", null: false
@@ -65,15 +66,17 @@ ActiveRecord::Schema.define(version: 20160415014310) do
 
   create_table "hosts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "creator_account_id"
+    t.integer  "bastion_host_id"
     t.string   "ip"
-    t.string   "code"
     t.integer  "port"
+    t.string   "code"
     t.string   "comment"
     t.string   "user1"
     t.string   "user2"
     t.string   "user3"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["bastion_host_id"], name: "index_hosts_on_bastion_host_id", using: :btree
     t.index ["creator_account_id"], name: "index_hosts_on_creator_account_id", using: :btree
   end
 
@@ -92,4 +95,5 @@ ActiveRecord::Schema.define(version: 20160415014310) do
 
   add_foreign_key "assigned_hosts", "accounts"
   add_foreign_key "assigned_hosts", "hosts"
+  add_foreign_key "hosts", "bastion_hosts"
 end

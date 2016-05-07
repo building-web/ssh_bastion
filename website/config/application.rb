@@ -24,7 +24,8 @@ module SshBastion
 
     Config::Integration::Rails::Railtie.preload
     if ENV['VAGRANT'].to_s == '1'
-      Config.load_and_set_settings(Rails.root.join('config', 'settings', "vagrant_#{Rails.env}.local.yml").to_s)
+      Settings.add_source!(Rails.root.join('config', 'settings', "vagrant_#{Rails.env}.local.yml").to_s)
+      Settings.reload!
     end
 
     config.time_zone = Settings.time_zone

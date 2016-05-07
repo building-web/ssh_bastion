@@ -1,13 +1,16 @@
 class Host < ApplicationRecord
 
   belongs_to :creator_account, class_name: 'Account', foreign_key: 'creator_account_id'
+  belongs_to :bastion_host
   has_many :assigned_hosts, dependent: :destroy
 
-  validates :ip, ip: { format: :v4 }, uniqueness: true
+  validates :ip, presence: true, uniqueness: {scope: :bastion_host_id}, ip: { format: :v4 }
+  validates :port, presence: true
+  validates :user1, exclusion: {in: %w(root)}, allow_nil: true
+  validates :user2, exclusion: {in: %w(root)}, allow_nil: true
+  validates :user3, exclusion: {in: %w(root)}, allow_nil: true
+
   validate :check_userx
-  validate :user1_valid
-  validate :user2_valid
-  validate :user3_valid
 
   after_save :sync_user_to_assigned_hosts, on: :update
 
@@ -16,36 +19,26 @@ class Host < ApplicationRecord
     return if remote_host_hash.blank?
 
     ip = remote_host_hash[:ip]
+    port = remote_host_hash[:port]
     user = remote_host_hash[:user]
 
     host = Host.find_or_initialize_by(ip: ip)
-    host.attributes = {user1: user}
+    host.attributes = {port: port, user1: user}
 
     host.save!
   end
 
   private
-  def user1_valid
-    return errors.add :user1, :invalid if user1 == 'root'
-  end
-
-  def user2_valid
-    return errors.add :user2, :invalid if user2 == 'root'
-  end
-
-  def user3_valid
-    return errors.add :user3, :invalid if user3 == 'root'
-  end
 
   def check_userx
-     userx = [user1, user2, user3].reject{|x| x.blank?}
+    userx = [user1, user2, user3].reject{|x| x.blank?}
 
-     if userx.blank?
-       errors.add :base, 'users must be more than one.'
-     end
+    if userx.blank?
+     errors.add :base, 'users must be more than one.'
+    end
 
     if userx.uniq.size != userx.size
-       errors.add :base, :taken
+     errors.add :base, :taken
     end
   end
 
@@ -58,7 +51,7 @@ class Host < ApplicationRecord
         assigned_host.save!
       end
     rescue err
-      logger.errorerr.message
+      Rails.logger.error err.message
     end
   end
 end

@@ -7,12 +7,11 @@ FactoryGirl.define do
     port { 22 }
 
     code { SecureRandom.hex(4) }
-
     comment { FFaker::Lorem.sentence }
 
-    user1 { FFaker::Internet.domain_name }
-    user2 { FFaker::Internet.domain_name }
-    user3 { FFaker::Internet.domain_name }
+    user1 { 'deploy' }
+    user2 { nil }
+    user3 { nil }
   end
 
 end
