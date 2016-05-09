@@ -34,7 +34,7 @@ web_gpg_key:
 bastion_host:
   ip: "127.0.0.1"
   port: 22
-  user: "developer"
+  user: "<%= ENV['USER'] %>"
   gpg_key:
     public_asc: |
       <%= File.read(Rails.root.join('spec/data/gpg_keys/35CF5CD1.key.pub_asc').to_s).split("\n").join("\n      ") %>
