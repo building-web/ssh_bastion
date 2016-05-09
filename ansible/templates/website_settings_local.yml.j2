@@ -1,6 +1,4 @@
 
-devise_two_factor_otp_secret_encryption_key: "{{ lookup('password', '/tmp/passwordfile chars=ascii,numbers,digits,hexdigits,punctuation') | password_hash('sha512') }}"
-
 time_zone: "{{ time_zone }}"
 
 web_url:

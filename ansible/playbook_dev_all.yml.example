@@ -170,6 +170,11 @@
       ssh_key_gen_fetch_enable: true
       ssh_key_gen_fetch_dest_basedir: "backup/bastion_host/ssh_key"
 
+    - role: vkill.environment_variables
+      tags: env
+      env_global_pam_data:
+        VAGRANT: 1
+
   tasks:
     - name: "Append bastion_host's user ssh public key to remote_host's user ssh authorized_key"
       authorized_key:
@@ -210,12 +215,5 @@
       template:
         src: "website_settings_local.yml.j2"
         dest: "/website/config/settings/vagrant_development.local.yml"
-      tags: web_host
-
-    - name: "Set ENV for webiste vagrant flag"
-      lineinfile:
-        dest:   "/etc/environment"
-        regexp: "^VAGRANT="
-        line:   "VAGRANT=1"
       tags: web_host
 

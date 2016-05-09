@@ -3,6 +3,8 @@ super_admin_email: "admin@example.com"
 
 devise_two_factor_otp_secret_encryption_key: "99999999999999999999999999999999"
 
+####################################
+
 time_zone: "Asia/Shanghai"
 
 web_url:
@@ -23,3 +25,20 @@ web_smtp:
 web_redis:
   host: "127.0.0.1"
   port: "6379"
+
+web_gpg_key:
+  public_asc: |
+    <%= File.read(Rails.root.join('spec/data/gpg_keys/1ECC0B35.key.pub_asc').to_s).split("\n").join("\n    ") %>
+  id: "1ECC0B35"
+
+bastion_host:
+  ip: "127.0.0.1"
+  port: 22
+  user: "developer"
+  gpg_key:
+    public_asc: |
+      <%= File.read(Rails.root.join('spec/data/gpg_keys/35CF5CD1.key.pub_asc').to_s).split("\n").join("\n      ") %>
+    id: "35CF5CD1"
+  ssh_key:
+    public: |
+      <%= File.read(Rails.root.join('spec/data/ssh_keys/id_rsa.pub').to_s).split("\n").join("\n      ") %>
