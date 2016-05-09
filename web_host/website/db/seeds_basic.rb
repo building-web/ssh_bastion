@@ -5,6 +5,9 @@ Account.find_or_create_by!(email: Settings.super_admin_email) do |account|
   account.skip_confirmation!
 end
 
+puts 'make data for default web_host'
+WebHost.build_default
+
 puts 'create default bastion_host'
 BastionHost.build_default
 
