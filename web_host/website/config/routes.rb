@@ -11,6 +11,12 @@ Rails.application.routes.draw do
 
   root to: 'main#home'
 
+  namespace :api do
+    namespace :v1 do
+      resources :hosts, only: [:index]
+    end
+  end
+
   namespace :account do
     root to: 'main#dashboard', as: :root
 
