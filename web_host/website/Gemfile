@@ -48,6 +48,7 @@ gem 'kaminari', github: 'amatsuda/kaminari',
               branch: 'master', ref: '9cfd00cd03e8850dc31319952d8471e7dab3d0f3'
 gem 'kaminari-i18n', '~> 0.4.0'
 
+gem 'active_model_serializers', '~> 0.10.0.rc5'
 
 group :development, :test do
   gem 'byebug', '~> 8.2.5'
