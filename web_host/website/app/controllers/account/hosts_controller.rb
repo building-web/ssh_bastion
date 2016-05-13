@@ -2,20 +2,20 @@ class Account::HostsController < Account::BaseController
   before_action :set_host, only: [:edit, :update, :destroy]
 
   def index
-    @hosts = current_account.hosts.page(params[:page])
+    @hosts = current_account.own_hosts.page(params[:page])
     @assigned_hosts = current_account.assigned_hosts.page(params[:page])
 
     authorize @hosts, :index?
   end
 
   def new
-    @host = current_account.hosts.new
+    @host = current_account.own_hosts.new
 
     authorize @host, :new?
   end
 
   def create
-    @host = current_account.hosts.new(host_param)
+    @host = current_account.own_hosts.new(host_param)
 
     authorize @host, :create?
 
@@ -52,7 +52,7 @@ class Account::HostsController < Account::BaseController
 
   private
   def set_host
-    @host = current_account.hosts.find(params[:id])
+    @host = current_account.own_hosts.find(params[:id])
   end
 
   def host_param

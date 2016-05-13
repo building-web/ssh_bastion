@@ -1,5 +1,13 @@
 class WebHost
 
+  def first
+    new
+  end
+
+  def gpg_key_id
+    Settings.web_gpg_key.to_h[:id]
+  end
+
   def self.build_default
     web_gpg_key_hash = Settings.web_gpg_key.to_h
     return if web_gpg_key_hash.blank?

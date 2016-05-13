@@ -23,6 +23,7 @@ class Host < ApplicationRecord
     user = remote_host_hash[:user]
 
     host = Host.find_or_initialize_by(ip: ip)
+    host.creator_account = Account.first
     host.attributes = {port: port, user1: user}
 
     host.save!

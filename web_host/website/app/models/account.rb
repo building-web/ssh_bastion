@@ -27,7 +27,7 @@ class Account < ApplicationRecord
 
 
   has_many :ssh_keys, class_name: 'AccountSshKey', foreign_key: :public_key_boxable_id, dependent: :destroy
-  has_many :hosts, class_name: 'Host', foreign_key: :creator_account_id, dependent: :destroy
+  has_many :own_hosts, class_name: 'Host', foreign_key: :creator_account_id, dependent: :destroy
 
   has_many :assigned_hosts, dependent: :destroy
 
@@ -83,6 +83,17 @@ class Account < ApplicationRecord
           file: nil # path to write
           )
     png.to_data_url
+  end
+
+  def self.find_by_ssh_public_key(key)
+    ssh_type, encoded_key = SSHKey.send(:parse_ssh_public_key, key)
+    key = "#{ssh_type} #{encoded_key}"
+    Account.joins(:ssh_keys).where(AccountSshKey.arel_table[:key].eq(key)).first
+  end
+
+  def hosts
+    # TODO
+    own_hosts
   end
 
   private
