@@ -96,6 +96,11 @@ class Account < ApplicationRecord
     own_hosts
   end
 
+  def otps_for_auth
+    # TODO
+    [current_otp]
+  end
+
   private
 
   def two_factor_otp_url

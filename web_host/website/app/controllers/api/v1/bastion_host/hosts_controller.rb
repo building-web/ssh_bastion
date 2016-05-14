@@ -17,7 +17,13 @@ class Api::V1::BastionHost::HostsController < Api::V1::ApiController
       return render json: {err_msg: "invalid_authentication_k"}, status: 401
     end
 
+    unless account.enabled_two_factor_authentication?
+      return render json: {err_msg: "do not enable two_factor_authentication"}, status: 401
+    end
+
     hosts = account.hosts
+    otps = account.otps_for_auth
+
     # TODO
   end
 
