@@ -22,7 +22,7 @@ class Api::V1::BastionHost::HostsController < Api::V1::ApiController
     end
 
     hosts = account.hosts
-    otps = account.otps_for_auth
+    otps = account.totp_otps
 
     # TODO
   end

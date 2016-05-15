@@ -96,9 +96,16 @@ class Account < ApplicationRecord
     own_hosts
   end
 
-  def otps_for_auth
-    # TODO
-    [current_otp]
+  def totp_otps
+    totp = otp(otp_secret)
+    drift = self.class.otp_allowed_drift
+
+    # ref https://github.com/mdp/rotp/blob/v2.1.2/lib/rotp/totp.rb#L43
+    time = Time.now.to_i
+    times = (time-drift..time+drift).step(totp.interval).to_a
+    times << time + drift if times.last < time + drift
+
+    times.map{|ti| totp.at(ti)}
   end
 
   private
