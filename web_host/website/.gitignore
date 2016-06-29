@@ -24,12 +24,15 @@
 /.ruby-gemset
 /.rvmrc
 /.versions.conf
+
+# Ignore for gem https://github.com/bkeepers/dotenv
 /.env
 
 # Ignore for gem https://github.com/railsconfig/config
-config/settings.local.yml
-config/settings/*.local.yml
-config/environments/*.local.yml
+/config/settings.local.yml
+/config/settings/*.local.yml
+/config/environments/*.local.yml
+
 
 # Ignore bundler path.
 /vendor/bundler
