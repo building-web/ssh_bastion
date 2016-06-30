@@ -13,9 +13,9 @@ $ cd .
 
 $ touch config/settings.local.yml
 
-$ bundle
+$ chmod +x bin/*
 
-$ RAILS_ENV=development rake db:environment:set && rake db:drop:all && rake db:create && rake db:migrate && rake db:seed
+$ ./bin/setup
 
 $ rails s -b 0.0.0.0 -p 3000
 
